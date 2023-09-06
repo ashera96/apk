@@ -27,7 +27,7 @@ import (
 	cache "github.com/wso2/apk/common-controller/internal/cache"
 	"github.com/wso2/apk/common-controller/internal/loggers"
 	dpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/dp/v1alpha1"
-	dpcontrollers "github.com/wso2/apk/common-controller/internal/operator/controller"
+	dpcontrollers "github.com/wso2/apk/common-controller/internal/operator/controllers/dp"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
