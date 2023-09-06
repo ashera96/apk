@@ -206,7 +206,6 @@ Following are some tasks with the steps that a developer might do in operator de
 14. Generating CRD and other resource yamls:
 
     ```bash
-    make generate
     make manifests
     ```
 

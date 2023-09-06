@@ -38,14 +38,13 @@ import (
 	gwapiv1b1 "sigs.k8s.io/gateway-api/apis/v1beta1"
 
 	"github.com/wso2/apk/adapter/pkg/logging"
-	"github.com/wso2/apk/adapter/pkg/utils/envutils"
-	"github.com/wso2/apk/adapter/pkg/utils/stringutils"
 	cache "github.com/wso2/apk/common-controller/internal/cache"
 	"github.com/wso2/apk/common-controller/internal/config"
 	loggers "github.com/wso2/apk/common-controller/internal/loggers"
 	dpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/dp/v1alpha1"
 	constants "github.com/wso2/apk/common-controller/internal/operator/constant"
 	xds "github.com/wso2/apk/common-controller/internal/xds"
+	"github.com/wso2/apk/common-controller/internal/utils"
 )
 
 // RateLimitPolicyReconciler reconciles a RateLimitPolicy object
@@ -83,7 +82,7 @@ func NewratelimitController(mgr manager.Manager, ratelimitStore *cache.Ratelimit
 	}
 
 	conf := config.ReadConfigs()
-	predicates := []predicate.Predicate{predicate.NewPredicateFuncs(FilterByNamespaces(conf.CommonController.Operator.Namespaces))}
+	predicates := []predicate.Predicate{predicate.NewPredicateFuncs(utils.FilterByNamespaces(conf.CommonController.Operator.Namespaces))}
 
 	if err := c.Watch(source.Kind(mgr.GetCache(), &dpv1alpha1.API{}),
 		handler.EnqueueRequestsFromMapFunc(ratelimitReconsiler.getRatelimitForAPI), predicates...); err != nil {
@@ -462,24 +461,6 @@ func GetNamespace(namespace *gwapiv1b1.Namespace, defaultNamespace string) strin
 		return string(*namespace)
 	}
 	return defaultNamespace
-}
-
-// FilterByNamespaces takes a list of namespaces and returns a filter function
-// which return true if the input object is in the given namespaces list,
-// and returns false otherwise
-func FilterByNamespaces(namespaces []string) func(object client.Object) bool {
-	return func(object client.Object) bool {
-		if namespaces == nil {
-			return true
-		}
-		return stringutils.StringInSlice(object.GetNamespace(), namespaces)
-	}
-}
-
-// GetOperatorPodNamespace returns the namesapce of the operator pod
-func GetOperatorPodNamespace() string {
-	return envutils.GetEnv(constants.OperatorPodNamespace,
-		constants.OperatorPodNamespaceDefaultValue)
 }
 
 // SetupWithManager sets up the controller with the Manager.

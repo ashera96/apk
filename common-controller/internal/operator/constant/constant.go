@@ -20,6 +20,7 @@ package constants
 // Controller related constants
 const (
 	RatelimitController string = "RatelimitController"
+	ApplicationController  string = "ApplicationController"
 )
 
 // API events related constants
@@ -62,4 +63,13 @@ const (
 const (
 	GlobalRequestInterceptorClusterName  = "request_interceptor_global_cluster"
 	GlobalResponseInterceptorClusterName = "response_interceptor_global_cluster"
+)
+
+// Application authentication types
+const (
+	OAuth2 = "OAuth2"
+	MTLS = "mTLS"
+	BasicAuth = "basicAuth"
+	APIKey = "apiKey"
+	IPRange = "IPRange"
 )

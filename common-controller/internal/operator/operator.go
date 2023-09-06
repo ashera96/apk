@@ -26,8 +26,6 @@ import (
 	"github.com/wso2/apk/adapter/pkg/logging"
 	cache "github.com/wso2/apk/common-controller/internal/cache"
 	"github.com/wso2/apk/common-controller/internal/loggers"
-	dpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/dp/v1alpha1"
-	dpcontrollers "github.com/wso2/apk/common-controller/internal/operator/controllers/dp"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
@@ -35,6 +33,11 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	gwapiv1b1 "sigs.k8s.io/gateway-api/apis/v1beta1"
+
+	cpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha1"
+	dpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/dp/v1alpha1"
+	cpcontrollers "github.com/wso2/apk/common-controller/internal/operator/controllers/cp"
+	dpcontrollers "github.com/wso2/apk/common-controller/internal/operator/controllers/dp"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -47,6 +50,7 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 	utilruntime.Must(gwapiv1b1.AddToScheme(scheme))
 	utilruntime.Must(dpv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(cpv1alpha1.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
@@ -119,6 +123,10 @@ func InitOperator() {
 	if err := dpcontrollers.NewratelimitController(mgr, ratelimitStore); err != nil {
 		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error3114, logging.MAJOR,
 			"Error creating JWT Issuer controller, error: %v", err))
+	}
+	if err := cpcontrollers.NewApplicationController(mgr); err != nil {
+		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error3115, logging.MAJOR,
+			"Error creating Application controller, error: %v", err))
 	}
 	//+kubebuilder:scaffold:builder
 

@@ -22,6 +22,10 @@ import (
 	"sync"
 
 	discovery "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
+	constants "github.com/wso2/apk/common-controller/internal/operator/constant"
+	"github.com/wso2/apk/adapter/pkg/utils/envutils"
+	"github.com/wso2/apk/adapter/pkg/utils/stringutils"
+	k8client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
 const nodeIDArrayMaxLength int = 20
@@ -92,4 +96,22 @@ func GetNodeIdentifier(request *discovery.DiscoveryRequest) string {
 		nodeIdentifier = request.Node.Id + ":" + identifierVal.(string)
 	}
 	return nodeIdentifier
+}
+
+// FilterByNamespaces takes a list of namespaces and returns a filter function
+// which return true if the input object is in the given namespaces list,
+// and returns false otherwise
+func FilterByNamespaces(namespaces []string) func(object k8client.Object) bool {
+	return func(object k8client.Object) bool {
+		if namespaces == nil {
+			return true
+		}
+		return stringutils.StringInSlice(object.GetNamespace(), namespaces)
+	}
+}
+
+// GetOperatorPodNamespace returns the namesapce of the operator pod
+func GetOperatorPodNamespace() string {
+	return envutils.GetEnv(constants.OperatorPodNamespace,
+		constants.OperatorPodNamespaceDefaultValue)
 }
