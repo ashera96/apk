@@ -36,7 +36,7 @@ type AuthenticationOption struct {
 	// Type denotes the application authentication type
 	// Possible values are OAuth2, mTLS, BasicAuth, APIKey, IPRange
 	//
-	// +kubebuilder:validation:Enum=OAuth2;mTLS;BasicAuth;APIKey;IPRange
+	// +kubebuilder:validation:Enum=oauth2;mTLS;basicAuth;apiKey;IPRange
 	Type string `json:"type"`
 
 	// OAuth2 denotes the OAuth2 authentication option
