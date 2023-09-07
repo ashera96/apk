@@ -138,10 +138,3 @@ func marshalApplicationKeyMapping(applicationList []cpv1alpha1.Application) *sub
 		List: applicationKeyMappings,
 	}
 }
-
-// SetupWithManager sets up the controller with the Manager.
-func (r *ApplicationReconciler) SetupWithManager(mgr ctrl.Manager) error {
-	return ctrl.NewControllerManagedBy(mgr).
-		For(&cpv1alpha1.Application{}).
-		Complete(r)
-}

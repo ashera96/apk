@@ -19,8 +19,8 @@ package constants
 
 // Controller related constants
 const (
-	RatelimitController string = "RatelimitController"
-	ApplicationController  string = "ApplicationController"
+	RatelimitController   string = "RatelimitController"
+	ApplicationController string = "ApplicationController"
 )
 
 // API events related constants
@@ -67,9 +67,9 @@ const (
 
 // Application authentication types
 const (
-	OAuth2 = "OAuth2"
-	MTLS = "mTLS"
+	OAuth2    = "OAuth2"
+	MTLS      = "mTLS"
 	BasicAuth = "basicAuth"
-	APIKey = "apiKey"
-	IPRange = "IPRange"
+	APIKey    = "apiKey"
+	IPRange   = "IPRange"
 )

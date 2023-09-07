@@ -40,6 +40,7 @@ spec:
                 type: object
               authenticationOptions:
                 items:
+                  description: AuthenticationOption defines an authentication option
                   properties:
                     IPRange:
                       description: IPRange denotes the IPRange authentication option

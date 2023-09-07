@@ -32,6 +32,7 @@ type ApplicationSpec struct {
 	AuthenticationOptions []AuthenticationOption `json:"authenticationOptions"`
 }
 
+// AuthenticationOption defines an authentication option
 type AuthenticationOption struct {
 	// Type denotes the application authentication type
 	// Possible values are OAuth2, mTLS, BasicAuth, APIKey, IPRange
