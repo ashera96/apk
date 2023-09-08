@@ -47,6 +47,27 @@ type ApplicationReconciler struct {
 	Scheme *runtime.Scheme
 }
 
+// NewApplicationController creates a new Application controller instance
+func NewApplicationController(mgr manager.Manager) error {
+	r := &ApplicationReconciler{
+		client: mgr.GetClient(),
+	}
+	c, err := controller.New(constants.ApplicationController, mgr, controller.Options{Reconciler: r})
+	if err != nil {
+		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error2606, logging.BLOCKER, "Error creating Application controller: %v", err.Error()))
+		return err
+	}
+
+	if err := c.Watch(source.Kind(mgr.GetCache(), &cpv1alpha1.Application{}), &handler.EnqueueRequestForObject{},
+		predicate.NewPredicateFuncs(utils.FilterByNamespaces([]string{utils.GetOperatorPodNamespace()}))); err != nil {
+		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error2607, logging.BLOCKER, "Error watching Application resources: %v", err.Error()))
+		return err
+	}
+
+	loggers.LoggerAPKOperator.Debug("Application Controller successfully started. Watching Application Objects...")
+	return nil
+}
+
 //+kubebuilder:rbac:groups=cp.wso2.com,resources=applications,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=cp.wso2.com,resources=applications/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=cp.wso2.com,resources=applications/finalizers,verbs=update
@@ -73,27 +94,6 @@ func (applicationReconciler *ApplicationReconciler) Reconcile(ctx context.Contex
 
 	sendUpdates(applicationList)
 	return ctrl.Result{}, nil
-}
-
-// NewApplicationController creates a new Application controller instance
-func NewApplicationController(mgr manager.Manager) error {
-	r := &ApplicationReconciler{
-		client: mgr.GetClient(),
-	}
-	c, err := controller.New(constants.ApplicationController, mgr, controller.Options{Reconciler: r})
-	if err != nil {
-		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error2606, logging.BLOCKER, "Error creating Application controller: %v", err.Error()))
-		return err
-	}
-
-	if err := c.Watch(source.Kind(mgr.GetCache(), &cpv1alpha1.Application{}), &handler.EnqueueRequestForObject{},
-		predicate.NewPredicateFuncs(utils.FilterByNamespaces([]string{utils.GetOperatorPodNamespace()}))); err != nil {
-		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error2607, logging.BLOCKER, "Error watching Application resources: %v", err.Error()))
-		return err
-	}
-
-	loggers.LoggerAPKOperator.Debug("Application Controller successfully started. Watching Application Objects...")
-	return nil
 }
 
 func sendUpdates(applicationList *cpv1alpha1.ApplicationList) {

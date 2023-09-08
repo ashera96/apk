@@ -53,6 +53,7 @@ type EnforcerInternalAPI struct {
 var (
 	enforcerApplicationCache           wso2_cache.SnapshotCache
 	enforcerApplicationKeyMappingCache wso2_cache.SnapshotCache
+	enforcerSubscriptionCache          wso2_cache.SnapshotCache
 	// Common Enforcer Label as map key
 	// TODO(amali) This doesn't have a usage yet. It will be used to handle multiple enforcer labels in future.
 	enforcerLabelMap map[string]*EnforcerInternalAPI // Enforcer Label -> EnforcerInternalAPI struct map
@@ -164,6 +165,7 @@ func UpdateEnforcerApplications(applications *subscription.ApplicationList) {
 	enforcerLabelMap[label].applications = applicationList
 	loggers.LoggerXds.Infof("New Application cache update for the label: " + label + " version: " + fmt.Sprint(version))
 }
+
 // UpdateEnforcerApplicationKeyMappings sets new update to the enforcer's Application Key Mappings
 func UpdateEnforcerApplicationKeyMappings(applicationKeyMappings *subscription.ApplicationKeyMappingList) {
 	loggers.LoggerXds.Debug("Updating Application Key Mapping Cache")
@@ -180,4 +182,26 @@ func UpdateEnforcerApplicationKeyMappings(applicationKeyMappings *subscription.A
 	}
 	enforcerLabelMap[label].applicationKeyMappings = applicationKeyMappingList
 	loggers.LoggerXds.Infof("New Application Key Mapping cache update for the label: " + label + " version: " + fmt.Sprint(version))
+}
+
+// UpdateEnforcerSubscriptions sets new update to the enforcer's Subscriptions
+func UpdateEnforcerSubscriptions(subscriptions *subscription.SubscriptionList) {
+	//TODO: (Dinusha) check this hardcoded value
+	loggers.LoggerXds.Debug("Updating Enforcer Subscription Cache")
+	label := commonEnforcerLabel
+	subscriptionList := append(enforcerLabelMap[label].subscriptions, subscriptions)
+
+	// TODO: (VirajSalaka) Decide if a map is required to keep version (just to avoid having the same version)
+	version, _ := crand.Int(crand.Reader, maxRandomBigInt())
+	snap, _ := wso2_cache.NewSnapshot(fmt.Sprint(version), map[wso2_resource.Type][]types.Resource{
+		wso2_resource.SubscriptionListType: subscriptionList,
+	})
+	snap.Consistent()
+
+	errSetSnap := enforcerSubscriptionCache.SetSnapshot(context.Background(), label, snap)
+	if errSetSnap != nil {
+		loggers.LoggerXds.ErrorC(logging.PrintError(logging.Error1414, logging.MAJOR, "Error while setting the snapshot : %v", errSetSnap.Error()))
+	}
+	enforcerLabelMap[label].subscriptions = subscriptionList
+	loggers.LoggerXds.Infof("New Subscription cache update for the label: " + label + " version: " + fmt.Sprint(version))
 }

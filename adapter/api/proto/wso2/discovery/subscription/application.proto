@@ -15,13 +15,44 @@ message Application {
     string name = 2;
     string uuid = 3;
     string owner = 4;
-    string policy = 5;
-    map<string, string> attributes = 6;
-    message Key {
-        string key = 1;
-        string keyManager = 2;
-    }
-    repeated Key keys = 7;
-    string organization = 8;
-    string timeStamp = 9;
+    map<string, string> attributes = 5;
+    repeated AuthenticationOption authenticationOptions = 6;
+    string timeStamp = 7;
 }
+
+message AuthenticationOption {
+    string type = 1;  
+    OAuth2 oAuth2 = 2;
+    // MTLS mTLS = 3;
+    // BasicAuth basicAuth = 4;
+    // APIKey apiKey = 5;
+    // IPRange IPRange = 6;
+}
+
+message OAuth2 {
+    string consumerKey = 1;
+    string keyManager = 2;
+    string keyType = 3;
+}
+
+// message MTLS {
+//     string cert = 1;
+//     string issuer = 2;
+//     string keyType = 3;
+// }
+// 
+// message BasicAuth {
+//     string basicAuthIdentifier = 1;
+//     string keyType = 2;
+// }
+// 
+// message APIKey {
+//     string key = 1;
+//     string keyType = 2;
+// }
+//
+// message IPRange {
+//     string IPs = 1;
+//     string IPRangeIdentifier = 2;
+//     string keyType = 3;
+// }

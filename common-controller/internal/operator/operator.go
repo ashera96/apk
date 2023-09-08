@@ -128,6 +128,10 @@ func InitOperator() {
 		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error3115, logging.MAJOR,
 			"Error creating Application controller, error: %v", err))
 	}
+	if err := cpcontrollers.NewSubscriptionController(mgr); err != nil {
+		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error3116, logging.MAJOR,
+			"Error creating Subscription controller, error: %v", err))
+	}
 	//+kubebuilder:scaffold:builder
 
 	if err := mgr.AddHealthzCheck("healthz", healthz.Ping); err != nil {

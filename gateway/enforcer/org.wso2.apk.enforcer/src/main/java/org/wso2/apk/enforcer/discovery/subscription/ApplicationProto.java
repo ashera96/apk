@@ -25,10 +25,15 @@ public final class ApplicationProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_wso2_discovery_subscription_Application_AttributesEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_wso2_discovery_subscription_Application_Key_descriptor;
+    internal_static_wso2_discovery_subscription_AuthenticationOption_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_wso2_discovery_subscription_Application_Key_fieldAccessorTable;
+      internal_static_wso2_discovery_subscription_AuthenticationOption_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_wso2_discovery_subscription_OAuth2_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_wso2_discovery_subscription_OAuth2_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -39,20 +44,23 @@ public final class ApplicationProto {
   static {
     java.lang.String[] descriptorData = {
       "\n-wso2/discovery/subscription/applicatio" +
-      "n.proto\022\033wso2.discovery.subscription\"\347\002\n" +
+      "n.proto\022\033wso2.discovery.subscription\"\257\002\n" +
       "\013Application\022\017\n\007eventId\030\001 \001(\t\022\014\n\004name\030\002 " +
-      "\001(\t\022\014\n\004uuid\030\003 \001(\t\022\r\n\005owner\030\004 \001(\t\022\016\n\006poli" +
-      "cy\030\005 \001(\t\022L\n\nattributes\030\006 \003(\01328.wso2.disc" +
-      "overy.subscription.Application.Attribute" +
-      "sEntry\022:\n\004keys\030\007 \003(\0132,.wso2.discovery.su" +
-      "bscription.Application.Key\022\024\n\014organizati" +
-      "on\030\010 \001(\t\022\021\n\ttimeStamp\030\t \001(\t\0321\n\017Attribute" +
-      "sEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032&" +
-      "\n\003Key\022\013\n\003key\030\001 \001(\t\022\022\n\nkeyManager\030\002 \001(\tB\223" +
-      "\001\n,org.wso2.apk.enforcer.discovery.subsc" +
-      "riptionB\020ApplicationProtoP\001ZOgithub.com/" +
-      "envoyproxy/go-control-plane/wso2/discove" +
-      "ry/subscription;subscriptionb\006proto3"
+      "\001(\t\022\014\n\004uuid\030\003 \001(\t\022\r\n\005owner\030\004 \001(\t\022L\n\nattr" +
+      "ibutes\030\005 \003(\01328.wso2.discovery.subscripti" +
+      "on.Application.AttributesEntry\022P\n\025authen" +
+      "ticationOptions\030\006 \003(\01321.wso2.discovery.s" +
+      "ubscription.AuthenticationOption\022\021\n\ttime" +
+      "Stamp\030\007 \001(\t\0321\n\017AttributesEntry\022\013\n\003key\030\001 " +
+      "\001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"Y\n\024Authentication" +
+      "Option\022\014\n\004type\030\001 \001(\t\0223\n\006oAuth2\030\002 \001(\0132#.w" +
+      "so2.discovery.subscription.OAuth2\"B\n\006OAu" +
+      "th2\022\023\n\013consumerKey\030\001 \001(\t\022\022\n\nkeyManager\030\002" +
+      " \001(\t\022\017\n\007keyType\030\003 \001(\tB\223\001\n,org.wso2.apk.e" +
+      "nforcer.discovery.subscriptionB\020Applicat" +
+      "ionProtoP\001ZOgithub.com/envoyproxy/go-con" +
+      "trol-plane/wso2/discovery/subscription;s" +
+      "ubscriptionb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -63,19 +71,25 @@ public final class ApplicationProto {
     internal_static_wso2_discovery_subscription_Application_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_wso2_discovery_subscription_Application_descriptor,
-        new java.lang.String[] { "EventId", "Name", "Uuid", "Owner", "Policy", "Attributes", "Keys", "Organization", "TimeStamp", });
+        new java.lang.String[] { "EventId", "Name", "Uuid", "Owner", "Attributes", "AuthenticationOptions", "TimeStamp", });
     internal_static_wso2_discovery_subscription_Application_AttributesEntry_descriptor =
       internal_static_wso2_discovery_subscription_Application_descriptor.getNestedTypes().get(0);
     internal_static_wso2_discovery_subscription_Application_AttributesEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_wso2_discovery_subscription_Application_AttributesEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_wso2_discovery_subscription_Application_Key_descriptor =
-      internal_static_wso2_discovery_subscription_Application_descriptor.getNestedTypes().get(1);
-    internal_static_wso2_discovery_subscription_Application_Key_fieldAccessorTable = new
+    internal_static_wso2_discovery_subscription_AuthenticationOption_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_wso2_discovery_subscription_AuthenticationOption_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_wso2_discovery_subscription_Application_Key_descriptor,
-        new java.lang.String[] { "Key", "KeyManager", });
+        internal_static_wso2_discovery_subscription_AuthenticationOption_descriptor,
+        new java.lang.String[] { "Type", "OAuth2", });
+    internal_static_wso2_discovery_subscription_OAuth2_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_wso2_discovery_subscription_OAuth2_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_wso2_discovery_subscription_OAuth2_descriptor,
+        new java.lang.String[] { "ConsumerKey", "KeyManager", "KeyType", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -56,23 +56,11 @@ public interface ApplicationOrBuilder extends
       getOwnerBytes();
 
   /**
-   * <code>string policy = 5;</code>
-   * @return The policy.
-   */
-  java.lang.String getPolicy();
-  /**
-   * <code>string policy = 5;</code>
-   * @return The bytes for policy.
-   */
-  com.google.protobuf.ByteString
-      getPolicyBytes();
-
-  /**
-   * <code>map&lt;string, string&gt; attributes = 6;</code>
+   * <code>map&lt;string, string&gt; attributes = 5;</code>
    */
   int getAttributesCount();
   /**
-   * <code>map&lt;string, string&gt; attributes = 6;</code>
+   * <code>map&lt;string, string&gt; attributes = 5;</code>
    */
   boolean containsAttributes(
       java.lang.String key);
@@ -83,67 +71,55 @@ public interface ApplicationOrBuilder extends
   java.util.Map<java.lang.String, java.lang.String>
   getAttributes();
   /**
-   * <code>map&lt;string, string&gt; attributes = 6;</code>
+   * <code>map&lt;string, string&gt; attributes = 5;</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
   getAttributesMap();
   /**
-   * <code>map&lt;string, string&gt; attributes = 6;</code>
+   * <code>map&lt;string, string&gt; attributes = 5;</code>
    */
 
   java.lang.String getAttributesOrDefault(
       java.lang.String key,
       java.lang.String defaultValue);
   /**
-   * <code>map&lt;string, string&gt; attributes = 6;</code>
+   * <code>map&lt;string, string&gt; attributes = 5;</code>
    */
 
   java.lang.String getAttributesOrThrow(
       java.lang.String key);
 
   /**
-   * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
    */
-  java.util.List<org.wso2.apk.enforcer.discovery.subscription.Application.Key> 
-      getKeysList();
+  java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> 
+      getAuthenticationOptionsList();
   /**
-   * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
    */
-  org.wso2.apk.enforcer.discovery.subscription.Application.Key getKeys(int index);
+  org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption getAuthenticationOptions(int index);
   /**
-   * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
    */
-  int getKeysCount();
+  int getAuthenticationOptionsCount();
   /**
-   * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
    */
-  java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.Application.KeyOrBuilder> 
-      getKeysOrBuilderList();
+  java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder> 
+      getAuthenticationOptionsOrBuilderList();
   /**
-   * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
    */
-  org.wso2.apk.enforcer.discovery.subscription.Application.KeyOrBuilder getKeysOrBuilder(
+  org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder getAuthenticationOptionsOrBuilder(
       int index);
 
   /**
-   * <code>string organization = 8;</code>
-   * @return The organization.
-   */
-  java.lang.String getOrganization();
-  /**
-   * <code>string organization = 8;</code>
-   * @return The bytes for organization.
-   */
-  com.google.protobuf.ByteString
-      getOrganizationBytes();
-
-  /**
-   * <code>string timeStamp = 9;</code>
+   * <code>string timeStamp = 7;</code>
    * @return The timeStamp.
    */
   java.lang.String getTimeStamp();
   /**
-   * <code>string timeStamp = 9;</code>
+   * <code>string timeStamp = 7;</code>
    * @return The bytes for timeStamp.
    */
   com.google.protobuf.ByteString

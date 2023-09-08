@@ -24,9 +24,7 @@ private static final long serialVersionUID = 0L;
     name_ = "";
     uuid_ = "";
     owner_ = "";
-    policy_ = "";
-    keys_ = java.util.Collections.emptyList();
-    organization_ = "";
+    authenticationOptions_ = java.util.Collections.emptyList();
     timeStamp_ = "";
   }
 
@@ -86,12 +84,6 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 42: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            policy_ = s;
-            break;
-          }
-          case 50: {
             if (!((mutable_bitField0_ & 0x00000001) != 0)) {
               attributes_ = com.google.protobuf.MapField.newMapField(
                   AttributesDefaultEntryHolder.defaultEntry);
@@ -104,22 +96,16 @@ private static final long serialVersionUID = 0L;
                 attributes__.getKey(), attributes__.getValue());
             break;
           }
-          case 58: {
+          case 50: {
             if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-              keys_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.Application.Key>();
+              authenticationOptions_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption>();
               mutable_bitField0_ |= 0x00000002;
             }
-            keys_.add(
-                input.readMessage(org.wso2.apk.enforcer.discovery.subscription.Application.Key.parser(), extensionRegistry));
+            authenticationOptions_.add(
+                input.readMessage(org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.parser(), extensionRegistry));
             break;
           }
-          case 66: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            organization_ = s;
-            break;
-          }
-          case 74: {
+          case 58: {
             java.lang.String s = input.readStringRequireUtf8();
 
             timeStamp_ = s;
@@ -141,7 +127,7 @@ private static final long serialVersionUID = 0L;
           e).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000002) != 0)) {
-        keys_ = java.util.Collections.unmodifiableList(keys_);
+        authenticationOptions_ = java.util.Collections.unmodifiableList(authenticationOptions_);
       }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
@@ -157,7 +143,7 @@ private static final long serialVersionUID = 0L;
   protected com.google.protobuf.MapField internalGetMapField(
       int number) {
     switch (number) {
-      case 6:
+      case 5:
         return internalGetAttributes();
       default:
         throw new RuntimeException(
@@ -170,724 +156,6 @@ private static final long serialVersionUID = 0L;
     return org.wso2.apk.enforcer.discovery.subscription.ApplicationProto.internal_static_wso2_discovery_subscription_Application_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             org.wso2.apk.enforcer.discovery.subscription.Application.class, org.wso2.apk.enforcer.discovery.subscription.Application.Builder.class);
-  }
-
-  public interface KeyOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:wso2.discovery.subscription.Application.Key)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string key = 1;</code>
-     * @return The key.
-     */
-    java.lang.String getKey();
-    /**
-     * <code>string key = 1;</code>
-     * @return The bytes for key.
-     */
-    com.google.protobuf.ByteString
-        getKeyBytes();
-
-    /**
-     * <code>string keyManager = 2;</code>
-     * @return The keyManager.
-     */
-    java.lang.String getKeyManager();
-    /**
-     * <code>string keyManager = 2;</code>
-     * @return The bytes for keyManager.
-     */
-    com.google.protobuf.ByteString
-        getKeyManagerBytes();
-  }
-  /**
-   * Protobuf type {@code wso2.discovery.subscription.Application.Key}
-   */
-  public static final class Key extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:wso2.discovery.subscription.Application.Key)
-      KeyOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use Key.newBuilder() to construct.
-    private Key(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private Key() {
-      key_ = "";
-      keyManager_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new Key();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private Key(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              key_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              keyManager_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return org.wso2.apk.enforcer.discovery.subscription.ApplicationProto.internal_static_wso2_discovery_subscription_Application_Key_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return org.wso2.apk.enforcer.discovery.subscription.ApplicationProto.internal_static_wso2_discovery_subscription_Application_Key_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              org.wso2.apk.enforcer.discovery.subscription.Application.Key.class, org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder.class);
-    }
-
-    public static final int KEY_FIELD_NUMBER = 1;
-    private volatile java.lang.Object key_;
-    /**
-     * <code>string key = 1;</code>
-     * @return The key.
-     */
-    @java.lang.Override
-    public java.lang.String getKey() {
-      java.lang.Object ref = key_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        key_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string key = 1;</code>
-     * @return The bytes for key.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getKeyBytes() {
-      java.lang.Object ref = key_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        key_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int KEYMANAGER_FIELD_NUMBER = 2;
-    private volatile java.lang.Object keyManager_;
-    /**
-     * <code>string keyManager = 2;</code>
-     * @return The keyManager.
-     */
-    @java.lang.Override
-    public java.lang.String getKeyManager() {
-      java.lang.Object ref = keyManager_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        keyManager_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string keyManager = 2;</code>
-     * @return The bytes for keyManager.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getKeyManagerBytes() {
-      java.lang.Object ref = keyManager_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        keyManager_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getKeyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, key_);
-      }
-      if (!getKeyManagerBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, keyManager_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getKeyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, key_);
-      }
-      if (!getKeyManagerBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, keyManager_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof org.wso2.apk.enforcer.discovery.subscription.Application.Key)) {
-        return super.equals(obj);
-      }
-      org.wso2.apk.enforcer.discovery.subscription.Application.Key other = (org.wso2.apk.enforcer.discovery.subscription.Application.Key) obj;
-
-      if (!getKey()
-          .equals(other.getKey())) return false;
-      if (!getKeyManager()
-          .equals(other.getKeyManager())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + KEY_FIELD_NUMBER;
-      hash = (53 * hash) + getKey().hashCode();
-      hash = (37 * hash) + KEYMANAGER_FIELD_NUMBER;
-      hash = (53 * hash) + getKeyManager().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(org.wso2.apk.enforcer.discovery.subscription.Application.Key prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code wso2.discovery.subscription.Application.Key}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:wso2.discovery.subscription.Application.Key)
-        org.wso2.apk.enforcer.discovery.subscription.Application.KeyOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return org.wso2.apk.enforcer.discovery.subscription.ApplicationProto.internal_static_wso2_discovery_subscription_Application_Key_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return org.wso2.apk.enforcer.discovery.subscription.ApplicationProto.internal_static_wso2_discovery_subscription_Application_Key_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                org.wso2.apk.enforcer.discovery.subscription.Application.Key.class, org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder.class);
-      }
-
-      // Construct using org.wso2.apk.enforcer.discovery.subscription.Application.Key.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        key_ = "";
-
-        keyManager_ = "";
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return org.wso2.apk.enforcer.discovery.subscription.ApplicationProto.internal_static_wso2_discovery_subscription_Application_Key_descriptor;
-      }
-
-      @java.lang.Override
-      public org.wso2.apk.enforcer.discovery.subscription.Application.Key getDefaultInstanceForType() {
-        return org.wso2.apk.enforcer.discovery.subscription.Application.Key.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public org.wso2.apk.enforcer.discovery.subscription.Application.Key build() {
-        org.wso2.apk.enforcer.discovery.subscription.Application.Key result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public org.wso2.apk.enforcer.discovery.subscription.Application.Key buildPartial() {
-        org.wso2.apk.enforcer.discovery.subscription.Application.Key result = new org.wso2.apk.enforcer.discovery.subscription.Application.Key(this);
-        result.key_ = key_;
-        result.keyManager_ = keyManager_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.wso2.apk.enforcer.discovery.subscription.Application.Key) {
-          return mergeFrom((org.wso2.apk.enforcer.discovery.subscription.Application.Key)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(org.wso2.apk.enforcer.discovery.subscription.Application.Key other) {
-        if (other == org.wso2.apk.enforcer.discovery.subscription.Application.Key.getDefaultInstance()) return this;
-        if (!other.getKey().isEmpty()) {
-          key_ = other.key_;
-          onChanged();
-        }
-        if (!other.getKeyManager().isEmpty()) {
-          keyManager_ = other.keyManager_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        org.wso2.apk.enforcer.discovery.subscription.Application.Key parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.wso2.apk.enforcer.discovery.subscription.Application.Key) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object key_ = "";
-      /**
-       * <code>string key = 1;</code>
-       * @return The key.
-       */
-      public java.lang.String getKey() {
-        java.lang.Object ref = key_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          key_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @return The bytes for key.
-       */
-      public com.google.protobuf.ByteString
-          getKeyBytes() {
-        java.lang.Object ref = key_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          key_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @param value The key to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKey(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        key_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearKey() {
-        
-        key_ = getDefaultInstance().getKey();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @param value The bytes for key to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKeyBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        key_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object keyManager_ = "";
-      /**
-       * <code>string keyManager = 2;</code>
-       * @return The keyManager.
-       */
-      public java.lang.String getKeyManager() {
-        java.lang.Object ref = keyManager_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          keyManager_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string keyManager = 2;</code>
-       * @return The bytes for keyManager.
-       */
-      public com.google.protobuf.ByteString
-          getKeyManagerBytes() {
-        java.lang.Object ref = keyManager_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          keyManager_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string keyManager = 2;</code>
-       * @param value The keyManager to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKeyManager(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        keyManager_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string keyManager = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearKeyManager() {
-        
-        keyManager_ = getDefaultInstance().getKeyManager();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string keyManager = 2;</code>
-       * @param value The bytes for keyManager to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKeyManagerBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        keyManager_ = value;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:wso2.discovery.subscription.Application.Key)
-    }
-
-    // @@protoc_insertion_point(class_scope:wso2.discovery.subscription.Application.Key)
-    private static final org.wso2.apk.enforcer.discovery.subscription.Application.Key DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new org.wso2.apk.enforcer.discovery.subscription.Application.Key();
-    }
-
-    public static org.wso2.apk.enforcer.discovery.subscription.Application.Key getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<Key>
-        PARSER = new com.google.protobuf.AbstractParser<Key>() {
-      @java.lang.Override
-      public Key parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Key(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<Key> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Key> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public org.wso2.apk.enforcer.discovery.subscription.Application.Key getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
   public static final int EVENTID_FIELD_NUMBER = 1;
@@ -1042,45 +310,7 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int POLICY_FIELD_NUMBER = 5;
-  private volatile java.lang.Object policy_;
-  /**
-   * <code>string policy = 5;</code>
-   * @return The policy.
-   */
-  @java.lang.Override
-  public java.lang.String getPolicy() {
-    java.lang.Object ref = policy_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      policy_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string policy = 5;</code>
-   * @return The bytes for policy.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getPolicyBytes() {
-    java.lang.Object ref = policy_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      policy_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int ATTRIBUTES_FIELD_NUMBER = 6;
+  public static final int ATTRIBUTES_FIELD_NUMBER = 5;
   private static final class AttributesDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
@@ -1107,7 +337,7 @@ private static final long serialVersionUID = 0L;
     return internalGetAttributes().getMap().size();
   }
   /**
-   * <code>map&lt;string, string&gt; attributes = 6;</code>
+   * <code>map&lt;string, string&gt; attributes = 5;</code>
    */
 
   @java.lang.Override
@@ -1125,7 +355,7 @@ private static final long serialVersionUID = 0L;
     return getAttributesMap();
   }
   /**
-   * <code>map&lt;string, string&gt; attributes = 6;</code>
+   * <code>map&lt;string, string&gt; attributes = 5;</code>
    */
   @java.lang.Override
 
@@ -1133,7 +363,7 @@ private static final long serialVersionUID = 0L;
     return internalGetAttributes().getMap();
   }
   /**
-   * <code>map&lt;string, string&gt; attributes = 6;</code>
+   * <code>map&lt;string, string&gt; attributes = 5;</code>
    */
   @java.lang.Override
 
@@ -1146,7 +376,7 @@ private static final long serialVersionUID = 0L;
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
   /**
-   * <code>map&lt;string, string&gt; attributes = 6;</code>
+   * <code>map&lt;string, string&gt; attributes = 5;</code>
    */
   @java.lang.Override
 
@@ -1161,88 +391,50 @@ private static final long serialVersionUID = 0L;
     return map.get(key);
   }
 
-  public static final int KEYS_FIELD_NUMBER = 7;
-  private java.util.List<org.wso2.apk.enforcer.discovery.subscription.Application.Key> keys_;
+  public static final int AUTHENTICATIONOPTIONS_FIELD_NUMBER = 6;
+  private java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> authenticationOptions_;
   /**
-   * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
    */
   @java.lang.Override
-  public java.util.List<org.wso2.apk.enforcer.discovery.subscription.Application.Key> getKeysList() {
-    return keys_;
+  public java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> getAuthenticationOptionsList() {
+    return authenticationOptions_;
   }
   /**
-   * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
    */
   @java.lang.Override
-  public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.Application.KeyOrBuilder> 
-      getKeysOrBuilderList() {
-    return keys_;
+  public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder> 
+      getAuthenticationOptionsOrBuilderList() {
+    return authenticationOptions_;
   }
   /**
-   * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
    */
   @java.lang.Override
-  public int getKeysCount() {
-    return keys_.size();
+  public int getAuthenticationOptionsCount() {
+    return authenticationOptions_.size();
   }
   /**
-   * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
    */
   @java.lang.Override
-  public org.wso2.apk.enforcer.discovery.subscription.Application.Key getKeys(int index) {
-    return keys_.get(index);
+  public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption getAuthenticationOptions(int index) {
+    return authenticationOptions_.get(index);
   }
   /**
-   * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
    */
   @java.lang.Override
-  public org.wso2.apk.enforcer.discovery.subscription.Application.KeyOrBuilder getKeysOrBuilder(
+  public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder getAuthenticationOptionsOrBuilder(
       int index) {
-    return keys_.get(index);
+    return authenticationOptions_.get(index);
   }
 
-  public static final int ORGANIZATION_FIELD_NUMBER = 8;
-  private volatile java.lang.Object organization_;
-  /**
-   * <code>string organization = 8;</code>
-   * @return The organization.
-   */
-  @java.lang.Override
-  public java.lang.String getOrganization() {
-    java.lang.Object ref = organization_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      organization_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string organization = 8;</code>
-   * @return The bytes for organization.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getOrganizationBytes() {
-    java.lang.Object ref = organization_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      organization_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int TIMESTAMP_FIELD_NUMBER = 9;
+  public static final int TIMESTAMP_FIELD_NUMBER = 7;
   private volatile java.lang.Object timeStamp_;
   /**
-   * <code>string timeStamp = 9;</code>
+   * <code>string timeStamp = 7;</code>
    * @return The timeStamp.
    */
   @java.lang.Override
@@ -1259,7 +451,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string timeStamp = 9;</code>
+   * <code>string timeStamp = 7;</code>
    * @return The bytes for timeStamp.
    */
   @java.lang.Override
@@ -1303,23 +495,17 @@ private static final long serialVersionUID = 0L;
     if (!getOwnerBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 4, owner_);
     }
-    if (!getPolicyBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, policy_);
-    }
     com.google.protobuf.GeneratedMessageV3
       .serializeStringMapTo(
         output,
         internalGetAttributes(),
         AttributesDefaultEntryHolder.defaultEntry,
-        6);
-    for (int i = 0; i < keys_.size(); i++) {
-      output.writeMessage(7, keys_.get(i));
-    }
-    if (!getOrganizationBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, organization_);
+        5);
+    for (int i = 0; i < authenticationOptions_.size(); i++) {
+      output.writeMessage(6, authenticationOptions_.get(i));
     }
     if (!getTimeStampBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 9, timeStamp_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, timeStamp_);
     }
     unknownFields.writeTo(output);
   }
@@ -1342,9 +528,6 @@ private static final long serialVersionUID = 0L;
     if (!getOwnerBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, owner_);
     }
-    if (!getPolicyBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, policy_);
-    }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
          : internalGetAttributes().getMap().entrySet()) {
       com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
@@ -1353,17 +536,14 @@ private static final long serialVersionUID = 0L;
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, attributes__);
+          .computeMessageSize(5, attributes__);
     }
-    for (int i = 0; i < keys_.size(); i++) {
+    for (int i = 0; i < authenticationOptions_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(7, keys_.get(i));
-    }
-    if (!getOrganizationBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, organization_);
+        .computeMessageSize(6, authenticationOptions_.get(i));
     }
     if (!getTimeStampBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, timeStamp_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, timeStamp_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -1388,14 +568,10 @@ private static final long serialVersionUID = 0L;
         .equals(other.getUuid())) return false;
     if (!getOwner()
         .equals(other.getOwner())) return false;
-    if (!getPolicy()
-        .equals(other.getPolicy())) return false;
     if (!internalGetAttributes().equals(
         other.internalGetAttributes())) return false;
-    if (!getKeysList()
-        .equals(other.getKeysList())) return false;
-    if (!getOrganization()
-        .equals(other.getOrganization())) return false;
+    if (!getAuthenticationOptionsList()
+        .equals(other.getAuthenticationOptionsList())) return false;
     if (!getTimeStamp()
         .equals(other.getTimeStamp())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
@@ -1417,18 +593,14 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getUuid().hashCode();
     hash = (37 * hash) + OWNER_FIELD_NUMBER;
     hash = (53 * hash) + getOwner().hashCode();
-    hash = (37 * hash) + POLICY_FIELD_NUMBER;
-    hash = (53 * hash) + getPolicy().hashCode();
     if (!internalGetAttributes().getMap().isEmpty()) {
       hash = (37 * hash) + ATTRIBUTES_FIELD_NUMBER;
       hash = (53 * hash) + internalGetAttributes().hashCode();
     }
-    if (getKeysCount() > 0) {
-      hash = (37 * hash) + KEYS_FIELD_NUMBER;
-      hash = (53 * hash) + getKeysList().hashCode();
+    if (getAuthenticationOptionsCount() > 0) {
+      hash = (37 * hash) + AUTHENTICATIONOPTIONS_FIELD_NUMBER;
+      hash = (53 * hash) + getAuthenticationOptionsList().hashCode();
     }
-    hash = (37 * hash) + ORGANIZATION_FIELD_NUMBER;
-    hash = (53 * hash) + getOrganization().hashCode();
     hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
     hash = (53 * hash) + getTimeStamp().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -1546,7 +718,7 @@ private static final long serialVersionUID = 0L;
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 6:
+        case 5:
           return internalGetAttributes();
         default:
           throw new RuntimeException(
@@ -1557,7 +729,7 @@ private static final long serialVersionUID = 0L;
     protected com.google.protobuf.MapField internalGetMutableMapField(
         int number) {
       switch (number) {
-        case 6:
+        case 5:
           return internalGetMutableAttributes();
         default:
           throw new RuntimeException(
@@ -1585,7 +757,7 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getKeysFieldBuilder();
+        getAuthenticationOptionsFieldBuilder();
       }
     }
     @java.lang.Override
@@ -1599,17 +771,13 @@ private static final long serialVersionUID = 0L;
 
       owner_ = "";
 
-      policy_ = "";
-
       internalGetMutableAttributes().clear();
-      if (keysBuilder_ == null) {
-        keys_ = java.util.Collections.emptyList();
+      if (authenticationOptionsBuilder_ == null) {
+        authenticationOptions_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
       } else {
-        keysBuilder_.clear();
+        authenticationOptionsBuilder_.clear();
       }
-      organization_ = "";
-
       timeStamp_ = "";
 
       return this;
@@ -1643,19 +811,17 @@ private static final long serialVersionUID = 0L;
       result.name_ = name_;
       result.uuid_ = uuid_;
       result.owner_ = owner_;
-      result.policy_ = policy_;
       result.attributes_ = internalGetAttributes();
       result.attributes_.makeImmutable();
-      if (keysBuilder_ == null) {
+      if (authenticationOptionsBuilder_ == null) {
         if (((bitField0_ & 0x00000002) != 0)) {
-          keys_ = java.util.Collections.unmodifiableList(keys_);
+          authenticationOptions_ = java.util.Collections.unmodifiableList(authenticationOptions_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.keys_ = keys_;
+        result.authenticationOptions_ = authenticationOptions_;
       } else {
-        result.keys_ = keysBuilder_.build();
+        result.authenticationOptions_ = authenticationOptionsBuilder_.build();
       }
-      result.organization_ = organization_;
       result.timeStamp_ = timeStamp_;
       onBuilt();
       return result;
@@ -1721,41 +887,33 @@ private static final long serialVersionUID = 0L;
         owner_ = other.owner_;
         onChanged();
       }
-      if (!other.getPolicy().isEmpty()) {
-        policy_ = other.policy_;
-        onChanged();
-      }
       internalGetMutableAttributes().mergeFrom(
           other.internalGetAttributes());
-      if (keysBuilder_ == null) {
-        if (!other.keys_.isEmpty()) {
-          if (keys_.isEmpty()) {
-            keys_ = other.keys_;
+      if (authenticationOptionsBuilder_ == null) {
+        if (!other.authenticationOptions_.isEmpty()) {
+          if (authenticationOptions_.isEmpty()) {
+            authenticationOptions_ = other.authenticationOptions_;
             bitField0_ = (bitField0_ & ~0x00000002);
           } else {
-            ensureKeysIsMutable();
-            keys_.addAll(other.keys_);
+            ensureAuthenticationOptionsIsMutable();
+            authenticationOptions_.addAll(other.authenticationOptions_);
           }
           onChanged();
         }
       } else {
-        if (!other.keys_.isEmpty()) {
-          if (keysBuilder_.isEmpty()) {
-            keysBuilder_.dispose();
-            keysBuilder_ = null;
-            keys_ = other.keys_;
+        if (!other.authenticationOptions_.isEmpty()) {
+          if (authenticationOptionsBuilder_.isEmpty()) {
+            authenticationOptionsBuilder_.dispose();
+            authenticationOptionsBuilder_ = null;
+            authenticationOptions_ = other.authenticationOptions_;
             bitField0_ = (bitField0_ & ~0x00000002);
-            keysBuilder_ = 
+            authenticationOptionsBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                 getKeysFieldBuilder() : null;
+                 getAuthenticationOptionsFieldBuilder() : null;
           } else {
-            keysBuilder_.addAllMessages(other.keys_);
+            authenticationOptionsBuilder_.addAllMessages(other.authenticationOptions_);
           }
         }
-      }
-      if (!other.getOrganization().isEmpty()) {
-        organization_ = other.organization_;
-        onChanged();
       }
       if (!other.getTimeStamp().isEmpty()) {
         timeStamp_ = other.timeStamp_;
@@ -2095,82 +1253,6 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object policy_ = "";
-    /**
-     * <code>string policy = 5;</code>
-     * @return The policy.
-     */
-    public java.lang.String getPolicy() {
-      java.lang.Object ref = policy_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        policy_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string policy = 5;</code>
-     * @return The bytes for policy.
-     */
-    public com.google.protobuf.ByteString
-        getPolicyBytes() {
-      java.lang.Object ref = policy_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        policy_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string policy = 5;</code>
-     * @param value The policy to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPolicy(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      policy_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string policy = 5;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearPolicy() {
-      
-      policy_ = getDefaultInstance().getPolicy();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string policy = 5;</code>
-     * @param value The bytes for policy to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPolicyBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      policy_ = value;
-      onChanged();
-      return this;
-    }
-
     private com.google.protobuf.MapField<
         java.lang.String, java.lang.String> attributes_;
     private com.google.protobuf.MapField<java.lang.String, java.lang.String>
@@ -2198,7 +1280,7 @@ private static final long serialVersionUID = 0L;
       return internalGetAttributes().getMap().size();
     }
     /**
-     * <code>map&lt;string, string&gt; attributes = 6;</code>
+     * <code>map&lt;string, string&gt; attributes = 5;</code>
      */
 
     @java.lang.Override
@@ -2216,7 +1298,7 @@ private static final long serialVersionUID = 0L;
       return getAttributesMap();
     }
     /**
-     * <code>map&lt;string, string&gt; attributes = 6;</code>
+     * <code>map&lt;string, string&gt; attributes = 5;</code>
      */
     @java.lang.Override
 
@@ -2224,7 +1306,7 @@ private static final long serialVersionUID = 0L;
       return internalGetAttributes().getMap();
     }
     /**
-     * <code>map&lt;string, string&gt; attributes = 6;</code>
+     * <code>map&lt;string, string&gt; attributes = 5;</code>
      */
     @java.lang.Override
 
@@ -2237,7 +1319,7 @@ private static final long serialVersionUID = 0L;
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, string&gt; attributes = 6;</code>
+     * <code>map&lt;string, string&gt; attributes = 5;</code>
      */
     @java.lang.Override
 
@@ -2258,7 +1340,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; attributes = 6;</code>
+     * <code>map&lt;string, string&gt; attributes = 5;</code>
      */
 
     public Builder removeAttributes(
@@ -2277,7 +1359,7 @@ private static final long serialVersionUID = 0L;
       return internalGetMutableAttributes().getMutableMap();
     }
     /**
-     * <code>map&lt;string, string&gt; attributes = 6;</code>
+     * <code>map&lt;string, string&gt; attributes = 5;</code>
      */
     public Builder putAttributes(
         java.lang.String key,
@@ -2289,7 +1371,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>map&lt;string, string&gt; attributes = 6;</code>
+     * <code>map&lt;string, string&gt; attributes = 5;</code>
      */
 
     public Builder putAllAttributes(
@@ -2299,325 +1381,249 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<org.wso2.apk.enforcer.discovery.subscription.Application.Key> keys_ =
+    private java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> authenticationOptions_ =
       java.util.Collections.emptyList();
-    private void ensureKeysIsMutable() {
+    private void ensureAuthenticationOptionsIsMutable() {
       if (!((bitField0_ & 0x00000002) != 0)) {
-        keys_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.Application.Key>(keys_);
+        authenticationOptions_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption>(authenticationOptions_);
         bitField0_ |= 0x00000002;
        }
     }
 
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        org.wso2.apk.enforcer.discovery.subscription.Application.Key, org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder, org.wso2.apk.enforcer.discovery.subscription.Application.KeyOrBuilder> keysBuilder_;
+        org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder> authenticationOptionsBuilder_;
 
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.Application.Key> getKeysList() {
-      if (keysBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(keys_);
+    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> getAuthenticationOptionsList() {
+      if (authenticationOptionsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(authenticationOptions_);
       } else {
-        return keysBuilder_.getMessageList();
+        return authenticationOptionsBuilder_.getMessageList();
       }
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public int getKeysCount() {
-      if (keysBuilder_ == null) {
-        return keys_.size();
+    public int getAuthenticationOptionsCount() {
+      if (authenticationOptionsBuilder_ == null) {
+        return authenticationOptions_.size();
       } else {
-        return keysBuilder_.getCount();
+        return authenticationOptionsBuilder_.getCount();
       }
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public org.wso2.apk.enforcer.discovery.subscription.Application.Key getKeys(int index) {
-      if (keysBuilder_ == null) {
-        return keys_.get(index);
+    public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption getAuthenticationOptions(int index) {
+      if (authenticationOptionsBuilder_ == null) {
+        return authenticationOptions_.get(index);
       } else {
-        return keysBuilder_.getMessage(index);
+        return authenticationOptionsBuilder_.getMessage(index);
       }
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public Builder setKeys(
-        int index, org.wso2.apk.enforcer.discovery.subscription.Application.Key value) {
-      if (keysBuilder_ == null) {
+    public Builder setAuthenticationOptions(
+        int index, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption value) {
+      if (authenticationOptionsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureKeysIsMutable();
-        keys_.set(index, value);
+        ensureAuthenticationOptionsIsMutable();
+        authenticationOptions_.set(index, value);
         onChanged();
       } else {
-        keysBuilder_.setMessage(index, value);
+        authenticationOptionsBuilder_.setMessage(index, value);
       }
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public Builder setKeys(
-        int index, org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder builderForValue) {
-      if (keysBuilder_ == null) {
-        ensureKeysIsMutable();
-        keys_.set(index, builderForValue.build());
+    public Builder setAuthenticationOptions(
+        int index, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder builderForValue) {
+      if (authenticationOptionsBuilder_ == null) {
+        ensureAuthenticationOptionsIsMutable();
+        authenticationOptions_.set(index, builderForValue.build());
         onChanged();
       } else {
-        keysBuilder_.setMessage(index, builderForValue.build());
+        authenticationOptionsBuilder_.setMessage(index, builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public Builder addKeys(org.wso2.apk.enforcer.discovery.subscription.Application.Key value) {
-      if (keysBuilder_ == null) {
+    public Builder addAuthenticationOptions(org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption value) {
+      if (authenticationOptionsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureKeysIsMutable();
-        keys_.add(value);
+        ensureAuthenticationOptionsIsMutable();
+        authenticationOptions_.add(value);
         onChanged();
       } else {
-        keysBuilder_.addMessage(value);
+        authenticationOptionsBuilder_.addMessage(value);
       }
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public Builder addKeys(
-        int index, org.wso2.apk.enforcer.discovery.subscription.Application.Key value) {
-      if (keysBuilder_ == null) {
+    public Builder addAuthenticationOptions(
+        int index, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption value) {
+      if (authenticationOptionsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureKeysIsMutable();
-        keys_.add(index, value);
+        ensureAuthenticationOptionsIsMutable();
+        authenticationOptions_.add(index, value);
         onChanged();
       } else {
-        keysBuilder_.addMessage(index, value);
+        authenticationOptionsBuilder_.addMessage(index, value);
       }
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public Builder addKeys(
-        org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder builderForValue) {
-      if (keysBuilder_ == null) {
-        ensureKeysIsMutable();
-        keys_.add(builderForValue.build());
+    public Builder addAuthenticationOptions(
+        org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder builderForValue) {
+      if (authenticationOptionsBuilder_ == null) {
+        ensureAuthenticationOptionsIsMutable();
+        authenticationOptions_.add(builderForValue.build());
         onChanged();
       } else {
-        keysBuilder_.addMessage(builderForValue.build());
+        authenticationOptionsBuilder_.addMessage(builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public Builder addKeys(
-        int index, org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder builderForValue) {
-      if (keysBuilder_ == null) {
-        ensureKeysIsMutable();
-        keys_.add(index, builderForValue.build());
+    public Builder addAuthenticationOptions(
+        int index, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder builderForValue) {
+      if (authenticationOptionsBuilder_ == null) {
+        ensureAuthenticationOptionsIsMutable();
+        authenticationOptions_.add(index, builderForValue.build());
         onChanged();
       } else {
-        keysBuilder_.addMessage(index, builderForValue.build());
+        authenticationOptionsBuilder_.addMessage(index, builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public Builder addAllKeys(
-        java.lang.Iterable<? extends org.wso2.apk.enforcer.discovery.subscription.Application.Key> values) {
-      if (keysBuilder_ == null) {
-        ensureKeysIsMutable();
+    public Builder addAllAuthenticationOptions(
+        java.lang.Iterable<? extends org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> values) {
+      if (authenticationOptionsBuilder_ == null) {
+        ensureAuthenticationOptionsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, keys_);
+            values, authenticationOptions_);
         onChanged();
       } else {
-        keysBuilder_.addAllMessages(values);
+        authenticationOptionsBuilder_.addAllMessages(values);
       }
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public Builder clearKeys() {
-      if (keysBuilder_ == null) {
-        keys_ = java.util.Collections.emptyList();
+    public Builder clearAuthenticationOptions() {
+      if (authenticationOptionsBuilder_ == null) {
+        authenticationOptions_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
       } else {
-        keysBuilder_.clear();
+        authenticationOptionsBuilder_.clear();
       }
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public Builder removeKeys(int index) {
-      if (keysBuilder_ == null) {
-        ensureKeysIsMutable();
-        keys_.remove(index);
+    public Builder removeAuthenticationOptions(int index) {
+      if (authenticationOptionsBuilder_ == null) {
+        ensureAuthenticationOptionsIsMutable();
+        authenticationOptions_.remove(index);
         onChanged();
       } else {
-        keysBuilder_.remove(index);
+        authenticationOptionsBuilder_.remove(index);
       }
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder getKeysBuilder(
+    public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder getAuthenticationOptionsBuilder(
         int index) {
-      return getKeysFieldBuilder().getBuilder(index);
+      return getAuthenticationOptionsFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public org.wso2.apk.enforcer.discovery.subscription.Application.KeyOrBuilder getKeysOrBuilder(
+    public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder getAuthenticationOptionsOrBuilder(
         int index) {
-      if (keysBuilder_ == null) {
-        return keys_.get(index);  } else {
-        return keysBuilder_.getMessageOrBuilder(index);
+      if (authenticationOptionsBuilder_ == null) {
+        return authenticationOptions_.get(index);  } else {
+        return authenticationOptionsBuilder_.getMessageOrBuilder(index);
       }
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.Application.KeyOrBuilder> 
-         getKeysOrBuilderList() {
-      if (keysBuilder_ != null) {
-        return keysBuilder_.getMessageOrBuilderList();
+    public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder> 
+         getAuthenticationOptionsOrBuilderList() {
+      if (authenticationOptionsBuilder_ != null) {
+        return authenticationOptionsBuilder_.getMessageOrBuilderList();
       } else {
-        return java.util.Collections.unmodifiableList(keys_);
+        return java.util.Collections.unmodifiableList(authenticationOptions_);
       }
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder addKeysBuilder() {
-      return getKeysFieldBuilder().addBuilder(
-          org.wso2.apk.enforcer.discovery.subscription.Application.Key.getDefaultInstance());
+    public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder addAuthenticationOptionsBuilder() {
+      return getAuthenticationOptionsFieldBuilder().addBuilder(
+          org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.getDefaultInstance());
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder addKeysBuilder(
+    public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder addAuthenticationOptionsBuilder(
         int index) {
-      return getKeysFieldBuilder().addBuilder(
-          index, org.wso2.apk.enforcer.discovery.subscription.Application.Key.getDefaultInstance());
+      return getAuthenticationOptionsFieldBuilder().addBuilder(
+          index, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.getDefaultInstance());
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.Application.Key keys = 7;</code>
+     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
      */
-    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder> 
-         getKeysBuilderList() {
-      return getKeysFieldBuilder().getBuilderList();
+    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder> 
+         getAuthenticationOptionsBuilderList() {
+      return getAuthenticationOptionsFieldBuilder().getBuilderList();
     }
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        org.wso2.apk.enforcer.discovery.subscription.Application.Key, org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder, org.wso2.apk.enforcer.discovery.subscription.Application.KeyOrBuilder> 
-        getKeysFieldBuilder() {
-      if (keysBuilder_ == null) {
-        keysBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-            org.wso2.apk.enforcer.discovery.subscription.Application.Key, org.wso2.apk.enforcer.discovery.subscription.Application.Key.Builder, org.wso2.apk.enforcer.discovery.subscription.Application.KeyOrBuilder>(
-                keys_,
+        org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder> 
+        getAuthenticationOptionsFieldBuilder() {
+      if (authenticationOptionsBuilder_ == null) {
+        authenticationOptionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder>(
+                authenticationOptions_,
                 ((bitField0_ & 0x00000002) != 0),
                 getParentForChildren(),
                 isClean());
-        keys_ = null;
+        authenticationOptions_ = null;
       }
-      return keysBuilder_;
-    }
-
-    private java.lang.Object organization_ = "";
-    /**
-     * <code>string organization = 8;</code>
-     * @return The organization.
-     */
-    public java.lang.String getOrganization() {
-      java.lang.Object ref = organization_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        organization_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string organization = 8;</code>
-     * @return The bytes for organization.
-     */
-    public com.google.protobuf.ByteString
-        getOrganizationBytes() {
-      java.lang.Object ref = organization_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        organization_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string organization = 8;</code>
-     * @param value The organization to set.
-     * @return This builder for chaining.
-     */
-    public Builder setOrganization(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      organization_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string organization = 8;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearOrganization() {
-      
-      organization_ = getDefaultInstance().getOrganization();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string organization = 8;</code>
-     * @param value The bytes for organization to set.
-     * @return This builder for chaining.
-     */
-    public Builder setOrganizationBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      organization_ = value;
-      onChanged();
-      return this;
+      return authenticationOptionsBuilder_;
     }
 
     private java.lang.Object timeStamp_ = "";
     /**
-     * <code>string timeStamp = 9;</code>
+     * <code>string timeStamp = 7;</code>
      * @return The timeStamp.
      */
     public java.lang.String getTimeStamp() {
@@ -2633,7 +1639,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string timeStamp = 9;</code>
+     * <code>string timeStamp = 7;</code>
      * @return The bytes for timeStamp.
      */
     public com.google.protobuf.ByteString
@@ -2650,7 +1656,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string timeStamp = 9;</code>
+     * <code>string timeStamp = 7;</code>
      * @param value The timeStamp to set.
      * @return This builder for chaining.
      */
@@ -2665,7 +1671,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string timeStamp = 9;</code>
+     * <code>string timeStamp = 7;</code>
      * @return This builder for chaining.
      */
     public Builder clearTimeStamp() {
@@ -2675,7 +1681,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string timeStamp = 9;</code>
+     * <code>string timeStamp = 7;</code>
      * @param value The bytes for timeStamp to set.
      * @return This builder for chaining.
      */

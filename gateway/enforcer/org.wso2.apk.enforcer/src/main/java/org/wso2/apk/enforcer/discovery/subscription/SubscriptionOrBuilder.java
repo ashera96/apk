@@ -20,98 +20,74 @@ public interface SubscriptionOrBuilder extends
       getEventIdBytes();
 
   /**
-   * <code>string applicationRef = 2;</code>
-   * @return The applicationRef.
-   */
-  java.lang.String getApplicationRef();
-  /**
-   * <code>string applicationRef = 2;</code>
-   * @return The bytes for applicationRef.
-   */
-  com.google.protobuf.ByteString
-      getApplicationRefBytes();
-
-  /**
-   * <code>string apiRef = 3;</code>
-   * @return The apiRef.
-   */
-  java.lang.String getApiRef();
-  /**
-   * <code>string apiRef = 3;</code>
-   * @return The bytes for apiRef.
-   */
-  com.google.protobuf.ByteString
-      getApiRefBytes();
-
-  /**
-   * <code>string policyId = 4;</code>
-   * @return The policyId.
-   */
-  java.lang.String getPolicyId();
-  /**
-   * <code>string policyId = 4;</code>
-   * @return The bytes for policyId.
-   */
-  com.google.protobuf.ByteString
-      getPolicyIdBytes();
-
-  /**
-   * <code>string subStatus = 5;</code>
+   * <code>string subStatus = 2;</code>
    * @return The subStatus.
    */
   java.lang.String getSubStatus();
   /**
-   * <code>string subStatus = 5;</code>
+   * <code>string subStatus = 2;</code>
    * @return The bytes for subStatus.
    */
   com.google.protobuf.ByteString
       getSubStatusBytes();
 
   /**
-   * <code>string subscriber = 6;</code>
-   * @return The subscriber.
-   */
-  java.lang.String getSubscriber();
-  /**
-   * <code>string subscriber = 6;</code>
-   * @return The bytes for subscriber.
-   */
-  com.google.protobuf.ByteString
-      getSubscriberBytes();
-
-  /**
-   * <code>string uuid = 7;</code>
+   * <code>string uuid = 3;</code>
    * @return The uuid.
    */
   java.lang.String getUuid();
   /**
-   * <code>string uuid = 7;</code>
+   * <code>string uuid = 3;</code>
    * @return The bytes for uuid.
    */
   com.google.protobuf.ByteString
       getUuidBytes();
 
   /**
-   * <code>string timeStamp = 8;</code>
+   * <code>string timeStamp = 4;</code>
    * @return The timeStamp.
    */
   java.lang.String getTimeStamp();
   /**
-   * <code>string timeStamp = 8;</code>
+   * <code>string timeStamp = 4;</code>
    * @return The bytes for timeStamp.
    */
   com.google.protobuf.ByteString
       getTimeStampBytes();
 
   /**
-   * <code>string organization = 9;</code>
+   * <code>string organization = 5;</code>
    * @return The organization.
    */
   java.lang.String getOrganization();
   /**
-   * <code>string organization = 9;</code>
+   * <code>string organization = 5;</code>
    * @return The bytes for organization.
    */
   com.google.protobuf.ByteString
       getOrganizationBytes();
+
+  /**
+   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   */
+  java.util.List<org.wso2.apk.enforcer.discovery.subscription.API> 
+      getApisList();
+  /**
+   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   */
+  org.wso2.apk.enforcer.discovery.subscription.API getApis(int index);
+  /**
+   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   */
+  int getApisCount();
+  /**
+   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   */
+  java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> 
+      getApisOrBuilderList();
+  /**
+   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   */
+  org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApisOrBuilder(
+      int index);
 }

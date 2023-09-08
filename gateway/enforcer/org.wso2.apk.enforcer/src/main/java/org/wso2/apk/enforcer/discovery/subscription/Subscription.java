@@ -21,14 +21,11 @@ private static final long serialVersionUID = 0L;
   }
   private Subscription() {
     eventId_ = "";
-    applicationRef_ = "";
-    apiRef_ = "";
-    policyId_ = "";
     subStatus_ = "";
-    subscriber_ = "";
     uuid_ = "";
     timeStamp_ = "";
     organization_ = "";
+    apis_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -51,6 +48,7 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
+    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -70,49 +68,34 @@ private static final long serialVersionUID = 0L;
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            applicationRef_ = s;
+            subStatus_ = s;
             break;
           }
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            apiRef_ = s;
+            uuid_ = s;
             break;
           }
           case 34: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            policyId_ = s;
+            timeStamp_ = s;
             break;
           }
           case 42: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            subStatus_ = s;
+            organization_ = s;
             break;
           }
           case 50: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            subscriber_ = s;
-            break;
-          }
-          case 58: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            uuid_ = s;
-            break;
-          }
-          case 66: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            timeStamp_ = s;
-            break;
-          }
-          case 74: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            organization_ = s;
+            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+              apis_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.API>();
+              mutable_bitField0_ |= 0x00000001;
+            }
+            apis_.add(
+                input.readMessage(org.wso2.apk.enforcer.discovery.subscription.API.parser(), extensionRegistry));
             break;
           }
           default: {
@@ -130,6 +113,9 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000001) != 0)) {
+        apis_ = java.util.Collections.unmodifiableList(apis_);
+      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -185,124 +171,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int APPLICATIONREF_FIELD_NUMBER = 2;
-  private volatile java.lang.Object applicationRef_;
-  /**
-   * <code>string applicationRef = 2;</code>
-   * @return The applicationRef.
-   */
-  @java.lang.Override
-  public java.lang.String getApplicationRef() {
-    java.lang.Object ref = applicationRef_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      applicationRef_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string applicationRef = 2;</code>
-   * @return The bytes for applicationRef.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getApplicationRefBytes() {
-    java.lang.Object ref = applicationRef_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      applicationRef_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int APIREF_FIELD_NUMBER = 3;
-  private volatile java.lang.Object apiRef_;
-  /**
-   * <code>string apiRef = 3;</code>
-   * @return The apiRef.
-   */
-  @java.lang.Override
-  public java.lang.String getApiRef() {
-    java.lang.Object ref = apiRef_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      apiRef_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string apiRef = 3;</code>
-   * @return The bytes for apiRef.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getApiRefBytes() {
-    java.lang.Object ref = apiRef_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      apiRef_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int POLICYID_FIELD_NUMBER = 4;
-  private volatile java.lang.Object policyId_;
-  /**
-   * <code>string policyId = 4;</code>
-   * @return The policyId.
-   */
-  @java.lang.Override
-  public java.lang.String getPolicyId() {
-    java.lang.Object ref = policyId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      policyId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string policyId = 4;</code>
-   * @return The bytes for policyId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getPolicyIdBytes() {
-    java.lang.Object ref = policyId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      policyId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int SUBSTATUS_FIELD_NUMBER = 5;
+  public static final int SUBSTATUS_FIELD_NUMBER = 2;
   private volatile java.lang.Object subStatus_;
   /**
-   * <code>string subStatus = 5;</code>
+   * <code>string subStatus = 2;</code>
    * @return The subStatus.
    */
   @java.lang.Override
@@ -319,7 +191,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string subStatus = 5;</code>
+   * <code>string subStatus = 2;</code>
    * @return The bytes for subStatus.
    */
   @java.lang.Override
@@ -337,48 +209,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int SUBSCRIBER_FIELD_NUMBER = 6;
-  private volatile java.lang.Object subscriber_;
-  /**
-   * <code>string subscriber = 6;</code>
-   * @return The subscriber.
-   */
-  @java.lang.Override
-  public java.lang.String getSubscriber() {
-    java.lang.Object ref = subscriber_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      subscriber_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string subscriber = 6;</code>
-   * @return The bytes for subscriber.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getSubscriberBytes() {
-    java.lang.Object ref = subscriber_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      subscriber_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int UUID_FIELD_NUMBER = 7;
+  public static final int UUID_FIELD_NUMBER = 3;
   private volatile java.lang.Object uuid_;
   /**
-   * <code>string uuid = 7;</code>
+   * <code>string uuid = 3;</code>
    * @return The uuid.
    */
   @java.lang.Override
@@ -395,7 +229,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string uuid = 7;</code>
+   * <code>string uuid = 3;</code>
    * @return The bytes for uuid.
    */
   @java.lang.Override
@@ -413,10 +247,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int TIMESTAMP_FIELD_NUMBER = 8;
+  public static final int TIMESTAMP_FIELD_NUMBER = 4;
   private volatile java.lang.Object timeStamp_;
   /**
-   * <code>string timeStamp = 8;</code>
+   * <code>string timeStamp = 4;</code>
    * @return The timeStamp.
    */
   @java.lang.Override
@@ -433,7 +267,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string timeStamp = 8;</code>
+   * <code>string timeStamp = 4;</code>
    * @return The bytes for timeStamp.
    */
   @java.lang.Override
@@ -451,10 +285,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int ORGANIZATION_FIELD_NUMBER = 9;
+  public static final int ORGANIZATION_FIELD_NUMBER = 5;
   private volatile java.lang.Object organization_;
   /**
-   * <code>string organization = 9;</code>
+   * <code>string organization = 5;</code>
    * @return The organization.
    */
   @java.lang.Override
@@ -471,7 +305,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string organization = 9;</code>
+   * <code>string organization = 5;</code>
    * @return The bytes for organization.
    */
   @java.lang.Override
@@ -487,6 +321,46 @@ private static final long serialVersionUID = 0L;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
+  }
+
+  public static final int APIS_FIELD_NUMBER = 6;
+  private java.util.List<org.wso2.apk.enforcer.discovery.subscription.API> apis_;
+  /**
+   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   */
+  @java.lang.Override
+  public java.util.List<org.wso2.apk.enforcer.discovery.subscription.API> getApisList() {
+    return apis_;
+  }
+  /**
+   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> 
+      getApisOrBuilderList() {
+    return apis_;
+  }
+  /**
+   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   */
+  @java.lang.Override
+  public int getApisCount() {
+    return apis_.size();
+  }
+  /**
+   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   */
+  @java.lang.Override
+  public org.wso2.apk.enforcer.discovery.subscription.API getApis(int index) {
+    return apis_.get(index);
+  }
+  /**
+   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   */
+  @java.lang.Override
+  public org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApisOrBuilder(
+      int index) {
+    return apis_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -506,29 +380,20 @@ private static final long serialVersionUID = 0L;
     if (!getEventIdBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, eventId_);
     }
-    if (!getApplicationRefBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, applicationRef_);
-    }
-    if (!getApiRefBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, apiRef_);
-    }
-    if (!getPolicyIdBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, policyId_);
-    }
     if (!getSubStatusBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, subStatus_);
-    }
-    if (!getSubscriberBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, subscriber_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, subStatus_);
     }
     if (!getUuidBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, uuid_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, uuid_);
     }
     if (!getTimeStampBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, timeStamp_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, timeStamp_);
     }
     if (!getOrganizationBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 9, organization_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, organization_);
+    }
+    for (int i = 0; i < apis_.size(); i++) {
+      output.writeMessage(6, apis_.get(i));
     }
     unknownFields.writeTo(output);
   }
@@ -542,29 +407,21 @@ private static final long serialVersionUID = 0L;
     if (!getEventIdBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, eventId_);
     }
-    if (!getApplicationRefBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, applicationRef_);
-    }
-    if (!getApiRefBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, apiRef_);
-    }
-    if (!getPolicyIdBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, policyId_);
-    }
     if (!getSubStatusBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, subStatus_);
-    }
-    if (!getSubscriberBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, subscriber_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, subStatus_);
     }
     if (!getUuidBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, uuid_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, uuid_);
     }
     if (!getTimeStampBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, timeStamp_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, timeStamp_);
     }
     if (!getOrganizationBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, organization_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, organization_);
+    }
+    for (int i = 0; i < apis_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(6, apis_.get(i));
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -583,22 +440,16 @@ private static final long serialVersionUID = 0L;
 
     if (!getEventId()
         .equals(other.getEventId())) return false;
-    if (!getApplicationRef()
-        .equals(other.getApplicationRef())) return false;
-    if (!getApiRef()
-        .equals(other.getApiRef())) return false;
-    if (!getPolicyId()
-        .equals(other.getPolicyId())) return false;
     if (!getSubStatus()
         .equals(other.getSubStatus())) return false;
-    if (!getSubscriber()
-        .equals(other.getSubscriber())) return false;
     if (!getUuid()
         .equals(other.getUuid())) return false;
     if (!getTimeStamp()
         .equals(other.getTimeStamp())) return false;
     if (!getOrganization()
         .equals(other.getOrganization())) return false;
+    if (!getApisList()
+        .equals(other.getApisList())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -612,22 +463,18 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + EVENTID_FIELD_NUMBER;
     hash = (53 * hash) + getEventId().hashCode();
-    hash = (37 * hash) + APPLICATIONREF_FIELD_NUMBER;
-    hash = (53 * hash) + getApplicationRef().hashCode();
-    hash = (37 * hash) + APIREF_FIELD_NUMBER;
-    hash = (53 * hash) + getApiRef().hashCode();
-    hash = (37 * hash) + POLICYID_FIELD_NUMBER;
-    hash = (53 * hash) + getPolicyId().hashCode();
     hash = (37 * hash) + SUBSTATUS_FIELD_NUMBER;
     hash = (53 * hash) + getSubStatus().hashCode();
-    hash = (37 * hash) + SUBSCRIBER_FIELD_NUMBER;
-    hash = (53 * hash) + getSubscriber().hashCode();
     hash = (37 * hash) + UUID_FIELD_NUMBER;
     hash = (53 * hash) + getUuid().hashCode();
     hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
     hash = (53 * hash) + getTimeStamp().hashCode();
     hash = (37 * hash) + ORGANIZATION_FIELD_NUMBER;
     hash = (53 * hash) + getOrganization().hashCode();
+    if (getApisCount() > 0) {
+      hash = (37 * hash) + APIS_FIELD_NUMBER;
+      hash = (53 * hash) + getApisList().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -760,6 +607,7 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
+        getApisFieldBuilder();
       }
     }
     @java.lang.Override
@@ -767,15 +615,7 @@ private static final long serialVersionUID = 0L;
       super.clear();
       eventId_ = "";
 
-      applicationRef_ = "";
-
-      apiRef_ = "";
-
-      policyId_ = "";
-
       subStatus_ = "";
-
-      subscriber_ = "";
 
       uuid_ = "";
 
@@ -783,6 +623,12 @@ private static final long serialVersionUID = 0L;
 
       organization_ = "";
 
+      if (apisBuilder_ == null) {
+        apis_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+      } else {
+        apisBuilder_.clear();
+      }
       return this;
     }
 
@@ -809,15 +655,21 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public org.wso2.apk.enforcer.discovery.subscription.Subscription buildPartial() {
       org.wso2.apk.enforcer.discovery.subscription.Subscription result = new org.wso2.apk.enforcer.discovery.subscription.Subscription(this);
+      int from_bitField0_ = bitField0_;
       result.eventId_ = eventId_;
-      result.applicationRef_ = applicationRef_;
-      result.apiRef_ = apiRef_;
-      result.policyId_ = policyId_;
       result.subStatus_ = subStatus_;
-      result.subscriber_ = subscriber_;
       result.uuid_ = uuid_;
       result.timeStamp_ = timeStamp_;
       result.organization_ = organization_;
+      if (apisBuilder_ == null) {
+        if (((bitField0_ & 0x00000001) != 0)) {
+          apis_ = java.util.Collections.unmodifiableList(apis_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.apis_ = apis_;
+      } else {
+        result.apis_ = apisBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -870,24 +722,8 @@ private static final long serialVersionUID = 0L;
         eventId_ = other.eventId_;
         onChanged();
       }
-      if (!other.getApplicationRef().isEmpty()) {
-        applicationRef_ = other.applicationRef_;
-        onChanged();
-      }
-      if (!other.getApiRef().isEmpty()) {
-        apiRef_ = other.apiRef_;
-        onChanged();
-      }
-      if (!other.getPolicyId().isEmpty()) {
-        policyId_ = other.policyId_;
-        onChanged();
-      }
       if (!other.getSubStatus().isEmpty()) {
         subStatus_ = other.subStatus_;
-        onChanged();
-      }
-      if (!other.getSubscriber().isEmpty()) {
-        subscriber_ = other.subscriber_;
         onChanged();
       }
       if (!other.getUuid().isEmpty()) {
@@ -901,6 +737,32 @@ private static final long serialVersionUID = 0L;
       if (!other.getOrganization().isEmpty()) {
         organization_ = other.organization_;
         onChanged();
+      }
+      if (apisBuilder_ == null) {
+        if (!other.apis_.isEmpty()) {
+          if (apis_.isEmpty()) {
+            apis_ = other.apis_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureApisIsMutable();
+            apis_.addAll(other.apis_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.apis_.isEmpty()) {
+          if (apisBuilder_.isEmpty()) {
+            apisBuilder_.dispose();
+            apisBuilder_ = null;
+            apis_ = other.apis_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            apisBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getApisFieldBuilder() : null;
+          } else {
+            apisBuilder_.addAllMessages(other.apis_);
+          }
+        }
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -930,6 +792,7 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
+    private int bitField0_;
 
     private java.lang.Object eventId_ = "";
     /**
@@ -1007,237 +870,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object applicationRef_ = "";
-    /**
-     * <code>string applicationRef = 2;</code>
-     * @return The applicationRef.
-     */
-    public java.lang.String getApplicationRef() {
-      java.lang.Object ref = applicationRef_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        applicationRef_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string applicationRef = 2;</code>
-     * @return The bytes for applicationRef.
-     */
-    public com.google.protobuf.ByteString
-        getApplicationRefBytes() {
-      java.lang.Object ref = applicationRef_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        applicationRef_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string applicationRef = 2;</code>
-     * @param value The applicationRef to set.
-     * @return This builder for chaining.
-     */
-    public Builder setApplicationRef(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      applicationRef_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string applicationRef = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearApplicationRef() {
-      
-      applicationRef_ = getDefaultInstance().getApplicationRef();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string applicationRef = 2;</code>
-     * @param value The bytes for applicationRef to set.
-     * @return This builder for chaining.
-     */
-    public Builder setApplicationRefBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      applicationRef_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object apiRef_ = "";
-    /**
-     * <code>string apiRef = 3;</code>
-     * @return The apiRef.
-     */
-    public java.lang.String getApiRef() {
-      java.lang.Object ref = apiRef_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        apiRef_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string apiRef = 3;</code>
-     * @return The bytes for apiRef.
-     */
-    public com.google.protobuf.ByteString
-        getApiRefBytes() {
-      java.lang.Object ref = apiRef_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        apiRef_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string apiRef = 3;</code>
-     * @param value The apiRef to set.
-     * @return This builder for chaining.
-     */
-    public Builder setApiRef(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      apiRef_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string apiRef = 3;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearApiRef() {
-      
-      apiRef_ = getDefaultInstance().getApiRef();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string apiRef = 3;</code>
-     * @param value The bytes for apiRef to set.
-     * @return This builder for chaining.
-     */
-    public Builder setApiRefBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      apiRef_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object policyId_ = "";
-    /**
-     * <code>string policyId = 4;</code>
-     * @return The policyId.
-     */
-    public java.lang.String getPolicyId() {
-      java.lang.Object ref = policyId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        policyId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string policyId = 4;</code>
-     * @return The bytes for policyId.
-     */
-    public com.google.protobuf.ByteString
-        getPolicyIdBytes() {
-      java.lang.Object ref = policyId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        policyId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string policyId = 4;</code>
-     * @param value The policyId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPolicyId(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      policyId_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string policyId = 4;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearPolicyId() {
-      
-      policyId_ = getDefaultInstance().getPolicyId();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string policyId = 4;</code>
-     * @param value The bytes for policyId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPolicyIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      policyId_ = value;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object subStatus_ = "";
     /**
-     * <code>string subStatus = 5;</code>
+     * <code>string subStatus = 2;</code>
      * @return The subStatus.
      */
     public java.lang.String getSubStatus() {
@@ -1253,7 +888,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string subStatus = 5;</code>
+     * <code>string subStatus = 2;</code>
      * @return The bytes for subStatus.
      */
     public com.google.protobuf.ByteString
@@ -1270,7 +905,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string subStatus = 5;</code>
+     * <code>string subStatus = 2;</code>
      * @param value The subStatus to set.
      * @return This builder for chaining.
      */
@@ -1285,7 +920,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string subStatus = 5;</code>
+     * <code>string subStatus = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearSubStatus() {
@@ -1295,7 +930,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string subStatus = 5;</code>
+     * <code>string subStatus = 2;</code>
      * @param value The bytes for subStatus to set.
      * @return This builder for chaining.
      */
@@ -1311,85 +946,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object subscriber_ = "";
-    /**
-     * <code>string subscriber = 6;</code>
-     * @return The subscriber.
-     */
-    public java.lang.String getSubscriber() {
-      java.lang.Object ref = subscriber_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        subscriber_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string subscriber = 6;</code>
-     * @return The bytes for subscriber.
-     */
-    public com.google.protobuf.ByteString
-        getSubscriberBytes() {
-      java.lang.Object ref = subscriber_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        subscriber_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string subscriber = 6;</code>
-     * @param value The subscriber to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSubscriber(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      subscriber_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string subscriber = 6;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearSubscriber() {
-      
-      subscriber_ = getDefaultInstance().getSubscriber();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string subscriber = 6;</code>
-     * @param value The bytes for subscriber to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSubscriberBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      subscriber_ = value;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object uuid_ = "";
     /**
-     * <code>string uuid = 7;</code>
+     * <code>string uuid = 3;</code>
      * @return The uuid.
      */
     public java.lang.String getUuid() {
@@ -1405,7 +964,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string uuid = 7;</code>
+     * <code>string uuid = 3;</code>
      * @return The bytes for uuid.
      */
     public com.google.protobuf.ByteString
@@ -1422,7 +981,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string uuid = 7;</code>
+     * <code>string uuid = 3;</code>
      * @param value The uuid to set.
      * @return This builder for chaining.
      */
@@ -1437,7 +996,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string uuid = 7;</code>
+     * <code>string uuid = 3;</code>
      * @return This builder for chaining.
      */
     public Builder clearUuid() {
@@ -1447,7 +1006,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string uuid = 7;</code>
+     * <code>string uuid = 3;</code>
      * @param value The bytes for uuid to set.
      * @return This builder for chaining.
      */
@@ -1465,7 +1024,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object timeStamp_ = "";
     /**
-     * <code>string timeStamp = 8;</code>
+     * <code>string timeStamp = 4;</code>
      * @return The timeStamp.
      */
     public java.lang.String getTimeStamp() {
@@ -1481,7 +1040,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string timeStamp = 8;</code>
+     * <code>string timeStamp = 4;</code>
      * @return The bytes for timeStamp.
      */
     public com.google.protobuf.ByteString
@@ -1498,7 +1057,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string timeStamp = 8;</code>
+     * <code>string timeStamp = 4;</code>
      * @param value The timeStamp to set.
      * @return This builder for chaining.
      */
@@ -1513,7 +1072,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string timeStamp = 8;</code>
+     * <code>string timeStamp = 4;</code>
      * @return This builder for chaining.
      */
     public Builder clearTimeStamp() {
@@ -1523,7 +1082,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string timeStamp = 8;</code>
+     * <code>string timeStamp = 4;</code>
      * @param value The bytes for timeStamp to set.
      * @return This builder for chaining.
      */
@@ -1541,7 +1100,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object organization_ = "";
     /**
-     * <code>string organization = 9;</code>
+     * <code>string organization = 5;</code>
      * @return The organization.
      */
     public java.lang.String getOrganization() {
@@ -1557,7 +1116,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string organization = 9;</code>
+     * <code>string organization = 5;</code>
      * @return The bytes for organization.
      */
     public com.google.protobuf.ByteString
@@ -1574,7 +1133,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string organization = 9;</code>
+     * <code>string organization = 5;</code>
      * @param value The organization to set.
      * @return This builder for chaining.
      */
@@ -1589,7 +1148,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string organization = 9;</code>
+     * <code>string organization = 5;</code>
      * @return This builder for chaining.
      */
     public Builder clearOrganization() {
@@ -1599,7 +1158,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string organization = 9;</code>
+     * <code>string organization = 5;</code>
      * @param value The bytes for organization to set.
      * @return This builder for chaining.
      */
@@ -1613,6 +1172,246 @@ private static final long serialVersionUID = 0L;
       organization_ = value;
       onChanged();
       return this;
+    }
+
+    private java.util.List<org.wso2.apk.enforcer.discovery.subscription.API> apis_ =
+      java.util.Collections.emptyList();
+    private void ensureApisIsMutable() {
+      if (!((bitField0_ & 0x00000001) != 0)) {
+        apis_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.API>(apis_);
+        bitField0_ |= 0x00000001;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        org.wso2.apk.enforcer.discovery.subscription.API, org.wso2.apk.enforcer.discovery.subscription.API.Builder, org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> apisBuilder_;
+
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.API> getApisList() {
+      if (apisBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(apis_);
+      } else {
+        return apisBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public int getApisCount() {
+      if (apisBuilder_ == null) {
+        return apis_.size();
+      } else {
+        return apisBuilder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.API getApis(int index) {
+      if (apisBuilder_ == null) {
+        return apis_.get(index);
+      } else {
+        return apisBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public Builder setApis(
+        int index, org.wso2.apk.enforcer.discovery.subscription.API value) {
+      if (apisBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureApisIsMutable();
+        apis_.set(index, value);
+        onChanged();
+      } else {
+        apisBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public Builder setApis(
+        int index, org.wso2.apk.enforcer.discovery.subscription.API.Builder builderForValue) {
+      if (apisBuilder_ == null) {
+        ensureApisIsMutable();
+        apis_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        apisBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public Builder addApis(org.wso2.apk.enforcer.discovery.subscription.API value) {
+      if (apisBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureApisIsMutable();
+        apis_.add(value);
+        onChanged();
+      } else {
+        apisBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public Builder addApis(
+        int index, org.wso2.apk.enforcer.discovery.subscription.API value) {
+      if (apisBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureApisIsMutable();
+        apis_.add(index, value);
+        onChanged();
+      } else {
+        apisBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public Builder addApis(
+        org.wso2.apk.enforcer.discovery.subscription.API.Builder builderForValue) {
+      if (apisBuilder_ == null) {
+        ensureApisIsMutable();
+        apis_.add(builderForValue.build());
+        onChanged();
+      } else {
+        apisBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public Builder addApis(
+        int index, org.wso2.apk.enforcer.discovery.subscription.API.Builder builderForValue) {
+      if (apisBuilder_ == null) {
+        ensureApisIsMutable();
+        apis_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        apisBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public Builder addAllApis(
+        java.lang.Iterable<? extends org.wso2.apk.enforcer.discovery.subscription.API> values) {
+      if (apisBuilder_ == null) {
+        ensureApisIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, apis_);
+        onChanged();
+      } else {
+        apisBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public Builder clearApis() {
+      if (apisBuilder_ == null) {
+        apis_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+      } else {
+        apisBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public Builder removeApis(int index) {
+      if (apisBuilder_ == null) {
+        ensureApisIsMutable();
+        apis_.remove(index);
+        onChanged();
+      } else {
+        apisBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.API.Builder getApisBuilder(
+        int index) {
+      return getApisFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApisOrBuilder(
+        int index) {
+      if (apisBuilder_ == null) {
+        return apis_.get(index);  } else {
+        return apisBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> 
+         getApisOrBuilderList() {
+      if (apisBuilder_ != null) {
+        return apisBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(apis_);
+      }
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.API.Builder addApisBuilder() {
+      return getApisFieldBuilder().addBuilder(
+          org.wso2.apk.enforcer.discovery.subscription.API.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.API.Builder addApisBuilder(
+        int index) {
+      return getApisFieldBuilder().addBuilder(
+          index, org.wso2.apk.enforcer.discovery.subscription.API.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     */
+    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.API.Builder> 
+         getApisBuilderList() {
+      return getApisFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        org.wso2.apk.enforcer.discovery.subscription.API, org.wso2.apk.enforcer.discovery.subscription.API.Builder, org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> 
+        getApisFieldBuilder() {
+      if (apisBuilder_ == null) {
+        apisBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            org.wso2.apk.enforcer.discovery.subscription.API, org.wso2.apk.enforcer.discovery.subscription.API.Builder, org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder>(
+                apis_,
+                ((bitField0_ & 0x00000001) != 0),
+                getParentForChildren(),
+                isClean());
+        apis_ = null;
+      }
+      return apisBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

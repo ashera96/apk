@@ -12,12 +12,15 @@ option java_multiple_files = true;
 // Subscription data model
 message Subscription {
     string eventId = 1;
-    string applicationRef = 2;
-    string apiRef = 3;
-    string policyId = 4;
-    string subStatus = 5;
-    string subscriber = 6;
-    string uuid = 7;
-    string timeStamp = 8;
-    string organization = 9;
+    string subStatus = 2;
+    string uuid = 3;
+    string timeStamp = 4;
+    string organization = 5;
+    repeated API apis = 6;
+}
+
+message API {
+    string name = 1;
+    string version = 2;
+    string organization = 3;
 }
