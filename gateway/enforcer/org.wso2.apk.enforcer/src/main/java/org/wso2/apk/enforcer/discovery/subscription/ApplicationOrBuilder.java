@@ -90,38 +90,17 @@ public interface ApplicationOrBuilder extends
       java.lang.String key);
 
   /**
-   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
+   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
+   * @return Whether the securitySchemes field is set.
    */
-  java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> 
-      getAuthenticationOptionsList();
+  boolean hasSecuritySchemes();
   /**
-   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
+   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
+   * @return The securitySchemes.
    */
-  org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption getAuthenticationOptions(int index);
+  org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes getSecuritySchemes();
   /**
-   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
+   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
    */
-  int getAuthenticationOptionsCount();
-  /**
-   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-   */
-  java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder> 
-      getAuthenticationOptionsOrBuilderList();
-  /**
-   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-   */
-  org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder getAuthenticationOptionsOrBuilder(
-      int index);
-
-  /**
-   * <code>string timeStamp = 7;</code>
-   * @return The timeStamp.
-   */
-  java.lang.String getTimeStamp();
-  /**
-   * <code>string timeStamp = 7;</code>
-   * @return The bytes for timeStamp.
-   */
-  com.google.protobuf.ByteString
-      getTimeStampBytes();
+  org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder getSecuritySchemesOrBuilder();
 }

@@ -34,17 +34,16 @@ public final class SubscriptionProto {
   static {
     java.lang.String[] descriptorData = {
       "\n.wso2/discovery/subscription/subscripti" +
-      "on.proto\022\033wso2.discovery.subscription\"\231\001" +
+      "on.proto\022\033wso2.discovery.subscription\"\230\001" +
       "\n\014Subscription\022\017\n\007eventId\030\001 \001(\t\022\021\n\tsubSt" +
       "atus\030\002 \001(\t\022\014\n\004uuid\030\003 \001(\t\022\021\n\ttimeStamp\030\004 " +
-      "\001(\t\022\024\n\014organization\030\005 \001(\t\022.\n\004apis\030\006 \003(\0132" +
-      " .wso2.discovery.subscription.API\":\n\003API" +
-      "\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\022\024\n\014organ" +
-      "ization\030\003 \001(\tB\224\001\n,org.wso2.apk.enforcer." +
-      "discovery.subscriptionB\021SubscriptionProt" +
-      "oP\001ZOgithub.com/envoyproxy/go-control-pl" +
-      "ane/wso2/discovery/subscription;subscrip" +
-      "tionb\006proto3"
+      "\001(\t\022\024\n\014organization\030\005 \001(\t\022-\n\003api\030\006 \001(\0132 " +
+      ".wso2.discovery.subscription.API\"%\n\003API\022" +
+      "\014\n\004name\030\001 \001(\t\022\020\n\010versions\030\002 \003(\tB\224\001\n,org." +
+      "wso2.apk.enforcer.discovery.subscription" +
+      "B\021SubscriptionProtoP\001ZOgithub.com/envoyp" +
+      "roxy/go-control-plane/wso2/discovery/sub" +
+      "scription;subscriptionb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -55,13 +54,13 @@ public final class SubscriptionProto {
     internal_static_wso2_discovery_subscription_Subscription_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_wso2_discovery_subscription_Subscription_descriptor,
-        new java.lang.String[] { "EventId", "SubStatus", "Uuid", "TimeStamp", "Organization", "Apis", });
+        new java.lang.String[] { "EventId", "SubStatus", "Uuid", "TimeStamp", "Organization", "Api", });
     internal_static_wso2_discovery_subscription_API_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_wso2_discovery_subscription_API_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_wso2_discovery_subscription_API_descriptor,
-        new java.lang.String[] { "Name", "Version", "Organization", });
+        new java.lang.String[] { "Name", "Versions", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

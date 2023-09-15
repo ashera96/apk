@@ -8,16 +8,16 @@ public interface ApplicationKeyMappingOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string consumerKey = 1;</code>
-   * @return The consumerKey.
+   * <code>string applicationIdentifier = 1;</code>
+   * @return The applicationIdentifier.
    */
-  java.lang.String getConsumerKey();
+  java.lang.String getApplicationIdentifier();
   /**
-   * <code>string consumerKey = 1;</code>
-   * @return The bytes for consumerKey.
+   * <code>string applicationIdentifier = 1;</code>
+   * @return The bytes for applicationIdentifier.
    */
   com.google.protobuf.ByteString
-      getConsumerKeyBytes();
+      getApplicationIdentifierBytes();
 
   /**
    * <code>string keyType = 2;</code>
@@ -32,54 +32,30 @@ public interface ApplicationKeyMappingOrBuilder extends
       getKeyTypeBytes();
 
   /**
-   * <code>string keyManager = 3;</code>
-   * @return The keyManager.
+   * <code>string envId = 3;</code>
+   * @return The envId.
    */
-  java.lang.String getKeyManager();
+  java.lang.String getEnvId();
   /**
-   * <code>string keyManager = 3;</code>
-   * @return The bytes for keyManager.
-   */
-  com.google.protobuf.ByteString
-      getKeyManagerBytes();
-
-  /**
-   * <code>int32 applicationId = 4;</code>
-   * @return The applicationId.
-   */
-  int getApplicationId();
-
-  /**
-   * <code>int32 tenantId = 5;</code>
-   * @return The tenantId.
-   */
-  int getTenantId();
-
-  /**
-   * <code>string tenantDomain = 6;</code>
-   * @return The tenantDomain.
-   */
-  java.lang.String getTenantDomain();
-  /**
-   * <code>string tenantDomain = 6;</code>
-   * @return The bytes for tenantDomain.
+   * <code>string envId = 3;</code>
+   * @return The bytes for envId.
    */
   com.google.protobuf.ByteString
-      getTenantDomainBytes();
+      getEnvIdBytes();
 
   /**
-   * <code>int64 timestamp = 7;</code>
+   * <code>int64 timestamp = 4;</code>
    * @return The timestamp.
    */
   long getTimestamp();
 
   /**
-   * <code>string applicationUUID = 8;</code>
+   * <code>string applicationUUID = 5;</code>
    * @return The applicationUUID.
    */
   java.lang.String getApplicationUUID();
   /**
-   * <code>string applicationUUID = 8;</code>
+   * <code>string applicationUUID = 5;</code>
    * @return The bytes for applicationUUID.
    */
   com.google.protobuf.ByteString

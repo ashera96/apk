@@ -8,38 +8,26 @@ public interface OAuth2OrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string consumerKey = 1;</code>
-   * @return The consumerKey.
+   * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
    */
-  java.lang.String getConsumerKey();
+  java.util.List<org.wso2.apk.enforcer.discovery.subscription.Environment> 
+      getEnvironmentsList();
   /**
-   * <code>string consumerKey = 1;</code>
-   * @return The bytes for consumerKey.
+   * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
    */
-  com.google.protobuf.ByteString
-      getConsumerKeyBytes();
-
+  org.wso2.apk.enforcer.discovery.subscription.Environment getEnvironments(int index);
   /**
-   * <code>string keyManager = 2;</code>
-   * @return The keyManager.
+   * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
    */
-  java.lang.String getKeyManager();
+  int getEnvironmentsCount();
   /**
-   * <code>string keyManager = 2;</code>
-   * @return The bytes for keyManager.
+   * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
    */
-  com.google.protobuf.ByteString
-      getKeyManagerBytes();
-
+  java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.EnvironmentOrBuilder> 
+      getEnvironmentsOrBuilderList();
   /**
-   * <code>string keyType = 3;</code>
-   * @return The keyType.
+   * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
    */
-  java.lang.String getKeyType();
-  /**
-   * <code>string keyType = 3;</code>
-   * @return The bytes for keyType.
-   */
-  com.google.protobuf.ByteString
-      getKeyTypeBytes();
+  org.wso2.apk.enforcer.discovery.subscription.EnvironmentOrBuilder getEnvironmentsOrBuilder(
+      int index);
 }

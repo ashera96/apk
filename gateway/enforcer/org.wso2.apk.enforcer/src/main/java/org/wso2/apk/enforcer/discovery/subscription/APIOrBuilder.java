@@ -20,26 +20,27 @@ public interface APIOrBuilder extends
       getNameBytes();
 
   /**
-   * <code>string version = 2;</code>
-   * @return The version.
+   * <code>repeated string versions = 2;</code>
+   * @return A list containing the versions.
    */
-  java.lang.String getVersion();
+  java.util.List<java.lang.String>
+      getVersionsList();
   /**
-   * <code>string version = 2;</code>
-   * @return The bytes for version.
+   * <code>repeated string versions = 2;</code>
+   * @return The count of versions.
+   */
+  int getVersionsCount();
+  /**
+   * <code>repeated string versions = 2;</code>
+   * @param index The index of the element to return.
+   * @return The versions at the given index.
+   */
+  java.lang.String getVersions(int index);
+  /**
+   * <code>repeated string versions = 2;</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the versions at the given index.
    */
   com.google.protobuf.ByteString
-      getVersionBytes();
-
-  /**
-   * <code>string organization = 3;</code>
-   * @return The organization.
-   */
-  java.lang.String getOrganization();
-  /**
-   * <code>string organization = 3;</code>
-   * @return The bytes for organization.
-   */
-  com.google.protobuf.ByteString
-      getOrganizationBytes();
+      getVersionsBytes(int index);
 }

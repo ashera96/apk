@@ -68,26 +68,17 @@ public interface SubscriptionOrBuilder extends
       getOrganizationBytes();
 
   /**
-   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   * <code>.wso2.discovery.subscription.API api = 6;</code>
+   * @return Whether the api field is set.
    */
-  java.util.List<org.wso2.apk.enforcer.discovery.subscription.API> 
-      getApisList();
+  boolean hasApi();
   /**
-   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   * <code>.wso2.discovery.subscription.API api = 6;</code>
+   * @return The api.
    */
-  org.wso2.apk.enforcer.discovery.subscription.API getApis(int index);
+  org.wso2.apk.enforcer.discovery.subscription.API getApi();
   /**
-   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   * <code>.wso2.discovery.subscription.API api = 6;</code>
    */
-  int getApisCount();
-  /**
-   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-   */
-  java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> 
-      getApisOrBuilderList();
-  /**
-   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-   */
-  org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApisOrBuilder(
-      int index);
+  org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApiOrBuilder();
 }

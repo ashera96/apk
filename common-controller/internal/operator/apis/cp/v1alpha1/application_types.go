@@ -26,67 +26,28 @@ import (
 
 // ApplicationSpec defines the desired state of Application
 type ApplicationSpec struct {
-	Name                  string                 `json:"name"`
-	Owner                 string                 `json:"owner"`
-	Attributes            map[string]string      `json:"attributes,omitempty"`
-	AuthenticationOptions []AuthenticationOption `json:"authenticationOptions"`
+	Name            string            `json:"name"`
+	Owner           string            `json:"owner"`
+	Attributes      map[string]string `json:"attributes,omitempty"`
+	SecuritySchemes SecuritySchemes   `json:"securitySchemes"`
 }
 
-// AuthenticationOption defines an authentication option
-type AuthenticationOption struct {
-	// Type denotes the application authentication type
-	// Possible values are OAuth2, mTLS, BasicAuth, APIKey, IPRange
-	//
-	// +kubebuilder:validation:Enum=oauth2;mTLS;basicAuth;apiKey;IPRange
-	Type string `json:"type"`
-
-	// OAuth2 denotes the OAuth2 authentication option
-	OAuth2 *OAuth2 `json:"oauth2,omitempty"`
-
-	// mTLS denotes the mTLS authentication option
-	MTLS *mTLS `json:"mTLS,omitempty"`
-
-	// BasicAuth denotes the Basic authentication option
-	BasicAuth *BasicAuth `json:"basicAuth,omitempty"`
-
-	// APIKey denotes the APIKey authentication option
-	APIKey *APIKey `json:"apiKey,omitempty"`
-
-	// IPRange denotes the IPRange authentication option
-	IPRange *IPRange `json:"IPRange,omitempty"`
+// SecuritySchemes defines the supported security schemes
+type SecuritySchemes struct {
+	// OAuth2 denotes the OAuth2 security scheme
+	OAuth2 *SecurityScheme `json:"oauth2,omitempty"`
 }
 
-// OAuth2 defines the OAuth2 configurations
-type OAuth2 struct {
-	ConsumerKey string `json:"consumerKey"`
-	KeyManager  string `json:"keyManager"`
-	KeyType     string `json:"keyType"`
+// SecurityScheme defines the details specific to a security scheme
+type SecurityScheme struct {
+	Environments []Environment `json:"environments,omitempty"`
 }
 
-// mTLS defines the mTLS configurations
-type mTLS struct {
-	Cert    string `json:"cert"`
-	Issuer  string `json:"issuer"`
+// Environment defines the environment specific details related to the security scheme
+type Environment struct {
+	EnvId   string `json:"envId"`
+	AppId   string `json:"appId"`
 	KeyType string `json:"keyType"`
-}
-
-// BasicAuth defines the BasicAuth configurations
-type BasicAuth struct {
-	BasicAuthIdentifier string `json:"basicAuthIdentifier"`
-	KeyType             string `json:"keyType"`
-}
-
-// APIKey defines the APIKey configurations
-type APIKey struct {
-	Key     string `json:"key"`
-	KeyType string `json:"keyType"`
-}
-
-// IPRange defines the IPRange configurations
-type IPRange struct {
-	IPs               string `json:"IPs"`
-	IPRangeIdentifier string `json:"IPRangeIdentifier"`
-	KeyType           string `json:"keyType"`
 }
 
 // ApplicationStatus defines the observed state of Application

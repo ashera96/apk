@@ -16,11 +16,10 @@ message Subscription {
     string uuid = 3;
     string timeStamp = 4;
     string organization = 5;
-    repeated API apis = 6;
+    API api = 6;
 }
 
 message API {
     string name = 1;
-    string version = 2;
-    string organization = 3;
+    repeated string versions = 2;
 }

@@ -110,6 +110,7 @@ func marshalApplicationList(applicationList []cpv1alpha1.Application) *subscript
 		app := &subscription.Application{
 			Uuid:       appInternal.Name,
 			Name:       appInternal.Spec.Name,
+			Owner:      appInternal.Spec.Owner,
 			Attributes: appInternal.Spec.Attributes,
 		}
 		applications = append(applications, app)
@@ -122,15 +123,16 @@ func marshalApplicationList(applicationList []cpv1alpha1.Application) *subscript
 func marshalApplicationKeyMapping(applicationList []cpv1alpha1.Application) *subscription.ApplicationKeyMappingList {
 	applicationKeyMappings := []*subscription.ApplicationKeyMapping{}
 	for _, appInternal := range applicationList {
-		for _, authenticationOption := range appInternal.Spec.AuthenticationOptions {
-			if authenticationOption.Type == constants.OAuth2 && authenticationOption.OAuth2 != nil {
-				consumerKey := &subscription.ApplicationKeyMapping{
-					ConsumerKey:     authenticationOption.OAuth2.ConsumerKey,
-					KeyManager:      authenticationOption.OAuth2.KeyManager,
-					KeyType:         authenticationOption.OAuth2.KeyType,
-					ApplicationUUID: appInternal.Name,
+		var oauth2SecurityScheme = appInternal.Spec.SecuritySchemes.OAuth2
+		if oauth2SecurityScheme != nil {
+			for _, env := range oauth2SecurityScheme.Environments {
+				appIdentifier := &subscription.ApplicationKeyMapping{
+					EnvId:                 env.EnvId,
+					ApplicationIdentifier: env.AppId,
+					KeyType:               env.KeyType,
+					ApplicationUUID:       appInternal.Name,
 				}
-				applicationKeyMappings = append(applicationKeyMappings, consumerKey)
+				applicationKeyMappings = append(applicationKeyMappings, appIdentifier)
 			}
 		}
 	}

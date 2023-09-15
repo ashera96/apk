@@ -24,8 +24,6 @@ private static final long serialVersionUID = 0L;
     name_ = "";
     uuid_ = "";
     owner_ = "";
-    authenticationOptions_ = java.util.Collections.emptyList();
-    timeStamp_ = "";
   }
 
   @java.lang.Override
@@ -97,18 +95,16 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 50: {
-            if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-              authenticationOptions_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption>();
-              mutable_bitField0_ |= 0x00000002;
+            org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder subBuilder = null;
+            if (securitySchemes_ != null) {
+              subBuilder = securitySchemes_.toBuilder();
             }
-            authenticationOptions_.add(
-                input.readMessage(org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.parser(), extensionRegistry));
-            break;
-          }
-          case 58: {
-            java.lang.String s = input.readStringRequireUtf8();
+            securitySchemes_ = input.readMessage(org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(securitySchemes_);
+              securitySchemes_ = subBuilder.buildPartial();
+            }
 
-            timeStamp_ = s;
             break;
           }
           default: {
@@ -126,9 +122,6 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000002) != 0)) {
-        authenticationOptions_ = java.util.Collections.unmodifiableList(authenticationOptions_);
-      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -391,82 +384,30 @@ private static final long serialVersionUID = 0L;
     return map.get(key);
   }
 
-  public static final int AUTHENTICATIONOPTIONS_FIELD_NUMBER = 6;
-  private java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> authenticationOptions_;
+  public static final int SECURITYSCHEMES_FIELD_NUMBER = 6;
+  private org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes securitySchemes_;
   /**
-   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
+   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
+   * @return Whether the securitySchemes field is set.
    */
   @java.lang.Override
-  public java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> getAuthenticationOptionsList() {
-    return authenticationOptions_;
+  public boolean hasSecuritySchemes() {
+    return securitySchemes_ != null;
   }
   /**
-   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
+   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
+   * @return The securitySchemes.
    */
   @java.lang.Override
-  public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder> 
-      getAuthenticationOptionsOrBuilderList() {
-    return authenticationOptions_;
+  public org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes getSecuritySchemes() {
+    return securitySchemes_ == null ? org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.getDefaultInstance() : securitySchemes_;
   }
   /**
-   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
+   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
    */
   @java.lang.Override
-  public int getAuthenticationOptionsCount() {
-    return authenticationOptions_.size();
-  }
-  /**
-   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-   */
-  @java.lang.Override
-  public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption getAuthenticationOptions(int index) {
-    return authenticationOptions_.get(index);
-  }
-  /**
-   * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-   */
-  @java.lang.Override
-  public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder getAuthenticationOptionsOrBuilder(
-      int index) {
-    return authenticationOptions_.get(index);
-  }
-
-  public static final int TIMESTAMP_FIELD_NUMBER = 7;
-  private volatile java.lang.Object timeStamp_;
-  /**
-   * <code>string timeStamp = 7;</code>
-   * @return The timeStamp.
-   */
-  @java.lang.Override
-  public java.lang.String getTimeStamp() {
-    java.lang.Object ref = timeStamp_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      timeStamp_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string timeStamp = 7;</code>
-   * @return The bytes for timeStamp.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getTimeStampBytes() {
-    java.lang.Object ref = timeStamp_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      timeStamp_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder getSecuritySchemesOrBuilder() {
+    return getSecuritySchemes();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -501,11 +442,8 @@ private static final long serialVersionUID = 0L;
         internalGetAttributes(),
         AttributesDefaultEntryHolder.defaultEntry,
         5);
-    for (int i = 0; i < authenticationOptions_.size(); i++) {
-      output.writeMessage(6, authenticationOptions_.get(i));
-    }
-    if (!getTimeStampBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, timeStamp_);
+    if (securitySchemes_ != null) {
+      output.writeMessage(6, getSecuritySchemes());
     }
     unknownFields.writeTo(output);
   }
@@ -538,12 +476,9 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, attributes__);
     }
-    for (int i = 0; i < authenticationOptions_.size(); i++) {
+    if (securitySchemes_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, authenticationOptions_.get(i));
-    }
-    if (!getTimeStampBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, timeStamp_);
+        .computeMessageSize(6, getSecuritySchemes());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -570,10 +505,11 @@ private static final long serialVersionUID = 0L;
         .equals(other.getOwner())) return false;
     if (!internalGetAttributes().equals(
         other.internalGetAttributes())) return false;
-    if (!getAuthenticationOptionsList()
-        .equals(other.getAuthenticationOptionsList())) return false;
-    if (!getTimeStamp()
-        .equals(other.getTimeStamp())) return false;
+    if (hasSecuritySchemes() != other.hasSecuritySchemes()) return false;
+    if (hasSecuritySchemes()) {
+      if (!getSecuritySchemes()
+          .equals(other.getSecuritySchemes())) return false;
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -597,12 +533,10 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + ATTRIBUTES_FIELD_NUMBER;
       hash = (53 * hash) + internalGetAttributes().hashCode();
     }
-    if (getAuthenticationOptionsCount() > 0) {
-      hash = (37 * hash) + AUTHENTICATIONOPTIONS_FIELD_NUMBER;
-      hash = (53 * hash) + getAuthenticationOptionsList().hashCode();
+    if (hasSecuritySchemes()) {
+      hash = (37 * hash) + SECURITYSCHEMES_FIELD_NUMBER;
+      hash = (53 * hash) + getSecuritySchemes().hashCode();
     }
-    hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
-    hash = (53 * hash) + getTimeStamp().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -757,7 +691,6 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getAuthenticationOptionsFieldBuilder();
       }
     }
     @java.lang.Override
@@ -772,14 +705,12 @@ private static final long serialVersionUID = 0L;
       owner_ = "";
 
       internalGetMutableAttributes().clear();
-      if (authenticationOptionsBuilder_ == null) {
-        authenticationOptions_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+      if (securitySchemesBuilder_ == null) {
+        securitySchemes_ = null;
       } else {
-        authenticationOptionsBuilder_.clear();
+        securitySchemes_ = null;
+        securitySchemesBuilder_ = null;
       }
-      timeStamp_ = "";
-
       return this;
     }
 
@@ -813,16 +744,11 @@ private static final long serialVersionUID = 0L;
       result.owner_ = owner_;
       result.attributes_ = internalGetAttributes();
       result.attributes_.makeImmutable();
-      if (authenticationOptionsBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) != 0)) {
-          authenticationOptions_ = java.util.Collections.unmodifiableList(authenticationOptions_);
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.authenticationOptions_ = authenticationOptions_;
+      if (securitySchemesBuilder_ == null) {
+        result.securitySchemes_ = securitySchemes_;
       } else {
-        result.authenticationOptions_ = authenticationOptionsBuilder_.build();
+        result.securitySchemes_ = securitySchemesBuilder_.build();
       }
-      result.timeStamp_ = timeStamp_;
       onBuilt();
       return result;
     }
@@ -889,35 +815,8 @@ private static final long serialVersionUID = 0L;
       }
       internalGetMutableAttributes().mergeFrom(
           other.internalGetAttributes());
-      if (authenticationOptionsBuilder_ == null) {
-        if (!other.authenticationOptions_.isEmpty()) {
-          if (authenticationOptions_.isEmpty()) {
-            authenticationOptions_ = other.authenticationOptions_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureAuthenticationOptionsIsMutable();
-            authenticationOptions_.addAll(other.authenticationOptions_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.authenticationOptions_.isEmpty()) {
-          if (authenticationOptionsBuilder_.isEmpty()) {
-            authenticationOptionsBuilder_.dispose();
-            authenticationOptionsBuilder_ = null;
-            authenticationOptions_ = other.authenticationOptions_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-            authenticationOptionsBuilder_ = 
-              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                 getAuthenticationOptionsFieldBuilder() : null;
-          } else {
-            authenticationOptionsBuilder_.addAllMessages(other.authenticationOptions_);
-          }
-        }
-      }
-      if (!other.getTimeStamp().isEmpty()) {
-        timeStamp_ = other.timeStamp_;
-        onChanged();
+      if (other.hasSecuritySchemes()) {
+        mergeSecuritySchemes(other.getSecuritySchemes());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -1381,320 +1280,123 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> authenticationOptions_ =
-      java.util.Collections.emptyList();
-    private void ensureAuthenticationOptionsIsMutable() {
-      if (!((bitField0_ & 0x00000002) != 0)) {
-        authenticationOptions_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption>(authenticationOptions_);
-        bitField0_ |= 0x00000002;
-       }
+    private org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes securitySchemes_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder> securitySchemesBuilder_;
+    /**
+     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
+     * @return Whether the securitySchemes field is set.
+     */
+    public boolean hasSecuritySchemes() {
+      return securitySchemesBuilder_ != null || securitySchemes_ != null;
     }
+    /**
+     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
+     * @return The securitySchemes.
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes getSecuritySchemes() {
+      if (securitySchemesBuilder_ == null) {
+        return securitySchemes_ == null ? org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.getDefaultInstance() : securitySchemes_;
+      } else {
+        return securitySchemesBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
+     */
+    public Builder setSecuritySchemes(org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes value) {
+      if (securitySchemesBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        securitySchemes_ = value;
+        onChanged();
+      } else {
+        securitySchemesBuilder_.setMessage(value);
+      }
 
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder> authenticationOptionsBuilder_;
+      return this;
+    }
+    /**
+     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
+     */
+    public Builder setSecuritySchemes(
+        org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder builderForValue) {
+      if (securitySchemesBuilder_ == null) {
+        securitySchemes_ = builderForValue.build();
+        onChanged();
+      } else {
+        securitySchemesBuilder_.setMessage(builderForValue.build());
+      }
 
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> getAuthenticationOptionsList() {
-      if (authenticationOptionsBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(authenticationOptions_);
-      } else {
-        return authenticationOptionsBuilder_.getMessageList();
-      }
+      return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
+     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
      */
-    public int getAuthenticationOptionsCount() {
-      if (authenticationOptionsBuilder_ == null) {
-        return authenticationOptions_.size();
-      } else {
-        return authenticationOptionsBuilder_.getCount();
-      }
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption getAuthenticationOptions(int index) {
-      if (authenticationOptionsBuilder_ == null) {
-        return authenticationOptions_.get(index);
-      } else {
-        return authenticationOptionsBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public Builder setAuthenticationOptions(
-        int index, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption value) {
-      if (authenticationOptionsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
+    public Builder mergeSecuritySchemes(org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes value) {
+      if (securitySchemesBuilder_ == null) {
+        if (securitySchemes_ != null) {
+          securitySchemes_ =
+            org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.newBuilder(securitySchemes_).mergeFrom(value).buildPartial();
+        } else {
+          securitySchemes_ = value;
         }
-        ensureAuthenticationOptionsIsMutable();
-        authenticationOptions_.set(index, value);
         onChanged();
       } else {
-        authenticationOptionsBuilder_.setMessage(index, value);
+        securitySchemesBuilder_.mergeFrom(value);
       }
+
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
+     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
      */
-    public Builder setAuthenticationOptions(
-        int index, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder builderForValue) {
-      if (authenticationOptionsBuilder_ == null) {
-        ensureAuthenticationOptionsIsMutable();
-        authenticationOptions_.set(index, builderForValue.build());
+    public Builder clearSecuritySchemes() {
+      if (securitySchemesBuilder_ == null) {
+        securitySchemes_ = null;
         onChanged();
       } else {
-        authenticationOptionsBuilder_.setMessage(index, builderForValue.build());
+        securitySchemes_ = null;
+        securitySchemesBuilder_ = null;
       }
+
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
+     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
      */
-    public Builder addAuthenticationOptions(org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption value) {
-      if (authenticationOptionsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureAuthenticationOptionsIsMutable();
-        authenticationOptions_.add(value);
-        onChanged();
+    public org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder getSecuritySchemesBuilder() {
+      
+      onChanged();
+      return getSecuritySchemesFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder getSecuritySchemesOrBuilder() {
+      if (securitySchemesBuilder_ != null) {
+        return securitySchemesBuilder_.getMessageOrBuilder();
       } else {
-        authenticationOptionsBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public Builder addAuthenticationOptions(
-        int index, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption value) {
-      if (authenticationOptionsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureAuthenticationOptionsIsMutable();
-        authenticationOptions_.add(index, value);
-        onChanged();
-      } else {
-        authenticationOptionsBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public Builder addAuthenticationOptions(
-        org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder builderForValue) {
-      if (authenticationOptionsBuilder_ == null) {
-        ensureAuthenticationOptionsIsMutable();
-        authenticationOptions_.add(builderForValue.build());
-        onChanged();
-      } else {
-        authenticationOptionsBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public Builder addAuthenticationOptions(
-        int index, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder builderForValue) {
-      if (authenticationOptionsBuilder_ == null) {
-        ensureAuthenticationOptionsIsMutable();
-        authenticationOptions_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        authenticationOptionsBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public Builder addAllAuthenticationOptions(
-        java.lang.Iterable<? extends org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption> values) {
-      if (authenticationOptionsBuilder_ == null) {
-        ensureAuthenticationOptionsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, authenticationOptions_);
-        onChanged();
-      } else {
-        authenticationOptionsBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public Builder clearAuthenticationOptions() {
-      if (authenticationOptionsBuilder_ == null) {
-        authenticationOptions_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
-      } else {
-        authenticationOptionsBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public Builder removeAuthenticationOptions(int index) {
-      if (authenticationOptionsBuilder_ == null) {
-        ensureAuthenticationOptionsIsMutable();
-        authenticationOptions_.remove(index);
-        onChanged();
-      } else {
-        authenticationOptionsBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder getAuthenticationOptionsBuilder(
-        int index) {
-      return getAuthenticationOptionsFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder getAuthenticationOptionsOrBuilder(
-        int index) {
-      if (authenticationOptionsBuilder_ == null) {
-        return authenticationOptions_.get(index);  } else {
-        return authenticationOptionsBuilder_.getMessageOrBuilder(index);
+        return securitySchemes_ == null ?
+            org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.getDefaultInstance() : securitySchemes_;
       }
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
+     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
      */
-    public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder> 
-         getAuthenticationOptionsOrBuilderList() {
-      if (authenticationOptionsBuilder_ != null) {
-        return authenticationOptionsBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(authenticationOptions_);
-      }
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder addAuthenticationOptionsBuilder() {
-      return getAuthenticationOptionsFieldBuilder().addBuilder(
-          org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder addAuthenticationOptionsBuilder(
-        int index) {
-      return getAuthenticationOptionsFieldBuilder().addBuilder(
-          index, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.AuthenticationOption authenticationOptions = 6;</code>
-     */
-    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder> 
-         getAuthenticationOptionsBuilderList() {
-      return getAuthenticationOptionsFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder> 
-        getAuthenticationOptionsFieldBuilder() {
-      if (authenticationOptionsBuilder_ == null) {
-        authenticationOptionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-            org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOption.Builder, org.wso2.apk.enforcer.discovery.subscription.AuthenticationOptionOrBuilder>(
-                authenticationOptions_,
-                ((bitField0_ & 0x00000002) != 0),
+    private com.google.protobuf.SingleFieldBuilderV3<
+        org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder> 
+        getSecuritySchemesFieldBuilder() {
+      if (securitySchemesBuilder_ == null) {
+        securitySchemesBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder>(
+                getSecuritySchemes(),
                 getParentForChildren(),
                 isClean());
-        authenticationOptions_ = null;
+        securitySchemes_ = null;
       }
-      return authenticationOptionsBuilder_;
-    }
-
-    private java.lang.Object timeStamp_ = "";
-    /**
-     * <code>string timeStamp = 7;</code>
-     * @return The timeStamp.
-     */
-    public java.lang.String getTimeStamp() {
-      java.lang.Object ref = timeStamp_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        timeStamp_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string timeStamp = 7;</code>
-     * @return The bytes for timeStamp.
-     */
-    public com.google.protobuf.ByteString
-        getTimeStampBytes() {
-      java.lang.Object ref = timeStamp_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        timeStamp_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string timeStamp = 7;</code>
-     * @param value The timeStamp to set.
-     * @return This builder for chaining.
-     */
-    public Builder setTimeStamp(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      timeStamp_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string timeStamp = 7;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearTimeStamp() {
-      
-      timeStamp_ = getDefaultInstance().getTimeStamp();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string timeStamp = 7;</code>
-     * @param value The bytes for timeStamp to set.
-     * @return This builder for chaining.
-     */
-    public Builder setTimeStampBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      timeStamp_ = value;
-      onChanged();
-      return this;
+      return securitySchemesBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

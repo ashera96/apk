@@ -19,17 +19,19 @@ package types
 
 // Subscription for struct subscription
 type Subscription struct {
-	SubscriptionID    int32  `json:"subscriptionId"`
-	SubscriptionUUID  string `json:"subscriptionUUID"`
-	PolicyID          string `json:"policyId"`
-	APIID             int32  `json:"apiId"`
-	APIUUID           string `json:"apiUUID"`
-	AppID             int32  `json:"appId" json:"applicationId"`
-	ApplicationUUID   string `json:"applicationUUID"`
-	SubscriptionState string `json:"subscriptionState"`
-	TenantID          int32  `json:"tenanId,omitempty"`
-	TenantDomain      string `json:"tenanDomain,omitempty"`
-	TimeStamp         int64  `json:"timeStamp,omitempty"`
+	SubscriptionID     int32  `json:"subscriptionId"`
+	SubscriptionUUID   string `json:"subscriptionUUID"`
+	APIID              int32  `json:"apiId"`
+	APIUUID            string `json:"apiUUID"`
+	SubscriptionStatus string `json:"subscriptionStatus"`
+	Organization       string `json:"organization"`
+	Api                APIRef `json:"api"`
+	TimeStamp          int64  `json:"timeStamp,omitempty"`
+}
+
+type APIRef struct {
+	Name     string   `json:"name"`
+	Versions []string `json:"versions"`
 }
 
 // SubscriptionList for struct list of applications
@@ -39,16 +41,14 @@ type SubscriptionList struct {
 
 // Application for struct application
 type Application struct {
-	UUID         string            `json:"uuid"`
-	ID           int32             `json:"id" json:"applicationId"`
-	Name         string            `json:"name" json:"applicationName"`
-	SubName      string            `json:"subName" json:"subscriber"`
-	Policy       string            `json:"policy" json:"applicationPolicy"`
-	TokenType    string            `json:"tokenType"`
-	Attributes   map[string]string `json:"attributes"`
-	TenantID     int32             `json:"tenanId,omitempty"`
-	TenantDomain string            `json:"tenanDomain,omitempty"`
-	TimeStamp    int64             `json:"timeStamp,omitempty"`
+	UUID       string            `json:"uuid"`
+	ID         int32             `json:"id" json:"applicationId"`
+	Name       string            `json:"name" json:"applicationName"`
+	Owner      string            `json:"owner"`
+	SubName    string            `json:"subName" json:"subscriber"`
+	Policy     string            `json:"policy" json:"applicationPolicy"`
+	TokenType  string            `json:"tokenType"`
+	Attributes map[string]string `json:"attributes"`
 }
 
 // ApplicationList for struct list of application
@@ -58,14 +58,11 @@ type ApplicationList struct {
 
 // ApplicationKeyMapping for struct applicationKeyMapping
 type ApplicationKeyMapping struct {
-	ApplicationID   int32  `json:"applicationId"`
-	ApplicationUUID string `json:"applicationUUID"`
-	ConsumerKey     string `json:"consumerKey"`
-	KeyType         string `json:"keyType"`
-	KeyManager      string `json:"keyManager"`
-	TenantID        int32  `json:"tenanId,omitempty"`
-	TenantDomain    string `json:"tenanDomain,omitempty"`
-	TimeStamp       int64  `json:"timeStamp,omitempty"`
+	ApplicationUUID       string `json:"applicationUUID"`
+	ApplicationIdentifier string `json:"appId"`
+	EnvId                 string `json:"envId"`
+	KeyType               string `json:"keyType"`
+	TimeStamp             int64  `json:"timeStamp,omitempty"`
 }
 
 // ApplicationKeyMappingList for struct list of applicationKeyMapping

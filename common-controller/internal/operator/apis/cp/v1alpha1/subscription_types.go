@@ -28,14 +28,13 @@ import (
 type SubscriptionSpec struct {
 	SubscriptionStatus string `json:"subscriptionStatus"`
 	Organization       string `json:"organization"`
-	APIs               []API  `json:"apis"`
+	API                API    `json:"api"`
 }
 
 // API defines the API associated with the subscription
 type API struct {
-	Name         string `json:"name"`
-	Version      string `json:"version"`
-	Organization string `json:"organization"`
+	Name     string   `json:"name"`
+	Versions []string `json:"versions"`
 }
 
 // SubscriptionStatus defines the observed state of Subscription

@@ -16,9 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private OAuth2() {
-    consumerKey_ = "";
-    keyManager_ = "";
-    keyType_ = "";
+    environments_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -41,6 +39,7 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
+    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -52,21 +51,12 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            consumerKey_ = s;
-            break;
-          }
-          case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            keyManager_ = s;
-            break;
-          }
-          case 26: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            keyType_ = s;
+            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+              environments_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.Environment>();
+              mutable_bitField0_ |= 0x00000001;
+            }
+            environments_.add(
+                input.readMessage(org.wso2.apk.enforcer.discovery.subscription.Environment.parser(), extensionRegistry));
             break;
           }
           default: {
@@ -84,6 +74,9 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000001) != 0)) {
+        environments_ = java.util.Collections.unmodifiableList(environments_);
+      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -101,118 +94,44 @@ private static final long serialVersionUID = 0L;
             org.wso2.apk.enforcer.discovery.subscription.OAuth2.class, org.wso2.apk.enforcer.discovery.subscription.OAuth2.Builder.class);
   }
 
-  public static final int CONSUMERKEY_FIELD_NUMBER = 1;
-  private volatile java.lang.Object consumerKey_;
+  public static final int ENVIRONMENTS_FIELD_NUMBER = 1;
+  private java.util.List<org.wso2.apk.enforcer.discovery.subscription.Environment> environments_;
   /**
-   * <code>string consumerKey = 1;</code>
-   * @return The consumerKey.
+   * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
    */
   @java.lang.Override
-  public java.lang.String getConsumerKey() {
-    java.lang.Object ref = consumerKey_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      consumerKey_ = s;
-      return s;
-    }
+  public java.util.List<org.wso2.apk.enforcer.discovery.subscription.Environment> getEnvironmentsList() {
+    return environments_;
   }
   /**
-   * <code>string consumerKey = 1;</code>
-   * @return The bytes for consumerKey.
+   * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getConsumerKeyBytes() {
-    java.lang.Object ref = consumerKey_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      consumerKey_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int KEYMANAGER_FIELD_NUMBER = 2;
-  private volatile java.lang.Object keyManager_;
-  /**
-   * <code>string keyManager = 2;</code>
-   * @return The keyManager.
-   */
-  @java.lang.Override
-  public java.lang.String getKeyManager() {
-    java.lang.Object ref = keyManager_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      keyManager_ = s;
-      return s;
-    }
+  public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.EnvironmentOrBuilder> 
+      getEnvironmentsOrBuilderList() {
+    return environments_;
   }
   /**
-   * <code>string keyManager = 2;</code>
-   * @return The bytes for keyManager.
+   * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getKeyManagerBytes() {
-    java.lang.Object ref = keyManager_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      keyManager_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int KEYTYPE_FIELD_NUMBER = 3;
-  private volatile java.lang.Object keyType_;
-  /**
-   * <code>string keyType = 3;</code>
-   * @return The keyType.
-   */
-  @java.lang.Override
-  public java.lang.String getKeyType() {
-    java.lang.Object ref = keyType_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      keyType_ = s;
-      return s;
-    }
+  public int getEnvironmentsCount() {
+    return environments_.size();
   }
   /**
-   * <code>string keyType = 3;</code>
-   * @return The bytes for keyType.
+   * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getKeyTypeBytes() {
-    java.lang.Object ref = keyType_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      keyType_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public org.wso2.apk.enforcer.discovery.subscription.Environment getEnvironments(int index) {
+    return environments_.get(index);
+  }
+  /**
+   * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+   */
+  @java.lang.Override
+  public org.wso2.apk.enforcer.discovery.subscription.EnvironmentOrBuilder getEnvironmentsOrBuilder(
+      int index) {
+    return environments_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -229,14 +148,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getConsumerKeyBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, consumerKey_);
-    }
-    if (!getKeyManagerBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, keyManager_);
-    }
-    if (!getKeyTypeBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, keyType_);
+    for (int i = 0; i < environments_.size(); i++) {
+      output.writeMessage(1, environments_.get(i));
     }
     unknownFields.writeTo(output);
   }
@@ -247,14 +160,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getConsumerKeyBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, consumerKey_);
-    }
-    if (!getKeyManagerBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, keyManager_);
-    }
-    if (!getKeyTypeBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, keyType_);
+    for (int i = 0; i < environments_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(1, environments_.get(i));
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -271,12 +179,8 @@ private static final long serialVersionUID = 0L;
     }
     org.wso2.apk.enforcer.discovery.subscription.OAuth2 other = (org.wso2.apk.enforcer.discovery.subscription.OAuth2) obj;
 
-    if (!getConsumerKey()
-        .equals(other.getConsumerKey())) return false;
-    if (!getKeyManager()
-        .equals(other.getKeyManager())) return false;
-    if (!getKeyType()
-        .equals(other.getKeyType())) return false;
+    if (!getEnvironmentsList()
+        .equals(other.getEnvironmentsList())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -288,12 +192,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + CONSUMERKEY_FIELD_NUMBER;
-    hash = (53 * hash) + getConsumerKey().hashCode();
-    hash = (37 * hash) + KEYMANAGER_FIELD_NUMBER;
-    hash = (53 * hash) + getKeyManager().hashCode();
-    hash = (37 * hash) + KEYTYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getKeyType().hashCode();
+    if (getEnvironmentsCount() > 0) {
+      hash = (37 * hash) + ENVIRONMENTS_FIELD_NUMBER;
+      hash = (53 * hash) + getEnvironmentsList().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -422,17 +324,18 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
+        getEnvironmentsFieldBuilder();
       }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      consumerKey_ = "";
-
-      keyManager_ = "";
-
-      keyType_ = "";
-
+      if (environmentsBuilder_ == null) {
+        environments_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+      } else {
+        environmentsBuilder_.clear();
+      }
       return this;
     }
 
@@ -459,9 +362,16 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public org.wso2.apk.enforcer.discovery.subscription.OAuth2 buildPartial() {
       org.wso2.apk.enforcer.discovery.subscription.OAuth2 result = new org.wso2.apk.enforcer.discovery.subscription.OAuth2(this);
-      result.consumerKey_ = consumerKey_;
-      result.keyManager_ = keyManager_;
-      result.keyType_ = keyType_;
+      int from_bitField0_ = bitField0_;
+      if (environmentsBuilder_ == null) {
+        if (((bitField0_ & 0x00000001) != 0)) {
+          environments_ = java.util.Collections.unmodifiableList(environments_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.environments_ = environments_;
+      } else {
+        result.environments_ = environmentsBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -510,17 +420,31 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(org.wso2.apk.enforcer.discovery.subscription.OAuth2 other) {
       if (other == org.wso2.apk.enforcer.discovery.subscription.OAuth2.getDefaultInstance()) return this;
-      if (!other.getConsumerKey().isEmpty()) {
-        consumerKey_ = other.consumerKey_;
-        onChanged();
-      }
-      if (!other.getKeyManager().isEmpty()) {
-        keyManager_ = other.keyManager_;
-        onChanged();
-      }
-      if (!other.getKeyType().isEmpty()) {
-        keyType_ = other.keyType_;
-        onChanged();
+      if (environmentsBuilder_ == null) {
+        if (!other.environments_.isEmpty()) {
+          if (environments_.isEmpty()) {
+            environments_ = other.environments_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureEnvironmentsIsMutable();
+            environments_.addAll(other.environments_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.environments_.isEmpty()) {
+          if (environmentsBuilder_.isEmpty()) {
+            environmentsBuilder_.dispose();
+            environmentsBuilder_ = null;
+            environments_ = other.environments_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            environmentsBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getEnvironmentsFieldBuilder() : null;
+          } else {
+            environmentsBuilder_.addAllMessages(other.environments_);
+          }
+        }
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -550,233 +474,246 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
+    private int bitField0_;
 
-    private java.lang.Object consumerKey_ = "";
-    /**
-     * <code>string consumerKey = 1;</code>
-     * @return The consumerKey.
-     */
-    public java.lang.String getConsumerKey() {
-      java.lang.Object ref = consumerKey_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        consumerKey_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string consumerKey = 1;</code>
-     * @return The bytes for consumerKey.
-     */
-    public com.google.protobuf.ByteString
-        getConsumerKeyBytes() {
-      java.lang.Object ref = consumerKey_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        consumerKey_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string consumerKey = 1;</code>
-     * @param value The consumerKey to set.
-     * @return This builder for chaining.
-     */
-    public Builder setConsumerKey(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      consumerKey_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string consumerKey = 1;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearConsumerKey() {
-      
-      consumerKey_ = getDefaultInstance().getConsumerKey();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string consumerKey = 1;</code>
-     * @param value The bytes for consumerKey to set.
-     * @return This builder for chaining.
-     */
-    public Builder setConsumerKeyBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      consumerKey_ = value;
-      onChanged();
-      return this;
+    private java.util.List<org.wso2.apk.enforcer.discovery.subscription.Environment> environments_ =
+      java.util.Collections.emptyList();
+    private void ensureEnvironmentsIsMutable() {
+      if (!((bitField0_ & 0x00000001) != 0)) {
+        environments_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.Environment>(environments_);
+        bitField0_ |= 0x00000001;
+       }
     }
 
-    private java.lang.Object keyManager_ = "";
-    /**
-     * <code>string keyManager = 2;</code>
-     * @return The keyManager.
-     */
-    public java.lang.String getKeyManager() {
-      java.lang.Object ref = keyManager_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        keyManager_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string keyManager = 2;</code>
-     * @return The bytes for keyManager.
-     */
-    public com.google.protobuf.ByteString
-        getKeyManagerBytes() {
-      java.lang.Object ref = keyManager_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        keyManager_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string keyManager = 2;</code>
-     * @param value The keyManager to set.
-     * @return This builder for chaining.
-     */
-    public Builder setKeyManager(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      keyManager_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string keyManager = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearKeyManager() {
-      
-      keyManager_ = getDefaultInstance().getKeyManager();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string keyManager = 2;</code>
-     * @param value The bytes for keyManager to set.
-     * @return This builder for chaining.
-     */
-    public Builder setKeyManagerBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      keyManager_ = value;
-      onChanged();
-      return this;
-    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        org.wso2.apk.enforcer.discovery.subscription.Environment, org.wso2.apk.enforcer.discovery.subscription.Environment.Builder, org.wso2.apk.enforcer.discovery.subscription.EnvironmentOrBuilder> environmentsBuilder_;
 
-    private java.lang.Object keyType_ = "";
     /**
-     * <code>string keyType = 3;</code>
-     * @return The keyType.
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
      */
-    public java.lang.String getKeyType() {
-      java.lang.Object ref = keyType_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        keyType_ = s;
-        return s;
+    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.Environment> getEnvironmentsList() {
+      if (environmentsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(environments_);
       } else {
-        return (java.lang.String) ref;
+        return environmentsBuilder_.getMessageList();
       }
     }
     /**
-     * <code>string keyType = 3;</code>
-     * @return The bytes for keyType.
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getKeyTypeBytes() {
-      java.lang.Object ref = keyType_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        keyType_ = b;
-        return b;
+    public int getEnvironmentsCount() {
+      if (environmentsBuilder_ == null) {
+        return environments_.size();
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        return environmentsBuilder_.getCount();
       }
     }
     /**
-     * <code>string keyType = 3;</code>
-     * @param value The keyType to set.
-     * @return This builder for chaining.
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
      */
-    public Builder setKeyType(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      keyType_ = value;
-      onChanged();
+    public org.wso2.apk.enforcer.discovery.subscription.Environment getEnvironments(int index) {
+      if (environmentsBuilder_ == null) {
+        return environments_.get(index);
+      } else {
+        return environmentsBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public Builder setEnvironments(
+        int index, org.wso2.apk.enforcer.discovery.subscription.Environment value) {
+      if (environmentsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureEnvironmentsIsMutable();
+        environments_.set(index, value);
+        onChanged();
+      } else {
+        environmentsBuilder_.setMessage(index, value);
+      }
       return this;
     }
     /**
-     * <code>string keyType = 3;</code>
-     * @return This builder for chaining.
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
      */
-    public Builder clearKeyType() {
-      
-      keyType_ = getDefaultInstance().getKeyType();
-      onChanged();
+    public Builder setEnvironments(
+        int index, org.wso2.apk.enforcer.discovery.subscription.Environment.Builder builderForValue) {
+      if (environmentsBuilder_ == null) {
+        ensureEnvironmentsIsMutable();
+        environments_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        environmentsBuilder_.setMessage(index, builderForValue.build());
+      }
       return this;
     }
     /**
-     * <code>string keyType = 3;</code>
-     * @param value The bytes for keyType to set.
-     * @return This builder for chaining.
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
      */
-    public Builder setKeyTypeBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      keyType_ = value;
-      onChanged();
+    public Builder addEnvironments(org.wso2.apk.enforcer.discovery.subscription.Environment value) {
+      if (environmentsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureEnvironmentsIsMutable();
+        environments_.add(value);
+        onChanged();
+      } else {
+        environmentsBuilder_.addMessage(value);
+      }
       return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public Builder addEnvironments(
+        int index, org.wso2.apk.enforcer.discovery.subscription.Environment value) {
+      if (environmentsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureEnvironmentsIsMutable();
+        environments_.add(index, value);
+        onChanged();
+      } else {
+        environmentsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public Builder addEnvironments(
+        org.wso2.apk.enforcer.discovery.subscription.Environment.Builder builderForValue) {
+      if (environmentsBuilder_ == null) {
+        ensureEnvironmentsIsMutable();
+        environments_.add(builderForValue.build());
+        onChanged();
+      } else {
+        environmentsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public Builder addEnvironments(
+        int index, org.wso2.apk.enforcer.discovery.subscription.Environment.Builder builderForValue) {
+      if (environmentsBuilder_ == null) {
+        ensureEnvironmentsIsMutable();
+        environments_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        environmentsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public Builder addAllEnvironments(
+        java.lang.Iterable<? extends org.wso2.apk.enforcer.discovery.subscription.Environment> values) {
+      if (environmentsBuilder_ == null) {
+        ensureEnvironmentsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, environments_);
+        onChanged();
+      } else {
+        environmentsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public Builder clearEnvironments() {
+      if (environmentsBuilder_ == null) {
+        environments_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+      } else {
+        environmentsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public Builder removeEnvironments(int index) {
+      if (environmentsBuilder_ == null) {
+        ensureEnvironmentsIsMutable();
+        environments_.remove(index);
+        onChanged();
+      } else {
+        environmentsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.Environment.Builder getEnvironmentsBuilder(
+        int index) {
+      return getEnvironmentsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.EnvironmentOrBuilder getEnvironmentsOrBuilder(
+        int index) {
+      if (environmentsBuilder_ == null) {
+        return environments_.get(index);  } else {
+        return environmentsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.EnvironmentOrBuilder> 
+         getEnvironmentsOrBuilderList() {
+      if (environmentsBuilder_ != null) {
+        return environmentsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(environments_);
+      }
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.Environment.Builder addEnvironmentsBuilder() {
+      return getEnvironmentsFieldBuilder().addBuilder(
+          org.wso2.apk.enforcer.discovery.subscription.Environment.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.Environment.Builder addEnvironmentsBuilder(
+        int index) {
+      return getEnvironmentsFieldBuilder().addBuilder(
+          index, org.wso2.apk.enforcer.discovery.subscription.Environment.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .wso2.discovery.subscription.Environment environments = 1;</code>
+     */
+    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.Environment.Builder> 
+         getEnvironmentsBuilderList() {
+      return getEnvironmentsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        org.wso2.apk.enforcer.discovery.subscription.Environment, org.wso2.apk.enforcer.discovery.subscription.Environment.Builder, org.wso2.apk.enforcer.discovery.subscription.EnvironmentOrBuilder> 
+        getEnvironmentsFieldBuilder() {
+      if (environmentsBuilder_ == null) {
+        environmentsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            org.wso2.apk.enforcer.discovery.subscription.Environment, org.wso2.apk.enforcer.discovery.subscription.Environment.Builder, org.wso2.apk.enforcer.discovery.subscription.EnvironmentOrBuilder>(
+                environments_,
+                ((bitField0_ & 0x00000001) != 0),
+                getParentForChildren(),
+                isClean());
+        environments_ = null;
+      }
+      return environmentsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

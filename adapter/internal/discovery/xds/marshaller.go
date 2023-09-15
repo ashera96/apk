@@ -489,41 +489,36 @@ func MarshalAPIForLifeCycleChangeEventAndReturnList(apiUUID, status, gatewayLabe
 }
 
 func marshalSubscription(subscriptionInternal *types.Subscription) *subscription.Subscription {
-	sub := &subscription.Subscription{
-		Uuid:           subscriptionInternal.SubscriptionUUID,
-		PolicyId:       subscriptionInternal.PolicyID,
-		ApiRef:         subscriptionInternal.APIUUID,
-		ApplicationRef: subscriptionInternal.ApplicationUUID,
-		SubStatus:      subscriptionInternal.SubscriptionState,
-		//TimeStamp:      subscriptionInternal.TimeStamp,
-		Organization: subscriptionInternal.TenantDomain,
+	api := &subscription.API{
+		Name:     subscriptionInternal.Api.Name,
+		Versions: subscriptionInternal.Api.Versions,
 	}
+	sub := &subscription.Subscription{
+		Uuid:         subscriptionInternal.SubscriptionUUID,
+		SubStatus:    subscriptionInternal.SubscriptionStatus,
+		Organization: subscriptionInternal.Organization,
+	}
+	sub.Api = api
 	return sub
 }
 
 func marshalApplication(appInternal *types.Application) *subscription.Application {
 	app := &subscription.Application{
-		Uuid:   appInternal.UUID,
-		Name:   appInternal.Name,
-		Policy: appInternal.Policy,
-		//Owner:        appInternal.Owner,
-		Attributes:   appInternal.Attributes,
-		Organization: appInternal.TenantDomain,
-		//Timestamp:    appInternal.TimeStamp,
+		Uuid:       appInternal.UUID,
+		Name:       appInternal.Name,
+		Owner:      appInternal.Owner,
+		Attributes: appInternal.Attributes,
 	}
 	return app
 }
 
 func marshalKeyMapping(keyMappingInternal *types.ApplicationKeyMapping) *subscription.ApplicationKeyMapping {
 	return &subscription.ApplicationKeyMapping{
-		ConsumerKey:     keyMappingInternal.ConsumerKey,
-		KeyType:         keyMappingInternal.KeyType,
-		KeyManager:      keyMappingInternal.KeyManager,
-		ApplicationId:   keyMappingInternal.ApplicationID,
-		ApplicationUUID: keyMappingInternal.ApplicationUUID,
-		TenantId:        keyMappingInternal.TenantID,
-		TenantDomain:    keyMappingInternal.TenantDomain,
-		Timestamp:       keyMappingInternal.TimeStamp,
+		ApplicationUUID:       keyMappingInternal.ApplicationUUID,
+		ApplicationIdentifier: keyMappingInternal.ApplicationIdentifier,
+		KeyType:               keyMappingInternal.KeyType,
+		EnvId:                 keyMappingInternal.EnvId,
+		Timestamp:             keyMappingInternal.TimeStamp,
 	}
 }
 

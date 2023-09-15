@@ -17,8 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private API() {
     name_ = "";
-    version_ = "";
-    organization_ = "";
+    versions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
   }
 
   @java.lang.Override
@@ -41,6 +40,7 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
+    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -59,14 +59,11 @@ private static final long serialVersionUID = 0L;
           }
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
-
-            version_ = s;
-            break;
-          }
-          case 26: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            organization_ = s;
+            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+              versions_ = new com.google.protobuf.LazyStringArrayList();
+              mutable_bitField0_ |= 0x00000001;
+            }
+            versions_.add(s);
             break;
           }
           default: {
@@ -84,6 +81,9 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000001) != 0)) {
+        versions_ = versions_.getUnmodifiableView();
+      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -139,80 +139,39 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int VERSION_FIELD_NUMBER = 2;
-  private volatile java.lang.Object version_;
+  public static final int VERSIONS_FIELD_NUMBER = 2;
+  private com.google.protobuf.LazyStringList versions_;
   /**
-   * <code>string version = 2;</code>
-   * @return The version.
+   * <code>repeated string versions = 2;</code>
+   * @return A list containing the versions.
    */
-  @java.lang.Override
-  public java.lang.String getVersion() {
-    java.lang.Object ref = version_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      version_ = s;
-      return s;
-    }
+  public com.google.protobuf.ProtocolStringList
+      getVersionsList() {
+    return versions_;
   }
   /**
-   * <code>string version = 2;</code>
-   * @return The bytes for version.
+   * <code>repeated string versions = 2;</code>
+   * @return The count of versions.
    */
-  @java.lang.Override
+  public int getVersionsCount() {
+    return versions_.size();
+  }
+  /**
+   * <code>repeated string versions = 2;</code>
+   * @param index The index of the element to return.
+   * @return The versions at the given index.
+   */
+  public java.lang.String getVersions(int index) {
+    return versions_.get(index);
+  }
+  /**
+   * <code>repeated string versions = 2;</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the versions at the given index.
+   */
   public com.google.protobuf.ByteString
-      getVersionBytes() {
-    java.lang.Object ref = version_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      version_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int ORGANIZATION_FIELD_NUMBER = 3;
-  private volatile java.lang.Object organization_;
-  /**
-   * <code>string organization = 3;</code>
-   * @return The organization.
-   */
-  @java.lang.Override
-  public java.lang.String getOrganization() {
-    java.lang.Object ref = organization_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      organization_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string organization = 3;</code>
-   * @return The bytes for organization.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getOrganizationBytes() {
-    java.lang.Object ref = organization_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      organization_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+      getVersionsBytes(int index) {
+    return versions_.getByteString(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -232,11 +191,8 @@ private static final long serialVersionUID = 0L;
     if (!getNameBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
     }
-    if (!getVersionBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, version_);
-    }
-    if (!getOrganizationBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, organization_);
+    for (int i = 0; i < versions_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, versions_.getRaw(i));
     }
     unknownFields.writeTo(output);
   }
@@ -250,11 +206,13 @@ private static final long serialVersionUID = 0L;
     if (!getNameBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
     }
-    if (!getVersionBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, version_);
-    }
-    if (!getOrganizationBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, organization_);
+    {
+      int dataSize = 0;
+      for (int i = 0; i < versions_.size(); i++) {
+        dataSize += computeStringSizeNoTag(versions_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getVersionsList().size();
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -273,10 +231,8 @@ private static final long serialVersionUID = 0L;
 
     if (!getName()
         .equals(other.getName())) return false;
-    if (!getVersion()
-        .equals(other.getVersion())) return false;
-    if (!getOrganization()
-        .equals(other.getOrganization())) return false;
+    if (!getVersionsList()
+        .equals(other.getVersionsList())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -290,10 +246,10 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + NAME_FIELD_NUMBER;
     hash = (53 * hash) + getName().hashCode();
-    hash = (37 * hash) + VERSION_FIELD_NUMBER;
-    hash = (53 * hash) + getVersion().hashCode();
-    hash = (37 * hash) + ORGANIZATION_FIELD_NUMBER;
-    hash = (53 * hash) + getOrganization().hashCode();
+    if (getVersionsCount() > 0) {
+      hash = (37 * hash) + VERSIONS_FIELD_NUMBER;
+      hash = (53 * hash) + getVersionsList().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -429,10 +385,8 @@ private static final long serialVersionUID = 0L;
       super.clear();
       name_ = "";
 
-      version_ = "";
-
-      organization_ = "";
-
+      versions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000001);
       return this;
     }
 
@@ -459,9 +413,13 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public org.wso2.apk.enforcer.discovery.subscription.API buildPartial() {
       org.wso2.apk.enforcer.discovery.subscription.API result = new org.wso2.apk.enforcer.discovery.subscription.API(this);
+      int from_bitField0_ = bitField0_;
       result.name_ = name_;
-      result.version_ = version_;
-      result.organization_ = organization_;
+      if (((bitField0_ & 0x00000001) != 0)) {
+        versions_ = versions_.getUnmodifiableView();
+        bitField0_ = (bitField0_ & ~0x00000001);
+      }
+      result.versions_ = versions_;
       onBuilt();
       return result;
     }
@@ -514,12 +472,14 @@ private static final long serialVersionUID = 0L;
         name_ = other.name_;
         onChanged();
       }
-      if (!other.getVersion().isEmpty()) {
-        version_ = other.version_;
-        onChanged();
-      }
-      if (!other.getOrganization().isEmpty()) {
-        organization_ = other.organization_;
+      if (!other.versions_.isEmpty()) {
+        if (versions_.isEmpty()) {
+          versions_ = other.versions_;
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          ensureVersionsIsMutable();
+          versions_.addAll(other.versions_);
+        }
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -550,6 +510,7 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
+    private int bitField0_;
 
     private java.lang.Object name_ = "";
     /**
@@ -627,154 +588,112 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object version_ = "";
-    /**
-     * <code>string version = 2;</code>
-     * @return The version.
-     */
-    public java.lang.String getVersion() {
-      java.lang.Object ref = version_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        version_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    private com.google.protobuf.LazyStringList versions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private void ensureVersionsIsMutable() {
+      if (!((bitField0_ & 0x00000001) != 0)) {
+        versions_ = new com.google.protobuf.LazyStringArrayList(versions_);
+        bitField0_ |= 0x00000001;
+       }
     }
     /**
-     * <code>string version = 2;</code>
-     * @return The bytes for version.
+     * <code>repeated string versions = 2;</code>
+     * @return A list containing the versions.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getVersionsList() {
+      return versions_.getUnmodifiableView();
+    }
+    /**
+     * <code>repeated string versions = 2;</code>
+     * @return The count of versions.
+     */
+    public int getVersionsCount() {
+      return versions_.size();
+    }
+    /**
+     * <code>repeated string versions = 2;</code>
+     * @param index The index of the element to return.
+     * @return The versions at the given index.
+     */
+    public java.lang.String getVersions(int index) {
+      return versions_.get(index);
+    }
+    /**
+     * <code>repeated string versions = 2;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the versions at the given index.
      */
     public com.google.protobuf.ByteString
-        getVersionBytes() {
-      java.lang.Object ref = version_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        version_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+        getVersionsBytes(int index) {
+      return versions_.getByteString(index);
     }
     /**
-     * <code>string version = 2;</code>
-     * @param value The version to set.
+     * <code>repeated string versions = 2;</code>
+     * @param index The index to set the value at.
+     * @param value The versions to set.
      * @return This builder for chaining.
      */
-    public Builder setVersion(
+    public Builder setVersions(
+        int index, java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureVersionsIsMutable();
+      versions_.set(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string versions = 2;</code>
+     * @param value The versions to add.
+     * @return This builder for chaining.
+     */
+    public Builder addVersions(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  
-      version_ = value;
+  ensureVersionsIsMutable();
+      versions_.add(value);
       onChanged();
       return this;
     }
     /**
-     * <code>string version = 2;</code>
+     * <code>repeated string versions = 2;</code>
+     * @param values The versions to add.
      * @return This builder for chaining.
      */
-    public Builder clearVersion() {
-      
-      version_ = getDefaultInstance().getVersion();
+    public Builder addAllVersions(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureVersionsIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, versions_);
       onChanged();
       return this;
     }
     /**
-     * <code>string version = 2;</code>
-     * @param value The bytes for version to set.
+     * <code>repeated string versions = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder setVersionBytes(
+    public Builder clearVersions() {
+      versions_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000001);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string versions = 2;</code>
+     * @param value The bytes of the versions to add.
+     * @return This builder for chaining.
+     */
+    public Builder addVersionsBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-      
-      version_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object organization_ = "";
-    /**
-     * <code>string organization = 3;</code>
-     * @return The organization.
-     */
-    public java.lang.String getOrganization() {
-      java.lang.Object ref = organization_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        organization_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string organization = 3;</code>
-     * @return The bytes for organization.
-     */
-    public com.google.protobuf.ByteString
-        getOrganizationBytes() {
-      java.lang.Object ref = organization_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        organization_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string organization = 3;</code>
-     * @param value The organization to set.
-     * @return This builder for chaining.
-     */
-    public Builder setOrganization(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      organization_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string organization = 3;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearOrganization() {
-      
-      organization_ = getDefaultInstance().getOrganization();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string organization = 3;</code>
-     * @param value The bytes for organization to set.
-     * @return This builder for chaining.
-     */
-    public Builder setOrganizationBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      organization_ = value;
+      ensureVersionsIsMutable();
+      versions_.add(value);
       onChanged();
       return this;
     }

@@ -25,7 +25,6 @@ private static final long serialVersionUID = 0L;
     uuid_ = "";
     timeStamp_ = "";
     organization_ = "";
-    apis_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -48,7 +47,6 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -90,12 +88,16 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 50: {
-            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-              apis_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.API>();
-              mutable_bitField0_ |= 0x00000001;
+            org.wso2.apk.enforcer.discovery.subscription.API.Builder subBuilder = null;
+            if (api_ != null) {
+              subBuilder = api_.toBuilder();
             }
-            apis_.add(
-                input.readMessage(org.wso2.apk.enforcer.discovery.subscription.API.parser(), extensionRegistry));
+            api_ = input.readMessage(org.wso2.apk.enforcer.discovery.subscription.API.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(api_);
+              api_ = subBuilder.buildPartial();
+            }
+
             break;
           }
           default: {
@@ -113,9 +115,6 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000001) != 0)) {
-        apis_ = java.util.Collections.unmodifiableList(apis_);
-      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -323,44 +322,30 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int APIS_FIELD_NUMBER = 6;
-  private java.util.List<org.wso2.apk.enforcer.discovery.subscription.API> apis_;
+  public static final int API_FIELD_NUMBER = 6;
+  private org.wso2.apk.enforcer.discovery.subscription.API api_;
   /**
-   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   * <code>.wso2.discovery.subscription.API api = 6;</code>
+   * @return Whether the api field is set.
    */
   @java.lang.Override
-  public java.util.List<org.wso2.apk.enforcer.discovery.subscription.API> getApisList() {
-    return apis_;
+  public boolean hasApi() {
+    return api_ != null;
   }
   /**
-   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   * <code>.wso2.discovery.subscription.API api = 6;</code>
+   * @return The api.
    */
   @java.lang.Override
-  public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> 
-      getApisOrBuilderList() {
-    return apis_;
+  public org.wso2.apk.enforcer.discovery.subscription.API getApi() {
+    return api_ == null ? org.wso2.apk.enforcer.discovery.subscription.API.getDefaultInstance() : api_;
   }
   /**
-   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+   * <code>.wso2.discovery.subscription.API api = 6;</code>
    */
   @java.lang.Override
-  public int getApisCount() {
-    return apis_.size();
-  }
-  /**
-   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-   */
-  @java.lang.Override
-  public org.wso2.apk.enforcer.discovery.subscription.API getApis(int index) {
-    return apis_.get(index);
-  }
-  /**
-   * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-   */
-  @java.lang.Override
-  public org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApisOrBuilder(
-      int index) {
-    return apis_.get(index);
+  public org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApiOrBuilder() {
+    return getApi();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -392,8 +377,8 @@ private static final long serialVersionUID = 0L;
     if (!getOrganizationBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 5, organization_);
     }
-    for (int i = 0; i < apis_.size(); i++) {
-      output.writeMessage(6, apis_.get(i));
+    if (api_ != null) {
+      output.writeMessage(6, getApi());
     }
     unknownFields.writeTo(output);
   }
@@ -419,9 +404,9 @@ private static final long serialVersionUID = 0L;
     if (!getOrganizationBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, organization_);
     }
-    for (int i = 0; i < apis_.size(); i++) {
+    if (api_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, apis_.get(i));
+        .computeMessageSize(6, getApi());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -448,8 +433,11 @@ private static final long serialVersionUID = 0L;
         .equals(other.getTimeStamp())) return false;
     if (!getOrganization()
         .equals(other.getOrganization())) return false;
-    if (!getApisList()
-        .equals(other.getApisList())) return false;
+    if (hasApi() != other.hasApi()) return false;
+    if (hasApi()) {
+      if (!getApi()
+          .equals(other.getApi())) return false;
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -471,9 +459,9 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getTimeStamp().hashCode();
     hash = (37 * hash) + ORGANIZATION_FIELD_NUMBER;
     hash = (53 * hash) + getOrganization().hashCode();
-    if (getApisCount() > 0) {
-      hash = (37 * hash) + APIS_FIELD_NUMBER;
-      hash = (53 * hash) + getApisList().hashCode();
+    if (hasApi()) {
+      hash = (37 * hash) + API_FIELD_NUMBER;
+      hash = (53 * hash) + getApi().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -607,7 +595,6 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getApisFieldBuilder();
       }
     }
     @java.lang.Override
@@ -623,11 +610,11 @@ private static final long serialVersionUID = 0L;
 
       organization_ = "";
 
-      if (apisBuilder_ == null) {
-        apis_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+      if (apiBuilder_ == null) {
+        api_ = null;
       } else {
-        apisBuilder_.clear();
+        api_ = null;
+        apiBuilder_ = null;
       }
       return this;
     }
@@ -655,20 +642,15 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public org.wso2.apk.enforcer.discovery.subscription.Subscription buildPartial() {
       org.wso2.apk.enforcer.discovery.subscription.Subscription result = new org.wso2.apk.enforcer.discovery.subscription.Subscription(this);
-      int from_bitField0_ = bitField0_;
       result.eventId_ = eventId_;
       result.subStatus_ = subStatus_;
       result.uuid_ = uuid_;
       result.timeStamp_ = timeStamp_;
       result.organization_ = organization_;
-      if (apisBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) != 0)) {
-          apis_ = java.util.Collections.unmodifiableList(apis_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.apis_ = apis_;
+      if (apiBuilder_ == null) {
+        result.api_ = api_;
       } else {
-        result.apis_ = apisBuilder_.build();
+        result.api_ = apiBuilder_.build();
       }
       onBuilt();
       return result;
@@ -738,31 +720,8 @@ private static final long serialVersionUID = 0L;
         organization_ = other.organization_;
         onChanged();
       }
-      if (apisBuilder_ == null) {
-        if (!other.apis_.isEmpty()) {
-          if (apis_.isEmpty()) {
-            apis_ = other.apis_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureApisIsMutable();
-            apis_.addAll(other.apis_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.apis_.isEmpty()) {
-          if (apisBuilder_.isEmpty()) {
-            apisBuilder_.dispose();
-            apisBuilder_ = null;
-            apis_ = other.apis_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-            apisBuilder_ = 
-              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                 getApisFieldBuilder() : null;
-          } else {
-            apisBuilder_.addAllMessages(other.apis_);
-          }
-        }
+      if (other.hasApi()) {
+        mergeApi(other.getApi());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -792,7 +751,6 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
-    private int bitField0_;
 
     private java.lang.Object eventId_ = "";
     /**
@@ -1174,244 +1132,123 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<org.wso2.apk.enforcer.discovery.subscription.API> apis_ =
-      java.util.Collections.emptyList();
-    private void ensureApisIsMutable() {
-      if (!((bitField0_ & 0x00000001) != 0)) {
-        apis_ = new java.util.ArrayList<org.wso2.apk.enforcer.discovery.subscription.API>(apis_);
-        bitField0_ |= 0x00000001;
-       }
+    private org.wso2.apk.enforcer.discovery.subscription.API api_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        org.wso2.apk.enforcer.discovery.subscription.API, org.wso2.apk.enforcer.discovery.subscription.API.Builder, org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> apiBuilder_;
+    /**
+     * <code>.wso2.discovery.subscription.API api = 6;</code>
+     * @return Whether the api field is set.
+     */
+    public boolean hasApi() {
+      return apiBuilder_ != null || api_ != null;
     }
+    /**
+     * <code>.wso2.discovery.subscription.API api = 6;</code>
+     * @return The api.
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.API getApi() {
+      if (apiBuilder_ == null) {
+        return api_ == null ? org.wso2.apk.enforcer.discovery.subscription.API.getDefaultInstance() : api_;
+      } else {
+        return apiBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.wso2.discovery.subscription.API api = 6;</code>
+     */
+    public Builder setApi(org.wso2.apk.enforcer.discovery.subscription.API value) {
+      if (apiBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        api_ = value;
+        onChanged();
+      } else {
+        apiBuilder_.setMessage(value);
+      }
 
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        org.wso2.apk.enforcer.discovery.subscription.API, org.wso2.apk.enforcer.discovery.subscription.API.Builder, org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> apisBuilder_;
-
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.API> getApisList() {
-      if (apisBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(apis_);
-      } else {
-        return apisBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public int getApisCount() {
-      if (apisBuilder_ == null) {
-        return apis_.size();
-      } else {
-        return apisBuilder_.getCount();
-      }
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.API getApis(int index) {
-      if (apisBuilder_ == null) {
-        return apis_.get(index);
-      } else {
-        return apisBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public Builder setApis(
-        int index, org.wso2.apk.enforcer.discovery.subscription.API value) {
-      if (apisBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureApisIsMutable();
-        apis_.set(index, value);
-        onChanged();
-      } else {
-        apisBuilder_.setMessage(index, value);
-      }
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     * <code>.wso2.discovery.subscription.API api = 6;</code>
      */
-    public Builder setApis(
-        int index, org.wso2.apk.enforcer.discovery.subscription.API.Builder builderForValue) {
-      if (apisBuilder_ == null) {
-        ensureApisIsMutable();
-        apis_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        apisBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public Builder addApis(org.wso2.apk.enforcer.discovery.subscription.API value) {
-      if (apisBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureApisIsMutable();
-        apis_.add(value);
-        onChanged();
-      } else {
-        apisBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public Builder addApis(
-        int index, org.wso2.apk.enforcer.discovery.subscription.API value) {
-      if (apisBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureApisIsMutable();
-        apis_.add(index, value);
-        onChanged();
-      } else {
-        apisBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public Builder addApis(
+    public Builder setApi(
         org.wso2.apk.enforcer.discovery.subscription.API.Builder builderForValue) {
-      if (apisBuilder_ == null) {
-        ensureApisIsMutable();
-        apis_.add(builderForValue.build());
+      if (apiBuilder_ == null) {
+        api_ = builderForValue.build();
         onChanged();
       } else {
-        apisBuilder_.addMessage(builderForValue.build());
+        apiBuilder_.setMessage(builderForValue.build());
       }
+
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     * <code>.wso2.discovery.subscription.API api = 6;</code>
      */
-    public Builder addApis(
-        int index, org.wso2.apk.enforcer.discovery.subscription.API.Builder builderForValue) {
-      if (apisBuilder_ == null) {
-        ensureApisIsMutable();
-        apis_.add(index, builderForValue.build());
+    public Builder mergeApi(org.wso2.apk.enforcer.discovery.subscription.API value) {
+      if (apiBuilder_ == null) {
+        if (api_ != null) {
+          api_ =
+            org.wso2.apk.enforcer.discovery.subscription.API.newBuilder(api_).mergeFrom(value).buildPartial();
+        } else {
+          api_ = value;
+        }
         onChanged();
       } else {
-        apisBuilder_.addMessage(index, builderForValue.build());
+        apiBuilder_.mergeFrom(value);
       }
+
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     * <code>.wso2.discovery.subscription.API api = 6;</code>
      */
-    public Builder addAllApis(
-        java.lang.Iterable<? extends org.wso2.apk.enforcer.discovery.subscription.API> values) {
-      if (apisBuilder_ == null) {
-        ensureApisIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, apis_);
+    public Builder clearApi() {
+      if (apiBuilder_ == null) {
+        api_ = null;
         onChanged();
       } else {
-        apisBuilder_.addAllMessages(values);
+        api_ = null;
+        apiBuilder_ = null;
       }
+
       return this;
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     * <code>.wso2.discovery.subscription.API api = 6;</code>
      */
-    public Builder clearApis() {
-      if (apisBuilder_ == null) {
-        apis_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
+    public org.wso2.apk.enforcer.discovery.subscription.API.Builder getApiBuilder() {
+      
+      onChanged();
+      return getApiFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.wso2.discovery.subscription.API api = 6;</code>
+     */
+    public org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApiOrBuilder() {
+      if (apiBuilder_ != null) {
+        return apiBuilder_.getMessageOrBuilder();
       } else {
-        apisBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public Builder removeApis(int index) {
-      if (apisBuilder_ == null) {
-        ensureApisIsMutable();
-        apis_.remove(index);
-        onChanged();
-      } else {
-        apisBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.API.Builder getApisBuilder(
-        int index) {
-      return getApisFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApisOrBuilder(
-        int index) {
-      if (apisBuilder_ == null) {
-        return apis_.get(index);  } else {
-        return apisBuilder_.getMessageOrBuilder(index);
+        return api_ == null ?
+            org.wso2.apk.enforcer.discovery.subscription.API.getDefaultInstance() : api_;
       }
     }
     /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
+     * <code>.wso2.discovery.subscription.API api = 6;</code>
      */
-    public java.util.List<? extends org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> 
-         getApisOrBuilderList() {
-      if (apisBuilder_ != null) {
-        return apisBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(apis_);
-      }
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.API.Builder addApisBuilder() {
-      return getApisFieldBuilder().addBuilder(
-          org.wso2.apk.enforcer.discovery.subscription.API.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.API.Builder addApisBuilder(
-        int index) {
-      return getApisFieldBuilder().addBuilder(
-          index, org.wso2.apk.enforcer.discovery.subscription.API.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .wso2.discovery.subscription.API apis = 6;</code>
-     */
-    public java.util.List<org.wso2.apk.enforcer.discovery.subscription.API.Builder> 
-         getApisBuilderList() {
-      return getApisFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilderV3<
+    private com.google.protobuf.SingleFieldBuilderV3<
         org.wso2.apk.enforcer.discovery.subscription.API, org.wso2.apk.enforcer.discovery.subscription.API.Builder, org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder> 
-        getApisFieldBuilder() {
-      if (apisBuilder_ == null) {
-        apisBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+        getApiFieldBuilder() {
+      if (apiBuilder_ == null) {
+        apiBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             org.wso2.apk.enforcer.discovery.subscription.API, org.wso2.apk.enforcer.discovery.subscription.API.Builder, org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder>(
-                apis_,
-                ((bitField0_ & 0x00000001) != 0),
+                getApi(),
                 getParentForChildren(),
                 isClean());
-        apis_ = null;
+        api_ = null;
       }
-      return apisBuilder_;
+      return apiBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
