@@ -7,6 +7,32 @@ rules:
 - apiGroups:
   - cp.wso2.com
   resources:
+  - applicationmappings
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cp.wso2.com
+  resources:
+  - applicationmappings/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - cp.wso2.com
+  resources:
+  - applicationmappings/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - cp.wso2.com
+  resources:
   - applications
   verbs:
   - create

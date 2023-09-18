@@ -92,11 +92,11 @@ func (applicationReconciler *ApplicationReconciler) Reconcile(ctx context.Contex
 			applicationKey.Namespace, applicationKey.Name)
 	}
 
-	sendUpdates(applicationList)
+	sendAppUpdates(applicationList)
 	return ctrl.Result{}, nil
 }
 
-func sendUpdates(applicationList *cpv1alpha1.ApplicationList) {
+func sendAppUpdates(applicationList *cpv1alpha1.ApplicationList) {
 	appList := marshalApplicationList(applicationList.Items)
 	xds.UpdateEnforcerApplications(appList)
 

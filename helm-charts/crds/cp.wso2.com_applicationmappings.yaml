@@ -4,20 +4,21 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.12.0
-  name: subscriptions.cp.wso2.com
+  name: applicationmappings.cp.wso2.com
 spec:
   group: cp.wso2.com
   names:
-    kind: Subscription
-    listKind: SubscriptionList
-    plural: subscriptions
-    singular: subscription
+    kind: ApplicationMapping
+    listKind: ApplicationMappingList
+    plural: applicationmappings
+    singular: applicationmapping
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - name: v1alpha2
     schema:
       openAPIV3Schema:
-        description: Subscription is the Schema for the subscriptions API
+        description: ApplicationMapping is the Schema for the applicationmappings
+          API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -32,32 +33,18 @@ spec:
           metadata:
             type: object
           spec:
-            description: SubscriptionSpec defines the desired state of Subscription
+            description: ApplicationMappingSpec defines the desired state of ApplicationMapping
             properties:
-              api:
-                description: API defines the API associated with the subscription
-                properties:
-                  name:
-                    type: string
-                  versions:
-                    items:
-                      type: string
-                    type: array
-                required:
-                - name
-                - versions
-                type: object
-              organization:
+              applicationRef:
                 type: string
-              subscriptionStatus:
+              subscriptionRef:
                 type: string
             required:
-            - api
-            - organization
-            - subscriptionStatus
+            - applicationRef
+            - subscriptionRef
             type: object
           status:
-            description: SubscriptionStatus defines the observed state of Subscription
+            description: ApplicationMappingStatus defines the observed state of ApplicationMapping
             type: object
         type: object
     served: true

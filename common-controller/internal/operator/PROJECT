@@ -36,4 +36,13 @@ resources:
   kind: Subscription
   path: github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha1
   version: v1alpha1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: wso2.com
+  group: cp
+  kind: ApplicationMapping
+  path: github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha2
+  version: v1alpha2
 version: "3"

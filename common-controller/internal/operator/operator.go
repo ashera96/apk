@@ -35,6 +35,7 @@ import (
 	gwapiv1b1 "sigs.k8s.io/gateway-api/apis/v1beta1"
 
 	cpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha1"
+	cpv1alpha2 "github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha2"
 	dpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/dp/v1alpha1"
 	cpcontrollers "github.com/wso2/apk/common-controller/internal/operator/controllers/cp"
 	dpcontrollers "github.com/wso2/apk/common-controller/internal/operator/controllers/dp"
@@ -51,6 +52,7 @@ func init() {
 	utilruntime.Must(gwapiv1b1.AddToScheme(scheme))
 	utilruntime.Must(dpv1alpha1.AddToScheme(scheme))
 	utilruntime.Must(cpv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(cpv1alpha2.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
@@ -131,6 +133,10 @@ func InitOperator() {
 	if err := cpcontrollers.NewSubscriptionController(mgr); err != nil {
 		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error3116, logging.MAJOR,
 			"Error creating Subscription controller, error: %v", err))
+	}
+	if err := cpcontrollers.NewApplicationMappingController(mgr); err != nil {
+		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error3117, logging.MAJOR,
+			"Error creating Application Mapping controller, error: %v", err))
 	}
 	//+kubebuilder:scaffold:builder
 

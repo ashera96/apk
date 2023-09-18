@@ -55,6 +55,12 @@ type PolicySpec struct {
 
 	// CORS policy to be applied to the API.
 	CORSPolicy *CORSPolicy `json:"cORSPolicy,omitempty"`
+
+	// // SubscriptionValidation denotes whether subscription validation is enabled for the API
+	// //
+	// // +kubebuilder:default:=false
+	// // +optional
+	// SubscriptionValidation bool `json:"subscriptionValidation,omitempty"`
 }
 
 // BackendJWTToken holds backend JWT token information
