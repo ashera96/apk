@@ -34,28 +34,25 @@ spec:
           spec:
             description: SubscriptionSpec defines the desired state of Subscription
             properties:
-              apis:
-                items:
-                  description: API defines the API associated with the subscription
-                  properties:
-                    name:
+              api:
+                description: API defines the API associated with the subscription
+                properties:
+                  name:
+                    type: string
+                  versions:
+                    items:
                       type: string
-                    organization:
-                      type: string
-                    version:
-                      type: string
-                  required:
-                  - name
-                  - organization
-                  - version
-                  type: object
-                type: array
+                    type: array
+                required:
+                - name
+                - versions
+                type: object
               organization:
                 type: string
               subscriptionStatus:
                 type: string
             required:
-            - apis
+            - api
             - organization
             - subscriptionStatus
             type: object

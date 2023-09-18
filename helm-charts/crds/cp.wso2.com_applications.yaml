@@ -38,95 +38,39 @@ spec:
                 additionalProperties:
                   type: string
                 type: object
-              authenticationOptions:
-                items:
-                  properties:
-                    IPRange:
-                      description: IPRange denotes the IPRange authentication option
-                      properties:
-                        IPRangeIdentifier:
-                          type: string
-                        IPs:
-                          type: string
-                        keyType:
-                          type: string
-                      required:
-                      - IPRangeIdentifier
-                      - IPs
-                      - keyType
-                      type: object
-                    apiKey:
-                      description: APIKey denotes the APIKey authentication option
-                      properties:
-                        key:
-                          type: string
-                        keyType:
-                          type: string
-                      required:
-                      - key
-                      - keyType
-                      type: object
-                    basicAuth:
-                      description: BasicAuth denotes the Basic authentication option
-                      properties:
-                        basicAuthIdentifier:
-                          type: string
-                        keyType:
-                          type: string
-                      required:
-                      - basicAuthIdentifier
-                      - keyType
-                      type: object
-                    mTLS:
-                      description: mTLS denotes the mTLS authentication option
-                      properties:
-                        cert:
-                          type: string
-                        issuer:
-                          type: string
-                        keyType:
-                          type: string
-                      required:
-                      - cert
-                      - issuer
-                      - keyType
-                      type: object
-                    oauth2:
-                      description: OAuth2 denotes the OAuth2 authentication option
-                      properties:
-                        consumerKey:
-                          type: string
-                        keyManager:
-                          type: string
-                        keyType:
-                          type: string
-                      required:
-                      - consumerKey
-                      - keyManager
-                      - keyType
-                      type: object
-                    type:
-                      description: Type denotes the application authentication type
-                        Possible values are OAuth2, mTLS, BasicAuth, APIKey, IPRange
-                      enum:
-                      - oauth2
-                      - mTLS
-                      - basicAuth
-                      - apiKey
-                      - IPRange
-                      type: string
-                  required:
-                  - type
-                  type: object
-                type: array
               name:
                 type: string
               owner:
                 type: string
+              securitySchemes:
+                description: SecuritySchemes defines the supported security schemes
+                properties:
+                  oauth2:
+                    description: OAuth2 denotes the OAuth2 security scheme
+                    properties:
+                      environments:
+                        items:
+                          description: Environment defines the environment specific
+                            details related to the security scheme
+                          properties:
+                            appId:
+                              type: string
+                            envId:
+                              type: string
+                            keyType:
+                              type: string
+                          required:
+                          - appId
+                          - envId
+                          - keyType
+                          type: object
+                        type: array
+                    type: object
+                type: object
             required:
-            - authenticationOptions
             - name
             - owner
+            - securitySchemes
             type: object
           status:
             description: ApplicationStatus defines the observed state of Application
