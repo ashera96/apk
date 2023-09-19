@@ -36,7 +36,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/source"
 
 	"github.com/wso2/apk/adapter/pkg/discovery/api/wso2/discovery/subscription"
-	cpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha1"
+	cpv1alpha2 "github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha2"
 	"github.com/wso2/apk/common-controller/internal/operator/constant"
 	"github.com/wso2/apk/common-controller/internal/utils"
 )
@@ -58,7 +58,7 @@ func NewApplicationController(mgr manager.Manager) error {
 		return err
 	}
 
-	if err := c.Watch(source.Kind(mgr.GetCache(), &cpv1alpha1.Application{}), &handler.EnqueueRequestForObject{},
+	if err := c.Watch(source.Kind(mgr.GetCache(), &cpv1alpha2.Application{}), &handler.EnqueueRequestForObject{},
 		predicate.NewPredicateFuncs(utils.FilterByNamespaces([]string{utils.GetOperatorPodNamespace()}))); err != nil {
 		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error2607, logging.BLOCKER, "Error watching Application resources: %v", err.Error()))
 		return err
@@ -84,7 +84,7 @@ func NewApplicationController(mgr manager.Manager) error {
 func (applicationReconciler *ApplicationReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 	applicationKey := req.NamespacedName
-	var applicationList = new(cpv1alpha1.ApplicationList)
+	var applicationList = new(cpv1alpha2.ApplicationList)
 
 	loggers.LoggerAPKOperator.Debugf("Reconciling application: %v", applicationKey.String())
 	if err := applicationReconciler.client.List(ctx, applicationList); err != nil {
@@ -96,7 +96,7 @@ func (applicationReconciler *ApplicationReconciler) Reconcile(ctx context.Contex
 	return ctrl.Result{}, nil
 }
 
-func sendAppUpdates(applicationList *cpv1alpha1.ApplicationList) {
+func sendAppUpdates(applicationList *cpv1alpha2.ApplicationList) {
 	appList := marshalApplicationList(applicationList.Items)
 	xds.UpdateEnforcerApplications(appList)
 
@@ -104,7 +104,7 @@ func sendAppUpdates(applicationList *cpv1alpha1.ApplicationList) {
 	xds.UpdateEnforcerApplicationKeyMappings(appKeyMappingList)
 }
 
-func marshalApplicationList(applicationList []cpv1alpha1.Application) *subscription.ApplicationList {
+func marshalApplicationList(applicationList []cpv1alpha2.Application) *subscription.ApplicationList {
 	applications := []*subscription.Application{}
 	for _, appInternal := range applicationList {
 		app := &subscription.Application{
@@ -120,15 +120,15 @@ func marshalApplicationList(applicationList []cpv1alpha1.Application) *subscript
 	}
 }
 
-func marshalApplicationKeyMapping(applicationList []cpv1alpha1.Application) *subscription.ApplicationKeyMappingList {
+func marshalApplicationKeyMapping(applicationList []cpv1alpha2.Application) *subscription.ApplicationKeyMappingList {
 	applicationKeyMappings := []*subscription.ApplicationKeyMapping{}
 	for _, appInternal := range applicationList {
 		var oauth2SecurityScheme = appInternal.Spec.SecuritySchemes.OAuth2
 		if oauth2SecurityScheme != nil {
 			for _, env := range oauth2SecurityScheme.Environments {
 				appIdentifier := &subscription.ApplicationKeyMapping{
-					EnvId:                 env.EnvId,
-					ApplicationIdentifier: env.AppId,
+					EnvId:                 env.EnvID,
+					ApplicationIdentifier: env.AppID,
 					KeyType:               env.KeyType,
 					ApplicationUUID:       appInternal.Name,
 				}

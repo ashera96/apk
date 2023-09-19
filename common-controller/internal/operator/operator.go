@@ -34,7 +34,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	gwapiv1b1 "sigs.k8s.io/gateway-api/apis/v1beta1"
 
-	cpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha1"
 	cpv1alpha2 "github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha2"
 	dpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/dp/v1alpha1"
 	cpcontrollers "github.com/wso2/apk/common-controller/internal/operator/controllers/cp"
@@ -51,7 +50,6 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 	utilruntime.Must(gwapiv1b1.AddToScheme(scheme))
 	utilruntime.Must(dpv1alpha1.AddToScheme(scheme))
-	utilruntime.Must(cpv1alpha1.AddToScheme(scheme))
 	utilruntime.Must(cpv1alpha2.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }

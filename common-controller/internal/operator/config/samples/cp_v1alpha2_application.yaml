@@ -1,12 +1,12 @@
-apiVersion: cp.wso2.com/v1alpha1
-kind: Subscription
+apiVersion: cp.wso2.com/v1alpha2
+kind: Application
 metadata:
   labels:
-    app.kubernetes.io/name: subscription
-    app.kubernetes.io/instance: subscription-sample
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: application-sample
     app.kubernetes.io/part-of: operator
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: operator
-  name: subscription-sample
+  name: application-sample
 spec:
   # TODO(user): Add fields here

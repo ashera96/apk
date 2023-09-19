@@ -25,8 +25,8 @@ resources:
   domain: wso2.com
   group: cp
   kind: Application
-  path: github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha1
-  version: v1alpha1
+  path: github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha2
+  version: v1alpha2
 - api:
     crdVersion: v1
     namespaced: true
@@ -34,8 +34,8 @@ resources:
   domain: wso2.com
   group: cp
   kind: Subscription
-  path: github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha1
-  version: v1alpha1
+  path: github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha2
+  version: v1alpha2
 - api:
     crdVersion: v1
     namespaced: true

@@ -38,7 +38,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"sigs.k8s.io/controller-runtime/pkg/source"
 
-	cpv1alpha1 "github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha1"
+	cpv1alpha2 "github.com/wso2/apk/common-controller/internal/operator/apis/cp/v1alpha2"
 )
 
 // SubscriptionReconciler reconciles a Subscription object
@@ -58,7 +58,7 @@ func NewSubscriptionController(mgr manager.Manager) error {
 		return err
 	}
 
-	if err := c.Watch(source.Kind(mgr.GetCache(), &cpv1alpha1.Subscription{}), &handler.EnqueueRequestForObject{},
+	if err := c.Watch(source.Kind(mgr.GetCache(), &cpv1alpha2.Subscription{}), &handler.EnqueueRequestForObject{},
 		predicate.NewPredicateFuncs(utils.FilterByNamespaces([]string{utils.GetOperatorPodNamespace()}))); err != nil {
 		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error2609, logging.BLOCKER, "Error watching Subscription resources: %v", err.Error()))
 		return err
@@ -87,7 +87,7 @@ func (subscriptionReconciler *SubscriptionReconciler) Reconcile(ctx context.Cont
 	loggers.LoggerAPKOperator.Debugf("Reconciling subscription: %v", req.NamespacedName.String())
 
 	subscriptionKey := req.NamespacedName
-	var subscriptionList = new(cpv1alpha1.SubscriptionList)
+	var subscriptionList = new(cpv1alpha2.SubscriptionList)
 	if err := subscriptionReconciler.client.List(ctx, subscriptionList); err != nil {
 		return reconcile.Result{}, fmt.Errorf("failed to get subscriptions %s/%s",
 			subscriptionKey.Namespace, subscriptionKey.Name)
@@ -96,12 +96,12 @@ func (subscriptionReconciler *SubscriptionReconciler) Reconcile(ctx context.Cont
 	return ctrl.Result{}, nil
 }
 
-func sendSubUpdates(subscriptionsList *cpv1alpha1.SubscriptionList) {
+func sendSubUpdates(subscriptionsList *cpv1alpha2.SubscriptionList) {
 	subList := marshalSubscriptionList(subscriptionsList.Items)
 	xds.UpdateEnforcerSubscriptions(subList)
 }
 
-func marshalSubscriptionList(subscriptionList []cpv1alpha1.Subscription) *subscription.SubscriptionList {
+func marshalSubscriptionList(subscriptionList []cpv1alpha2.Subscription) *subscription.SubscriptionList {
 	subscriptions := []*subscription.Subscription{}
 	for _, subInternal := range subscriptionList {
 		api := &subscription.API{}

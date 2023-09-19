@@ -15,7 +15,7 @@
  *
  */
 
-package v1alpha1
+package v1alpha2
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -45,8 +45,8 @@ type SecurityScheme struct {
 
 // Environment defines the environment specific details related to the security scheme
 type Environment struct {
-	EnvId   string `json:"envId"`
-	AppId   string `json:"appId"`
+	EnvID   string `json:"envId"`
+	AppID   string `json:"appId"`
 	KeyType string `json:"keyType"`
 }
 
