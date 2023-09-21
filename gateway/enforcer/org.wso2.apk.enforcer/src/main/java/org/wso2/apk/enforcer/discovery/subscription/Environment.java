@@ -16,8 +16,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private Environment() {
-    envId_ = "";
-    appId_ = "";
+    envID_ = "";
+    applicationIdentifier_ = "";
     keyType_ = "";
   }
 
@@ -54,13 +54,13 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            envId_ = s;
+            envID_ = s;
             break;
           }
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            appId_ = s;
+            applicationIdentifier_ = s;
             break;
           }
           case 26: {
@@ -102,75 +102,75 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int ENVID_FIELD_NUMBER = 1;
-  private volatile java.lang.Object envId_;
+  private volatile java.lang.Object envID_;
   /**
-   * <code>string envId = 1;</code>
-   * @return The envId.
+   * <code>string envID = 1;</code>
+   * @return The envID.
    */
   @java.lang.Override
-  public java.lang.String getEnvId() {
-    java.lang.Object ref = envId_;
+  public java.lang.String getEnvID() {
+    java.lang.Object ref = envID_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      envId_ = s;
+      envID_ = s;
       return s;
     }
   }
   /**
-   * <code>string envId = 1;</code>
-   * @return The bytes for envId.
+   * <code>string envID = 1;</code>
+   * @return The bytes for envID.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getEnvIdBytes() {
-    java.lang.Object ref = envId_;
+      getEnvIDBytes() {
+    java.lang.Object ref = envID_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      envId_ = b;
+      envID_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int APPID_FIELD_NUMBER = 2;
-  private volatile java.lang.Object appId_;
+  public static final int APPLICATIONIDENTIFIER_FIELD_NUMBER = 2;
+  private volatile java.lang.Object applicationIdentifier_;
   /**
-   * <code>string appId = 2;</code>
-   * @return The appId.
+   * <code>string applicationIdentifier = 2;</code>
+   * @return The applicationIdentifier.
    */
   @java.lang.Override
-  public java.lang.String getAppId() {
-    java.lang.Object ref = appId_;
+  public java.lang.String getApplicationIdentifier() {
+    java.lang.Object ref = applicationIdentifier_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      appId_ = s;
+      applicationIdentifier_ = s;
       return s;
     }
   }
   /**
-   * <code>string appId = 2;</code>
-   * @return The bytes for appId.
+   * <code>string applicationIdentifier = 2;</code>
+   * @return The bytes for applicationIdentifier.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getAppIdBytes() {
-    java.lang.Object ref = appId_;
+      getApplicationIdentifierBytes() {
+    java.lang.Object ref = applicationIdentifier_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      appId_ = b;
+      applicationIdentifier_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -229,11 +229,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getEnvIdBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, envId_);
+    if (!getEnvIDBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, envID_);
     }
-    if (!getAppIdBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, appId_);
+    if (!getApplicationIdentifierBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, applicationIdentifier_);
     }
     if (!getKeyTypeBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, keyType_);
@@ -247,11 +247,11 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getEnvIdBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, envId_);
+    if (!getEnvIDBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, envID_);
     }
-    if (!getAppIdBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, appId_);
+    if (!getApplicationIdentifierBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, applicationIdentifier_);
     }
     if (!getKeyTypeBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, keyType_);
@@ -271,10 +271,10 @@ private static final long serialVersionUID = 0L;
     }
     org.wso2.apk.enforcer.discovery.subscription.Environment other = (org.wso2.apk.enforcer.discovery.subscription.Environment) obj;
 
-    if (!getEnvId()
-        .equals(other.getEnvId())) return false;
-    if (!getAppId()
-        .equals(other.getAppId())) return false;
+    if (!getEnvID()
+        .equals(other.getEnvID())) return false;
+    if (!getApplicationIdentifier()
+        .equals(other.getApplicationIdentifier())) return false;
     if (!getKeyType()
         .equals(other.getKeyType())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
@@ -289,9 +289,9 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ENVID_FIELD_NUMBER;
-    hash = (53 * hash) + getEnvId().hashCode();
-    hash = (37 * hash) + APPID_FIELD_NUMBER;
-    hash = (53 * hash) + getAppId().hashCode();
+    hash = (53 * hash) + getEnvID().hashCode();
+    hash = (37 * hash) + APPLICATIONIDENTIFIER_FIELD_NUMBER;
+    hash = (53 * hash) + getApplicationIdentifier().hashCode();
     hash = (37 * hash) + KEYTYPE_FIELD_NUMBER;
     hash = (53 * hash) + getKeyType().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -427,9 +427,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      envId_ = "";
+      envID_ = "";
 
-      appId_ = "";
+      applicationIdentifier_ = "";
 
       keyType_ = "";
 
@@ -459,8 +459,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public org.wso2.apk.enforcer.discovery.subscription.Environment buildPartial() {
       org.wso2.apk.enforcer.discovery.subscription.Environment result = new org.wso2.apk.enforcer.discovery.subscription.Environment(this);
-      result.envId_ = envId_;
-      result.appId_ = appId_;
+      result.envID_ = envID_;
+      result.applicationIdentifier_ = applicationIdentifier_;
       result.keyType_ = keyType_;
       onBuilt();
       return result;
@@ -510,12 +510,12 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(org.wso2.apk.enforcer.discovery.subscription.Environment other) {
       if (other == org.wso2.apk.enforcer.discovery.subscription.Environment.getDefaultInstance()) return this;
-      if (!other.getEnvId().isEmpty()) {
-        envId_ = other.envId_;
+      if (!other.getEnvID().isEmpty()) {
+        envID_ = other.envID_;
         onChanged();
       }
-      if (!other.getAppId().isEmpty()) {
-        appId_ = other.appId_;
+      if (!other.getApplicationIdentifier().isEmpty()) {
+        applicationIdentifier_ = other.applicationIdentifier_;
         onChanged();
       }
       if (!other.getKeyType().isEmpty()) {
@@ -551,154 +551,154 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object envId_ = "";
+    private java.lang.Object envID_ = "";
     /**
-     * <code>string envId = 1;</code>
-     * @return The envId.
+     * <code>string envID = 1;</code>
+     * @return The envID.
      */
-    public java.lang.String getEnvId() {
-      java.lang.Object ref = envId_;
+    public java.lang.String getEnvID() {
+      java.lang.Object ref = envID_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        envId_ = s;
+        envID_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string envId = 1;</code>
-     * @return The bytes for envId.
+     * <code>string envID = 1;</code>
+     * @return The bytes for envID.
      */
     public com.google.protobuf.ByteString
-        getEnvIdBytes() {
-      java.lang.Object ref = envId_;
+        getEnvIDBytes() {
+      java.lang.Object ref = envID_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        envId_ = b;
+        envID_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string envId = 1;</code>
-     * @param value The envId to set.
+     * <code>string envID = 1;</code>
+     * @param value The envID to set.
      * @return This builder for chaining.
      */
-    public Builder setEnvId(
+    public Builder setEnvID(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      envId_ = value;
+      envID_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string envId = 1;</code>
+     * <code>string envID = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearEnvId() {
+    public Builder clearEnvID() {
       
-      envId_ = getDefaultInstance().getEnvId();
+      envID_ = getDefaultInstance().getEnvID();
       onChanged();
       return this;
     }
     /**
-     * <code>string envId = 1;</code>
-     * @param value The bytes for envId to set.
+     * <code>string envID = 1;</code>
+     * @param value The bytes for envID to set.
      * @return This builder for chaining.
      */
-    public Builder setEnvIdBytes(
+    public Builder setEnvIDBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      envId_ = value;
+      envID_ = value;
       onChanged();
       return this;
     }
 
-    private java.lang.Object appId_ = "";
+    private java.lang.Object applicationIdentifier_ = "";
     /**
-     * <code>string appId = 2;</code>
-     * @return The appId.
+     * <code>string applicationIdentifier = 2;</code>
+     * @return The applicationIdentifier.
      */
-    public java.lang.String getAppId() {
-      java.lang.Object ref = appId_;
+    public java.lang.String getApplicationIdentifier() {
+      java.lang.Object ref = applicationIdentifier_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        appId_ = s;
+        applicationIdentifier_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string appId = 2;</code>
-     * @return The bytes for appId.
+     * <code>string applicationIdentifier = 2;</code>
+     * @return The bytes for applicationIdentifier.
      */
     public com.google.protobuf.ByteString
-        getAppIdBytes() {
-      java.lang.Object ref = appId_;
+        getApplicationIdentifierBytes() {
+      java.lang.Object ref = applicationIdentifier_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        appId_ = b;
+        applicationIdentifier_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string appId = 2;</code>
-     * @param value The appId to set.
+     * <code>string applicationIdentifier = 2;</code>
+     * @param value The applicationIdentifier to set.
      * @return This builder for chaining.
      */
-    public Builder setAppId(
+    public Builder setApplicationIdentifier(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      appId_ = value;
+      applicationIdentifier_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string appId = 2;</code>
+     * <code>string applicationIdentifier = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearAppId() {
+    public Builder clearApplicationIdentifier() {
       
-      appId_ = getDefaultInstance().getAppId();
+      applicationIdentifier_ = getDefaultInstance().getApplicationIdentifier();
       onChanged();
       return this;
     }
     /**
-     * <code>string appId = 2;</code>
-     * @param value The bytes for appId to set.
+     * <code>string applicationIdentifier = 2;</code>
+     * @param value The bytes for applicationIdentifier to set.
      * @return This builder for chaining.
      */
-    public Builder setAppIdBytes(
+    public Builder setApplicationIdentifierBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      appId_ = value;
+      applicationIdentifier_ = value;
       onChanged();
       return this;
     }

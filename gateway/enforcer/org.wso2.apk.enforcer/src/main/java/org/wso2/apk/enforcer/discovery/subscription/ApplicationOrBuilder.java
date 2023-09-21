@@ -20,28 +20,28 @@ public interface ApplicationOrBuilder extends
       getEventIdBytes();
 
   /**
-   * <code>string name = 2;</code>
-   * @return The name.
-   */
-  java.lang.String getName();
-  /**
-   * <code>string name = 2;</code>
-   * @return The bytes for name.
-   */
-  com.google.protobuf.ByteString
-      getNameBytes();
-
-  /**
-   * <code>string uuid = 3;</code>
+   * <code>string uuid = 2;</code>
    * @return The uuid.
    */
   java.lang.String getUuid();
   /**
-   * <code>string uuid = 3;</code>
+   * <code>string uuid = 2;</code>
    * @return The bytes for uuid.
    */
   com.google.protobuf.ByteString
       getUuidBytes();
+
+  /**
+   * <code>string name = 3;</code>
+   * @return The name.
+   */
+  java.lang.String getName();
+  /**
+   * <code>string name = 3;</code>
+   * @return The bytes for name.
+   */
+  com.google.protobuf.ByteString
+      getNameBytes();
 
   /**
    * <code>string owner = 4;</code>
@@ -88,19 +88,4 @@ public interface ApplicationOrBuilder extends
 
   java.lang.String getAttributesOrThrow(
       java.lang.String key);
-
-  /**
-   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-   * @return Whether the securitySchemes field is set.
-   */
-  boolean hasSecuritySchemes();
-  /**
-   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-   * @return The securitySchemes.
-   */
-  org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes getSecuritySchemes();
-  /**
-   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-   */
-  org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder getSecuritySchemesOrBuilder();
 }

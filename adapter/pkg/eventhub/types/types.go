@@ -21,8 +21,6 @@ package types
 type Subscription struct {
 	SubscriptionID     int32  `json:"subscriptionId"`
 	SubscriptionUUID   string `json:"subscriptionUUID"`
-	APIID              int32  `json:"apiId"`
-	APIUUID            string `json:"apiUUID"`
 	SubscriptionStatus string `json:"subscriptionStatus"`
 	Organization       string `json:"organization"`
 	Api                APIRef `json:"api"`
@@ -45,9 +43,6 @@ type Application struct {
 	ID         int32             `json:"id" json:"applicationId"`
 	Name       string            `json:"name" json:"applicationName"`
 	Owner      string            `json:"owner"`
-	SubName    string            `json:"subName" json:"subscriber"`
-	Policy     string            `json:"policy" json:"applicationPolicy"`
-	TokenType  string            `json:"tokenType"`
 	Attributes map[string]string `json:"attributes"`
 }
 
@@ -59,6 +54,7 @@ type ApplicationList struct {
 // ApplicationKeyMapping for struct applicationKeyMapping
 type ApplicationKeyMapping struct {
 	ApplicationUUID       string `json:"applicationUUID"`
+	SecurityScheme		  string `json:"securityScheme"`
 	ApplicationIdentifier string `json:"appId"`
 	EnvId                 string `json:"envId"`
 	KeyType               string `json:"keyType"`

@@ -8,28 +8,28 @@ public interface EnvironmentOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string envId = 1;</code>
-   * @return The envId.
+   * <code>string envID = 1;</code>
+   * @return The envID.
    */
-  java.lang.String getEnvId();
+  java.lang.String getEnvID();
   /**
-   * <code>string envId = 1;</code>
-   * @return The bytes for envId.
+   * <code>string envID = 1;</code>
+   * @return The bytes for envID.
    */
   com.google.protobuf.ByteString
-      getEnvIdBytes();
+      getEnvIDBytes();
 
   /**
-   * <code>string appId = 2;</code>
-   * @return The appId.
+   * <code>string applicationIdentifier = 2;</code>
+   * @return The applicationIdentifier.
    */
-  java.lang.String getAppId();
+  java.lang.String getApplicationIdentifier();
   /**
-   * <code>string appId = 2;</code>
-   * @return The bytes for appId.
+   * <code>string applicationIdentifier = 2;</code>
+   * @return The bytes for applicationIdentifier.
    */
   com.google.protobuf.ByteString
-      getAppIdBytes();
+      getApplicationIdentifierBytes();
 
   /**
    * <code>string keyType = 3;</code>

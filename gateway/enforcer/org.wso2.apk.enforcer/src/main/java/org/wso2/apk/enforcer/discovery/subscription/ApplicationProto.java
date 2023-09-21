@@ -49,23 +49,22 @@ public final class ApplicationProto {
   static {
     java.lang.String[] descriptorData = {
       "\n-wso2/discovery/subscription/applicatio" +
-      "n.proto\022\033wso2.discovery.subscription\"\221\002\n" +
-      "\013Application\022\017\n\007eventId\030\001 \001(\t\022\014\n\004name\030\002 " +
-      "\001(\t\022\014\n\004uuid\030\003 \001(\t\022\r\n\005owner\030\004 \001(\t\022L\n\nattr" +
+      "n.proto\022\033wso2.discovery.subscription\"\312\001\n" +
+      "\013Application\022\017\n\007eventId\030\001 \001(\t\022\014\n\004uuid\030\002 " +
+      "\001(\t\022\014\n\004name\030\003 \001(\t\022\r\n\005owner\030\004 \001(\t\022L\n\nattr" +
       "ibutes\030\005 \003(\01328.wso2.discovery.subscripti" +
-      "on.Application.AttributesEntry\022E\n\017securi" +
-      "tySchemes\030\006 \001(\0132,.wso2.discovery.subscri" +
-      "ption.SecuritySchemes\0321\n\017AttributesEntry" +
-      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"F\n\017Secu" +
-      "ritySchemes\0223\n\006oAuth2\030\001 \001(\0132#.wso2.disco" +
-      "very.subscription.OAuth2\"H\n\006OAuth2\022>\n\014en" +
-      "vironments\030\001 \003(\0132(.wso2.discovery.subscr" +
-      "iption.Environment\"<\n\013Environment\022\r\n\005env" +
-      "Id\030\001 \001(\t\022\r\n\005appId\030\002 \001(\t\022\017\n\007keyType\030\003 \001(\t" +
-      "B\223\001\n,org.wso2.apk.enforcer.discovery.sub" +
-      "scriptionB\020ApplicationProtoP\001ZOgithub.co" +
-      "m/envoyproxy/go-control-plane/wso2/disco" +
-      "very/subscription;subscriptionb\006proto3"
+      "on.Application.AttributesEntry\0321\n\017Attrib" +
+      "utesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028" +
+      "\001\"F\n\017SecuritySchemes\0223\n\006oAuth2\030\001 \001(\0132#.w" +
+      "so2.discovery.subscription.OAuth2\"H\n\006OAu" +
+      "th2\022>\n\014environments\030\001 \003(\0132(.wso2.discove" +
+      "ry.subscription.Environment\"L\n\013Environme" +
+      "nt\022\r\n\005envID\030\001 \001(\t\022\035\n\025applicationIdentifi" +
+      "er\030\002 \001(\t\022\017\n\007keyType\030\003 \001(\tB\223\001\n,org.wso2.a" +
+      "pk.enforcer.discovery.subscriptionB\020Appl" +
+      "icationProtoP\001ZOgithub.com/envoyproxy/go" +
+      "-control-plane/wso2/discovery/subscripti" +
+      "on;subscriptionb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -76,7 +75,7 @@ public final class ApplicationProto {
     internal_static_wso2_discovery_subscription_Application_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_wso2_discovery_subscription_Application_descriptor,
-        new java.lang.String[] { "EventId", "Name", "Uuid", "Owner", "Attributes", "SecuritySchemes", });
+        new java.lang.String[] { "EventId", "Uuid", "Name", "Owner", "Attributes", });
     internal_static_wso2_discovery_subscription_Application_AttributesEntry_descriptor =
       internal_static_wso2_discovery_subscription_Application_descriptor.getNestedTypes().get(0);
     internal_static_wso2_discovery_subscription_Application_AttributesEntry_fieldAccessorTable = new
@@ -100,7 +99,7 @@ public final class ApplicationProto {
     internal_static_wso2_discovery_subscription_Environment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_wso2_discovery_subscription_Environment_descriptor,
-        new java.lang.String[] { "EnvId", "AppId", "KeyType", });
+        new java.lang.String[] { "EnvID", "ApplicationIdentifier", "KeyType", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

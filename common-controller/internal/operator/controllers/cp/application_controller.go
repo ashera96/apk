@@ -127,10 +127,11 @@ func marshalApplicationKeyMapping(applicationList []cpv1alpha2.Application) *sub
 		if oauth2SecurityScheme != nil {
 			for _, env := range oauth2SecurityScheme.Environments {
 				appIdentifier := &subscription.ApplicationKeyMapping{
-					EnvId:                 env.EnvID,
+					ApplicationUUID:       appInternal.Name,
+					SecurityScheme:        "OAuth2",
 					ApplicationIdentifier: env.AppID,
 					KeyType:               env.KeyType,
-					ApplicationUUID:       appInternal.Name,
+					EnvID:                 env.EnvID,
 				}
 				applicationKeyMappings = append(applicationKeyMappings, appIdentifier)
 			}

@@ -44,41 +44,41 @@ public interface SubscriptionOrBuilder extends
       getUuidBytes();
 
   /**
-   * <code>string timeStamp = 4;</code>
-   * @return The timeStamp.
-   */
-  java.lang.String getTimeStamp();
-  /**
-   * <code>string timeStamp = 4;</code>
-   * @return The bytes for timeStamp.
-   */
-  com.google.protobuf.ByteString
-      getTimeStampBytes();
-
-  /**
-   * <code>string organization = 5;</code>
+   * <code>string organization = 4;</code>
    * @return The organization.
    */
   java.lang.String getOrganization();
   /**
-   * <code>string organization = 5;</code>
+   * <code>string organization = 4;</code>
    * @return The bytes for organization.
    */
   com.google.protobuf.ByteString
       getOrganizationBytes();
 
   /**
-   * <code>.wso2.discovery.subscription.API api = 6;</code>
+   * <code>.wso2.discovery.subscription.API api = 5;</code>
    * @return Whether the api field is set.
    */
   boolean hasApi();
   /**
-   * <code>.wso2.discovery.subscription.API api = 6;</code>
+   * <code>.wso2.discovery.subscription.API api = 5;</code>
    * @return The api.
    */
   org.wso2.apk.enforcer.discovery.subscription.API getApi();
   /**
-   * <code>.wso2.discovery.subscription.API api = 6;</code>
+   * <code>.wso2.discovery.subscription.API api = 5;</code>
    */
   org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApiOrBuilder();
+
+  /**
+   * <code>string timeStamp = 6;</code>
+   * @return The timeStamp.
+   */
+  java.lang.String getTimeStamp();
+  /**
+   * <code>string timeStamp = 6;</code>
+   * @return The bytes for timeStamp.
+   */
+  com.google.protobuf.ByteString
+      getTimeStampBytes();
 }

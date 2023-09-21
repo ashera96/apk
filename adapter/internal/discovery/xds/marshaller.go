@@ -344,23 +344,23 @@ func MarshalMultipleSubscriptions(subscriptionsList *types.SubscriptionList) *su
 	return marshalSubscriptionMapToList(SubscriptionMap)
 }
 
-// MarshalSubscriptionEventAndReturnList handles the Subscription Event corresponding to the event received
-// from message broker. And then it returns the SubscriptionList.
-func MarshalSubscriptionEventAndReturnList(sub *types.Subscription, eventType EventType) *subscription.SubscriptionList {
-	if eventType == DeleteEvent {
-		delete(SubscriptionMap, sub.SubscriptionID)
-		logger.LoggerXds.Infof("Subscription for %s:%s is deleted.", sub.APIUUID, sub.ApplicationUUID)
-	} else {
-		subscriptionSub := marshalSubscription(sub)
-		SubscriptionMap[sub.SubscriptionID] = subscriptionSub
-		if eventType == UpdateEvent {
-			logger.LoggerXds.Infof("Subscription for %s:%s is updated.", sub.APIUUID, sub.ApplicationUUID)
-		} else {
-			logger.LoggerXds.Infof("Subscription for %s:%s is added.", sub.APIUUID, sub.ApplicationUUID)
-		}
-	}
-	return marshalSubscriptionMapToList(SubscriptionMap)
-}
+// // MarshalSubscriptionEventAndReturnList handles the Subscription Event corresponding to the event received
+// // from message broker. And then it returns the SubscriptionList.
+// func MarshalSubscriptionEventAndReturnList(sub *types.Subscription, eventType EventType) *subscription.SubscriptionList {
+// 	if eventType == DeleteEvent {
+// 		delete(SubscriptionMap, sub.SubscriptionID)
+// 		logger.LoggerXds.Infof("Subscription for %s:%s is deleted.", sub.APIUUID, sub.ApplicationUUID)
+// 	} else {
+// 		subscriptionSub := marshalSubscription(sub)
+// 		SubscriptionMap[sub.SubscriptionID] = subscriptionSub
+// 		if eventType == UpdateEvent {
+// 			logger.LoggerXds.Infof("Subscription for %s:%s is updated.", sub.APIUUID, sub.ApplicationUUID)
+// 		} else {
+// 			logger.LoggerXds.Infof("Subscription for %s:%s is added.", sub.APIUUID, sub.ApplicationUUID)
+// 		}
+// 	}
+// 	return marshalSubscriptionMapToList(SubscriptionMap)
+// }
 
 // MarshalMultipleApplicationPolicies is used to update the applicationPolicies during the startup where
 // multiple application policies are pulled at once. And then it returns the ApplicationPolicyList.
@@ -563,9 +563,9 @@ func marshalSubscriptionPolicy(policy *types.SubscriptionPolicy) *subscription.S
 }
 
 // GetApplicationKeyMappingReference returns unique reference for each key Mapping event.
-// It is the combination of consumerKey:keyManager
+// It is the combination of consumerKey
 func GetApplicationKeyMappingReference(keyMapping *types.ApplicationKeyMapping) string {
-	return keyMapping.ConsumerKey + ":" + keyMapping.KeyManager
+	return keyMapping.ApplicationIdentifier
 }
 
 // CheckIfAPIMetadataIsAlreadyAvailable returns true only if the API Metadata for the given API UUID

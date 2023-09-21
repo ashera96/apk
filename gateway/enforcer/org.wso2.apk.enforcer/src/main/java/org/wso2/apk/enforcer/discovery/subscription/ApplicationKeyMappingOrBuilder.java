@@ -8,56 +8,68 @@ public interface ApplicationKeyMappingOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string applicationIdentifier = 1;</code>
+   * <code>string applicationUUID = 1;</code>
+   * @return The applicationUUID.
+   */
+  java.lang.String getApplicationUUID();
+  /**
+   * <code>string applicationUUID = 1;</code>
+   * @return The bytes for applicationUUID.
+   */
+  com.google.protobuf.ByteString
+      getApplicationUUIDBytes();
+
+  /**
+   * <code>string securityScheme = 2;</code>
+   * @return The securityScheme.
+   */
+  java.lang.String getSecurityScheme();
+  /**
+   * <code>string securityScheme = 2;</code>
+   * @return The bytes for securityScheme.
+   */
+  com.google.protobuf.ByteString
+      getSecuritySchemeBytes();
+
+  /**
+   * <code>string applicationIdentifier = 3;</code>
    * @return The applicationIdentifier.
    */
   java.lang.String getApplicationIdentifier();
   /**
-   * <code>string applicationIdentifier = 1;</code>
+   * <code>string applicationIdentifier = 3;</code>
    * @return The bytes for applicationIdentifier.
    */
   com.google.protobuf.ByteString
       getApplicationIdentifierBytes();
 
   /**
-   * <code>string keyType = 2;</code>
+   * <code>string keyType = 4;</code>
    * @return The keyType.
    */
   java.lang.String getKeyType();
   /**
-   * <code>string keyType = 2;</code>
+   * <code>string keyType = 4;</code>
    * @return The bytes for keyType.
    */
   com.google.protobuf.ByteString
       getKeyTypeBytes();
 
   /**
-   * <code>string envId = 3;</code>
-   * @return The envId.
+   * <code>string envID = 5;</code>
+   * @return The envID.
    */
-  java.lang.String getEnvId();
+  java.lang.String getEnvID();
   /**
-   * <code>string envId = 3;</code>
-   * @return The bytes for envId.
+   * <code>string envID = 5;</code>
+   * @return The bytes for envID.
    */
   com.google.protobuf.ByteString
-      getEnvIdBytes();
+      getEnvIDBytes();
 
   /**
-   * <code>int64 timestamp = 4;</code>
+   * <code>int64 timestamp = 6;</code>
    * @return The timestamp.
    */
   long getTimestamp();
-
-  /**
-   * <code>string applicationUUID = 5;</code>
-   * @return The applicationUUID.
-   */
-  java.lang.String getApplicationUUID();
-  /**
-   * <code>string applicationUUID = 5;</code>
-   * @return The bytes for applicationUUID.
-   */
-  com.google.protobuf.ByteString
-      getApplicationUUIDBytes();
 }

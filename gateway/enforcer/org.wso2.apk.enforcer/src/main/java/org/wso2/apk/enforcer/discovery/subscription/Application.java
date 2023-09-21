@@ -21,8 +21,8 @@ private static final long serialVersionUID = 0L;
   }
   private Application() {
     eventId_ = "";
-    name_ = "";
     uuid_ = "";
+    name_ = "";
     owner_ = "";
   }
 
@@ -66,13 +66,13 @@ private static final long serialVersionUID = 0L;
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            name_ = s;
+            uuid_ = s;
             break;
           }
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            uuid_ = s;
+            name_ = s;
             break;
           }
           case 34: {
@@ -92,19 +92,6 @@ private static final long serialVersionUID = 0L;
                 AttributesDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
             attributes_.getMutableMap().put(
                 attributes__.getKey(), attributes__.getValue());
-            break;
-          }
-          case 50: {
-            org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder subBuilder = null;
-            if (securitySchemes_ != null) {
-              subBuilder = securitySchemes_.toBuilder();
-            }
-            securitySchemes_ = input.readMessage(org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.parser(), extensionRegistry);
-            if (subBuilder != null) {
-              subBuilder.mergeFrom(securitySchemes_);
-              securitySchemes_ = subBuilder.buildPartial();
-            }
-
             break;
           }
           default: {
@@ -189,48 +176,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int NAME_FIELD_NUMBER = 2;
-  private volatile java.lang.Object name_;
-  /**
-   * <code>string name = 2;</code>
-   * @return The name.
-   */
-  @java.lang.Override
-  public java.lang.String getName() {
-    java.lang.Object ref = name_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      name_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string name = 2;</code>
-   * @return The bytes for name.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getNameBytes() {
-    java.lang.Object ref = name_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      name_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int UUID_FIELD_NUMBER = 3;
+  public static final int UUID_FIELD_NUMBER = 2;
   private volatile java.lang.Object uuid_;
   /**
-   * <code>string uuid = 3;</code>
+   * <code>string uuid = 2;</code>
    * @return The uuid.
    */
   @java.lang.Override
@@ -247,7 +196,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string uuid = 3;</code>
+   * <code>string uuid = 2;</code>
    * @return The bytes for uuid.
    */
   @java.lang.Override
@@ -259,6 +208,44 @@ private static final long serialVersionUID = 0L;
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
       uuid_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int NAME_FIELD_NUMBER = 3;
+  private volatile java.lang.Object name_;
+  /**
+   * <code>string name = 3;</code>
+   * @return The name.
+   */
+  @java.lang.Override
+  public java.lang.String getName() {
+    java.lang.Object ref = name_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      name_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string name = 3;</code>
+   * @return The bytes for name.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getNameBytes() {
+    java.lang.Object ref = name_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      name_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -384,32 +371,6 @@ private static final long serialVersionUID = 0L;
     return map.get(key);
   }
 
-  public static final int SECURITYSCHEMES_FIELD_NUMBER = 6;
-  private org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes securitySchemes_;
-  /**
-   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-   * @return Whether the securitySchemes field is set.
-   */
-  @java.lang.Override
-  public boolean hasSecuritySchemes() {
-    return securitySchemes_ != null;
-  }
-  /**
-   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-   * @return The securitySchemes.
-   */
-  @java.lang.Override
-  public org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes getSecuritySchemes() {
-    return securitySchemes_ == null ? org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.getDefaultInstance() : securitySchemes_;
-  }
-  /**
-   * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-   */
-  @java.lang.Override
-  public org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder getSecuritySchemesOrBuilder() {
-    return getSecuritySchemes();
-  }
-
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -427,11 +388,11 @@ private static final long serialVersionUID = 0L;
     if (!getEventIdBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, eventId_);
     }
-    if (!getNameBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
-    }
     if (!getUuidBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, uuid_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, uuid_);
+    }
+    if (!getNameBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, name_);
     }
     if (!getOwnerBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 4, owner_);
@@ -442,9 +403,6 @@ private static final long serialVersionUID = 0L;
         internalGetAttributes(),
         AttributesDefaultEntryHolder.defaultEntry,
         5);
-    if (securitySchemes_ != null) {
-      output.writeMessage(6, getSecuritySchemes());
-    }
     unknownFields.writeTo(output);
   }
 
@@ -457,11 +415,11 @@ private static final long serialVersionUID = 0L;
     if (!getEventIdBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, eventId_);
     }
-    if (!getNameBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
-    }
     if (!getUuidBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, uuid_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, uuid_);
+    }
+    if (!getNameBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, name_);
     }
     if (!getOwnerBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, owner_);
@@ -475,10 +433,6 @@ private static final long serialVersionUID = 0L;
           .build();
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, attributes__);
-    }
-    if (securitySchemes_ != null) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, getSecuritySchemes());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -497,19 +451,14 @@ private static final long serialVersionUID = 0L;
 
     if (!getEventId()
         .equals(other.getEventId())) return false;
-    if (!getName()
-        .equals(other.getName())) return false;
     if (!getUuid()
         .equals(other.getUuid())) return false;
+    if (!getName()
+        .equals(other.getName())) return false;
     if (!getOwner()
         .equals(other.getOwner())) return false;
     if (!internalGetAttributes().equals(
         other.internalGetAttributes())) return false;
-    if (hasSecuritySchemes() != other.hasSecuritySchemes()) return false;
-    if (hasSecuritySchemes()) {
-      if (!getSecuritySchemes()
-          .equals(other.getSecuritySchemes())) return false;
-    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -523,19 +472,15 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + EVENTID_FIELD_NUMBER;
     hash = (53 * hash) + getEventId().hashCode();
-    hash = (37 * hash) + NAME_FIELD_NUMBER;
-    hash = (53 * hash) + getName().hashCode();
     hash = (37 * hash) + UUID_FIELD_NUMBER;
     hash = (53 * hash) + getUuid().hashCode();
+    hash = (37 * hash) + NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getName().hashCode();
     hash = (37 * hash) + OWNER_FIELD_NUMBER;
     hash = (53 * hash) + getOwner().hashCode();
     if (!internalGetAttributes().getMap().isEmpty()) {
       hash = (37 * hash) + ATTRIBUTES_FIELD_NUMBER;
       hash = (53 * hash) + internalGetAttributes().hashCode();
-    }
-    if (hasSecuritySchemes()) {
-      hash = (37 * hash) + SECURITYSCHEMES_FIELD_NUMBER;
-      hash = (53 * hash) + getSecuritySchemes().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -698,19 +643,13 @@ private static final long serialVersionUID = 0L;
       super.clear();
       eventId_ = "";
 
-      name_ = "";
-
       uuid_ = "";
+
+      name_ = "";
 
       owner_ = "";
 
       internalGetMutableAttributes().clear();
-      if (securitySchemesBuilder_ == null) {
-        securitySchemes_ = null;
-      } else {
-        securitySchemes_ = null;
-        securitySchemesBuilder_ = null;
-      }
       return this;
     }
 
@@ -739,16 +678,11 @@ private static final long serialVersionUID = 0L;
       org.wso2.apk.enforcer.discovery.subscription.Application result = new org.wso2.apk.enforcer.discovery.subscription.Application(this);
       int from_bitField0_ = bitField0_;
       result.eventId_ = eventId_;
-      result.name_ = name_;
       result.uuid_ = uuid_;
+      result.name_ = name_;
       result.owner_ = owner_;
       result.attributes_ = internalGetAttributes();
       result.attributes_.makeImmutable();
-      if (securitySchemesBuilder_ == null) {
-        result.securitySchemes_ = securitySchemes_;
-      } else {
-        result.securitySchemes_ = securitySchemesBuilder_.build();
-      }
       onBuilt();
       return result;
     }
@@ -801,12 +735,12 @@ private static final long serialVersionUID = 0L;
         eventId_ = other.eventId_;
         onChanged();
       }
-      if (!other.getName().isEmpty()) {
-        name_ = other.name_;
-        onChanged();
-      }
       if (!other.getUuid().isEmpty()) {
         uuid_ = other.uuid_;
+        onChanged();
+      }
+      if (!other.getName().isEmpty()) {
+        name_ = other.name_;
         onChanged();
       }
       if (!other.getOwner().isEmpty()) {
@@ -815,9 +749,6 @@ private static final long serialVersionUID = 0L;
       }
       internalGetMutableAttributes().mergeFrom(
           other.internalGetAttributes());
-      if (other.hasSecuritySchemes()) {
-        mergeSecuritySchemes(other.getSecuritySchemes());
-      }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -924,85 +855,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object name_ = "";
-    /**
-     * <code>string name = 2;</code>
-     * @return The name.
-     */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        name_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string name = 2;</code>
-     * @return The bytes for name.
-     */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string name = 2;</code>
-     * @param value The name to set.
-     * @return This builder for chaining.
-     */
-    public Builder setName(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      name_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string name = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearName() {
-      
-      name_ = getDefaultInstance().getName();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string name = 2;</code>
-     * @param value The bytes for name to set.
-     * @return This builder for chaining.
-     */
-    public Builder setNameBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      name_ = value;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object uuid_ = "";
     /**
-     * <code>string uuid = 3;</code>
+     * <code>string uuid = 2;</code>
      * @return The uuid.
      */
     public java.lang.String getUuid() {
@@ -1018,7 +873,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string uuid = 3;</code>
+     * <code>string uuid = 2;</code>
      * @return The bytes for uuid.
      */
     public com.google.protobuf.ByteString
@@ -1035,7 +890,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string uuid = 3;</code>
+     * <code>string uuid = 2;</code>
      * @param value The uuid to set.
      * @return This builder for chaining.
      */
@@ -1050,7 +905,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string uuid = 3;</code>
+     * <code>string uuid = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearUuid() {
@@ -1060,7 +915,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string uuid = 3;</code>
+     * <code>string uuid = 2;</code>
      * @param value The bytes for uuid to set.
      * @return This builder for chaining.
      */
@@ -1072,6 +927,82 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       uuid_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object name_ = "";
+    /**
+     * <code>string name = 3;</code>
+     * @return The name.
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string name = 3;</code>
+     * @return The bytes for name.
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string name = 3;</code>
+     * @param value The name to set.
+     * @return This builder for chaining.
+     */
+    public Builder setName(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      name_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string name = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearName() {
+      
+      name_ = getDefaultInstance().getName();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string name = 3;</code>
+     * @param value The bytes for name to set.
+     * @return This builder for chaining.
+     */
+    public Builder setNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      name_ = value;
       onChanged();
       return this;
     }
@@ -1278,125 +1209,6 @@ private static final long serialVersionUID = 0L;
       internalGetMutableAttributes().getMutableMap()
           .putAll(values);
       return this;
-    }
-
-    private org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes securitySchemes_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder> securitySchemesBuilder_;
-    /**
-     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-     * @return Whether the securitySchemes field is set.
-     */
-    public boolean hasSecuritySchemes() {
-      return securitySchemesBuilder_ != null || securitySchemes_ != null;
-    }
-    /**
-     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-     * @return The securitySchemes.
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes getSecuritySchemes() {
-      if (securitySchemesBuilder_ == null) {
-        return securitySchemes_ == null ? org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.getDefaultInstance() : securitySchemes_;
-      } else {
-        return securitySchemesBuilder_.getMessage();
-      }
-    }
-    /**
-     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-     */
-    public Builder setSecuritySchemes(org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes value) {
-      if (securitySchemesBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        securitySchemes_ = value;
-        onChanged();
-      } else {
-        securitySchemesBuilder_.setMessage(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-     */
-    public Builder setSecuritySchemes(
-        org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder builderForValue) {
-      if (securitySchemesBuilder_ == null) {
-        securitySchemes_ = builderForValue.build();
-        onChanged();
-      } else {
-        securitySchemesBuilder_.setMessage(builderForValue.build());
-      }
-
-      return this;
-    }
-    /**
-     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-     */
-    public Builder mergeSecuritySchemes(org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes value) {
-      if (securitySchemesBuilder_ == null) {
-        if (securitySchemes_ != null) {
-          securitySchemes_ =
-            org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.newBuilder(securitySchemes_).mergeFrom(value).buildPartial();
-        } else {
-          securitySchemes_ = value;
-        }
-        onChanged();
-      } else {
-        securitySchemesBuilder_.mergeFrom(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-     */
-    public Builder clearSecuritySchemes() {
-      if (securitySchemesBuilder_ == null) {
-        securitySchemes_ = null;
-        onChanged();
-      } else {
-        securitySchemes_ = null;
-        securitySchemesBuilder_ = null;
-      }
-
-      return this;
-    }
-    /**
-     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder getSecuritySchemesBuilder() {
-      
-      onChanged();
-      return getSecuritySchemesFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-     */
-    public org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder getSecuritySchemesOrBuilder() {
-      if (securitySchemesBuilder_ != null) {
-        return securitySchemesBuilder_.getMessageOrBuilder();
-      } else {
-        return securitySchemes_ == null ?
-            org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.getDefaultInstance() : securitySchemes_;
-      }
-    }
-    /**
-     * <code>.wso2.discovery.subscription.SecuritySchemes securitySchemes = 6;</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder> 
-        getSecuritySchemesFieldBuilder() {
-      if (securitySchemesBuilder_ == null) {
-        securitySchemesBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemes.Builder, org.wso2.apk.enforcer.discovery.subscription.SecuritySchemesOrBuilder>(
-                getSecuritySchemes(),
-                getParentForChildren(),
-                isClean());
-        securitySchemes_ = null;
-      }
-      return securitySchemesBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
