@@ -17,54 +17,54 @@
 
 package types
 
-// Subscription for struct subscription
-type Subscription struct {
-	SubscriptionID     int32  `json:"subscriptionId"`
-	SubscriptionUUID   string `json:"subscriptionUUID"`
-	SubscriptionStatus string `json:"subscriptionStatus"`
-	Organization       string `json:"organization"`
-	Api                APIRef `json:"api"`
-	TimeStamp          int64  `json:"timeStamp,omitempty"`
-}
+// // Subscription for struct subscription
+// type Subscription struct {
+// 	SubscriptionID     int32  `json:"subscriptionId"`
+// 	SubscriptionUUID   string `json:"subscriptionUUID"`
+// 	SubscriptionStatus string `json:"subscriptionStatus"`
+// 	Organization       string `json:"organization"`
+// 	Api                APIRef `json:"api"`
+// 	TimeStamp          int64  `json:"timeStamp,omitempty"`
+// }
 
-type APIRef struct {
-	Name     string   `json:"name"`
-	Versions []string `json:"versions"`
-}
+// type APIRef struct {
+// 	Name     string   `json:"name"`
+// 	Versions []string `json:"versions"`
+// }
 
-// SubscriptionList for struct list of applications
-type SubscriptionList struct {
-	List []Subscription `json:"list"`
-}
+// // SubscriptionList for struct list of applications
+// type SubscriptionList struct {
+// 	List []Subscription `json:"list"`
+// }
 
-// Application for struct application
-type Application struct {
-	UUID       string            `json:"uuid"`
-	ID         int32             `json:"id" json:"applicationId"`
-	Name       string            `json:"name" json:"applicationName"`
-	Owner      string            `json:"owner"`
-	Attributes map[string]string `json:"attributes"`
-}
+// // Application for struct application
+// type Application struct {
+// 	UUID       string            `json:"uuid"`
+// 	ID         int32             `json:"id" json:"applicationId"`
+// 	Name       string            `json:"name" json:"applicationName"`
+// 	Owner      string            `json:"owner"`
+// 	Attributes map[string]string `json:"attributes"`
+// }
 
-// ApplicationList for struct list of application
-type ApplicationList struct {
-	List []Application `json:"list"`
-}
+// // ApplicationList for struct list of application
+// type ApplicationList struct {
+// 	List []Application `json:"list"`
+// }
 
-// ApplicationKeyMapping for struct applicationKeyMapping
-type ApplicationKeyMapping struct {
-	ApplicationUUID       string `json:"applicationUUID"`
-	SecurityScheme		  string `json:"securityScheme"`
-	ApplicationIdentifier string `json:"appId"`
-	EnvId                 string `json:"envId"`
-	KeyType               string `json:"keyType"`
-	TimeStamp             int64  `json:"timeStamp,omitempty"`
-}
+// // ApplicationKeyMapping for struct applicationKeyMapping
+// type ApplicationKeyMapping struct {
+// 	ApplicationUUID       string `json:"applicationUUID"`
+// 	SecurityScheme		  string `json:"securityScheme"`
+// 	ApplicationIdentifier string `json:"appId"`
+// 	EnvId                 string `json:"envId"`
+// 	KeyType               string `json:"keyType"`
+// 	TimeStamp             int64  `json:"timeStamp,omitempty"`
+// }
 
-// ApplicationKeyMappingList for struct list of applicationKeyMapping
-type ApplicationKeyMappingList struct {
-	List []ApplicationKeyMapping `json:"list"`
-}
+// // ApplicationKeyMappingList for struct list of applicationKeyMapping
+// type ApplicationKeyMappingList struct {
+// 	List []ApplicationKeyMapping `json:"list"`
+// }
 
 // API for struct Api
 type API struct {

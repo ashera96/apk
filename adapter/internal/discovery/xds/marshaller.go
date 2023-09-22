@@ -268,81 +268,81 @@ func MarshalKeyManager(keyManager *types.KeyManager) *keymgt.KeyManagerConfig {
 	return nil
 }
 
-// MarshalMultipleApplications is used to update the applicationList during the startup where
-// multiple applications are pulled at once. And then it returns the ApplicationList.
-func MarshalMultipleApplications(appList *types.ApplicationList) *subscription.ApplicationList {
-	resourceMap := make(map[string]*subscription.Application)
-	for item := range appList.List {
-		application := appList.List[item]
-		applicationSub := marshalApplication(&application)
-		resourceMap[application.UUID] = applicationSub
-	}
-	ApplicationMap = resourceMap
-	return marshalApplicationMapToList(ApplicationMap)
-}
+// // MarshalMultipleApplications is used to update the applicationList during the startup where
+// // multiple applications are pulled at once. And then it returns the ApplicationList.
+// func MarshalMultipleApplications(appList *types.ApplicationList) *subscription.ApplicationList {
+// 	resourceMap := make(map[string]*subscription.Application)
+// 	for item := range appList.List {
+// 		application := appList.List[item]
+// 		applicationSub := marshalApplication(&application)
+// 		resourceMap[application.UUID] = applicationSub
+// 	}
+// 	ApplicationMap = resourceMap
+// 	return marshalApplicationMapToList(ApplicationMap)
+// }
 
-// MarshalApplicationEventAndReturnList handles the Application Event corresponding to the event received
-// from message broker. And then it returns the ApplicationList.
-func MarshalApplicationEventAndReturnList(application *types.Application,
-	eventType EventType) *subscription.ApplicationList {
-	if eventType == DeleteEvent {
-		delete(ApplicationMap, application.UUID)
-		logger.LoggerXds.Infof("Application %s is deleted.", application.UUID)
-	} else {
-		applicationSub := marshalApplication(application)
-		ApplicationMap[application.UUID] = applicationSub
-		if eventType == CreateEvent {
-			logger.LoggerXds.Infof("Application %s is added.", application.UUID)
-		} else {
-			logger.LoggerXds.Infof("Application %s is updated.", application.UUID)
-		}
-	}
-	return marshalApplicationMapToList(ApplicationMap)
-}
+// // MarshalApplicationEventAndReturnList handles the Application Event corresponding to the event received
+// // from message broker. And then it returns the ApplicationList.
+// func MarshalApplicationEventAndReturnList(application *types.Application,
+// 	eventType EventType) *subscription.ApplicationList {
+// 	if eventType == DeleteEvent {
+// 		delete(ApplicationMap, application.UUID)
+// 		logger.LoggerXds.Infof("Application %s is deleted.", application.UUID)
+// 	} else {
+// 		applicationSub := marshalApplication(application)
+// 		ApplicationMap[application.UUID] = applicationSub
+// 		if eventType == CreateEvent {
+// 			logger.LoggerXds.Infof("Application %s is added.", application.UUID)
+// 		} else {
+// 			logger.LoggerXds.Infof("Application %s is updated.", application.UUID)
+// 		}
+// 	}
+// 	return marshalApplicationMapToList(ApplicationMap)
+// }
 
-// MarshalMultipleApplicationKeyMappings is used to update the application key mappings during the startup where
-// multiple key mappings are pulled at once. And then it returns the ApplicationKeyMappingList.
-func MarshalMultipleApplicationKeyMappings(keymappingList *types.ApplicationKeyMappingList) *subscription.ApplicationKeyMappingList {
-	resourceMap := make(map[string]*subscription.ApplicationKeyMapping)
-	for item := range keymappingList.List {
-		keyMapping := keymappingList.List[item]
-		applicationKeyMappingReference := GetApplicationKeyMappingReference(&keyMapping)
-		keyMappingSub := marshalKeyMapping(&keyMapping)
-		resourceMap[applicationKeyMappingReference] = keyMappingSub
-	}
-	ApplicationKeyMappingMap = resourceMap
-	return marshalKeyMappingMapToList(ApplicationKeyMappingMap)
-}
+// // MarshalMultipleApplicationKeyMappings is used to update the application key mappings during the startup where
+// // multiple key mappings are pulled at once. And then it returns the ApplicationKeyMappingList.
+// func MarshalMultipleApplicationKeyMappings(keymappingList *types.ApplicationKeyMappingList) *subscription.ApplicationKeyMappingList {
+// 	resourceMap := make(map[string]*subscription.ApplicationKeyMapping)
+// 	for item := range keymappingList.List {
+// 		keyMapping := keymappingList.List[item]
+// 		applicationKeyMappingReference := GetApplicationKeyMappingReference(&keyMapping)
+// 		keyMappingSub := marshalKeyMapping(&keyMapping)
+// 		resourceMap[applicationKeyMappingReference] = keyMappingSub
+// 	}
+// 	ApplicationKeyMappingMap = resourceMap
+// 	return marshalKeyMappingMapToList(ApplicationKeyMappingMap)
+// }
 
-// MarshalApplicationKeyMappingEventAndReturnList handles the Application Key Mapping Event corresponding to the event received
-// from message broker. And then it returns the ApplicationKeyMappingList.
-func MarshalApplicationKeyMappingEventAndReturnList(keyMapping *types.ApplicationKeyMapping,
-	eventType EventType) *subscription.ApplicationKeyMappingList {
-	applicationKeyMappingReference := GetApplicationKeyMappingReference(keyMapping)
-	if eventType == DeleteEvent {
-		delete(ApplicationKeyMappingMap, applicationKeyMappingReference)
-		logger.LoggerXds.Infof("Application Key Mapping for the applicationKeyMappingReference %s is removed.",
-			applicationKeyMappingReference)
-	} else {
-		keyMappingSub := marshalKeyMapping(keyMapping)
-		ApplicationKeyMappingMap[applicationKeyMappingReference] = keyMappingSub
-		logger.LoggerXds.Infof("Application Key Mapping for the applicationKeyMappingReference %s is added.",
-			applicationKeyMappingReference)
-	}
-	return marshalKeyMappingMapToList(ApplicationKeyMappingMap)
-}
+// // MarshalApplicationKeyMappingEventAndReturnList handles the Application Key Mapping Event corresponding to the event received
+// // from message broker. And then it returns the ApplicationKeyMappingList.
+// func MarshalApplicationKeyMappingEventAndReturnList(keyMapping *types.ApplicationKeyMapping,
+// 	eventType EventType) *subscription.ApplicationKeyMappingList {
+// 	applicationKeyMappingReference := GetApplicationKeyMappingReference(keyMapping)
+// 	if eventType == DeleteEvent {
+// 		delete(ApplicationKeyMappingMap, applicationKeyMappingReference)
+// 		logger.LoggerXds.Infof("Application Key Mapping for the applicationKeyMappingReference %s is removed.",
+// 			applicationKeyMappingReference)
+// 	} else {
+// 		keyMappingSub := marshalKeyMapping(keyMapping)
+// 		ApplicationKeyMappingMap[applicationKeyMappingReference] = keyMappingSub
+// 		logger.LoggerXds.Infof("Application Key Mapping for the applicationKeyMappingReference %s is added.",
+// 			applicationKeyMappingReference)
+// 	}
+// 	return marshalKeyMappingMapToList(ApplicationKeyMappingMap)
+// }
 
-// MarshalMultipleSubscriptions is used to update the subscriptions during the startup where
-// multiple subscriptions are pulled at once. And then it returns the SubscriptionList.
-func MarshalMultipleSubscriptions(subscriptionsList *types.SubscriptionList) *subscription.SubscriptionList {
-	resourceMap := make(map[int32]*subscription.Subscription)
-	for item := range subscriptionsList.List {
-		sb := subscriptionsList.List[item]
-		resourceMap[sb.SubscriptionID] = marshalSubscription(&sb)
-	}
-	SubscriptionMap = resourceMap
-	return marshalSubscriptionMapToList(SubscriptionMap)
-}
+// // MarshalMultipleSubscriptions is used to update the subscriptions during the startup where
+// // multiple subscriptions are pulled at once. And then it returns the SubscriptionList.
+// func MarshalMultipleSubscriptions(subscriptionsList *types.SubscriptionList) *subscription.SubscriptionList {
+// 	resourceMap := make(map[int32]*subscription.Subscription)
+// 	for item := range subscriptionsList.List {
+// 		sb := subscriptionsList.List[item]
+// 		resourceMap[sb.SubscriptionID] = marshalSubscription(&sb)
+// 	}
+// 	SubscriptionMap = resourceMap
+// 	return marshalSubscriptionMapToList(SubscriptionMap)
+// }
 
 // // MarshalSubscriptionEventAndReturnList handles the Subscription Event corresponding to the event received
 // // from message broker. And then it returns the SubscriptionList.
@@ -356,7 +356,7 @@ func MarshalMultipleSubscriptions(subscriptionsList *types.SubscriptionList) *su
 // 		if eventType == UpdateEvent {
 // 			logger.LoggerXds.Infof("Subscription for %s:%s is updated.", sub.APIUUID, sub.ApplicationUUID)
 // 		} else {
-// 			logger.LoggerXds.Infof("Subscription for %s:%s is added.", sub.APIUUID, sub.ApplicationUUID)
+// 			logger.LoggerXds.Infof("Subscription for %s:%s is added.", x.APIUUID, sub.ApplicationUUID)
 // 		}
 // 	}
 // 	return marshalSubscriptionMapToList(SubscriptionMap)
@@ -488,39 +488,39 @@ func MarshalAPIForLifeCycleChangeEventAndReturnList(apiUUID, status, gatewayLabe
 	return marshalAPIListMapToList(APIListMap[gatewayLabel])
 }
 
-func marshalSubscription(subscriptionInternal *types.Subscription) *subscription.Subscription {
-	api := &subscription.API{
-		Name:     subscriptionInternal.Api.Name,
-		Versions: subscriptionInternal.Api.Versions,
-	}
-	sub := &subscription.Subscription{
-		Uuid:         subscriptionInternal.SubscriptionUUID,
-		SubStatus:    subscriptionInternal.SubscriptionStatus,
-		Organization: subscriptionInternal.Organization,
-	}
-	sub.Api = api
-	return sub
-}
+// func marshalSubscription(subscriptionInternal *types.Subscription) *subscription.Subscription {
+// 	api := &subscription.API{
+// 		Name:     subscriptionInternal.Api.Name,
+// 		Versions: subscriptionInternal.Api.Versions,
+// 	}
+// 	sub := &subscription.Subscription{
+// 		Uuid:         subscriptionInternal.SubscriptionUUID,
+// 		SubStatus:    subscriptionInternal.SubscriptionStatus,
+// 		Organization: subscriptionInternal.Organization,
+// 	}
+// 	sub.Api = api
+// 	return sub
+// }
 
-func marshalApplication(appInternal *types.Application) *subscription.Application {
-	app := &subscription.Application{
-		Uuid:       appInternal.UUID,
-		Name:       appInternal.Name,
-		Owner:      appInternal.Owner,
-		Attributes: appInternal.Attributes,
-	}
-	return app
-}
+// func marshalApplication(appInternal *types.Application) *subscription.Application {
+// 	app := &subscription.Application{
+// 		Uuid:       appInternal.UUID,
+// 		Name:       appInternal.Name,
+// 		Owner:      appInternal.Owner,
+// 		Attributes: appInternal.Attributes,
+// 	}
+// 	return app
+// }
 
-func marshalKeyMapping(keyMappingInternal *types.ApplicationKeyMapping) *subscription.ApplicationKeyMapping {
-	return &subscription.ApplicationKeyMapping{
-		ApplicationUUID:       keyMappingInternal.ApplicationUUID,
-		ApplicationIdentifier: keyMappingInternal.ApplicationIdentifier,
-		KeyType:               keyMappingInternal.KeyType,
-		EnvId:                 keyMappingInternal.EnvId,
-		Timestamp:             keyMappingInternal.TimeStamp,
-	}
-}
+// func marshalKeyMapping(keyMappingInternal *types.ApplicationKeyMapping) *subscription.ApplicationKeyMapping {
+// 	return &subscription.ApplicationKeyMapping{
+// 		ApplicationUUID:       keyMappingInternal.ApplicationUUID,
+// 		ApplicationIdentifier: keyMappingInternal.ApplicationIdentifier,
+// 		KeyType:               keyMappingInternal.KeyType,
+// 		EnvID:                 keyMappingInternal.EnvId,
+// 		Timestamp:             keyMappingInternal.TimeStamp,
+// 	}
+// }
 
 func marshalAPIMetadata(api *types.API) *subscription.APIs {
 	return &subscription.APIs{
@@ -562,11 +562,11 @@ func marshalSubscriptionPolicy(policy *types.SubscriptionPolicy) *subscription.S
 	}
 }
 
-// GetApplicationKeyMappingReference returns unique reference for each key Mapping event.
-// It is the combination of consumerKey
-func GetApplicationKeyMappingReference(keyMapping *types.ApplicationKeyMapping) string {
-	return keyMapping.ApplicationIdentifier
-}
+// // GetApplicationKeyMappingReference returns unique reference for each key Mapping event.
+// // It is the combination of consumerKey
+// func GetApplicationKeyMappingReference(keyMapping *types.ApplicationKeyMapping) string {
+// 	return keyMapping.ApplicationIdentifier
+// }
 
 // CheckIfAPIMetadataIsAlreadyAvailable returns true only if the API Metadata for the given API UUID
 // is already available
