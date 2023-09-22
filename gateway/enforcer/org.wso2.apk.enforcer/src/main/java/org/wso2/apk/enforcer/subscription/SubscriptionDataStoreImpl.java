@@ -142,11 +142,11 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
         for (org.wso2.apk.enforcer.discovery.subscription.Subscription subscription : subscriptionList) {
             Subscription newSubscription = new Subscription();
             newSubscription.setSubscriptionId(subscription.getUuid());
-            newSubscription.setPolicyId(subscription.getPolicyId());
-            newSubscription.setApiUUID(subscription.getApiRef());
-            newSubscription.setAppUUID(subscription.getApplicationRef());
+//            newSubscription.setPolicyId(subscription.getPolicyId());
+//            newSubscription.setApiUUID(subscription.getApiRef());
+//            newSubscription.setAppUUID(subscription.getApplicationRef());
             newSubscription.setSubscriptionState(subscription.getSubStatus());
-            //newSubscription.setTimeStamp(Long.parseLong(subscription.getTimeStamp()));
+//            newSubscription.setTimeStamp(Long.parseLong(subscription.getTimeStamp()));
 
             newSubscriptionMap.put(newSubscription.getCacheKey(), newSubscription);
         }
@@ -164,9 +164,9 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
         for (org.wso2.apk.enforcer.discovery.subscription.Application application : applicationList) {
             Application newApplication = new Application();
             newApplication.setName(application.getName());
-            newApplication.setPolicy(application.getPolicy());
+//            newApplication.setPolicy(application.getPolicy());
             newApplication.setUUID(application.getUuid());
-            newApplication.setTenantDomain(application.getOrganization());
+//            newApplication.setTenantDomain(application.getOrganization());
             application.getAttributesMap().forEach(newApplication::addAttribute);
 
             newApplicationMap.put(newApplication.getCacheKey(), newApplication);
@@ -256,11 +256,11 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
         for (org.wso2.apk.enforcer.discovery.subscription.ApplicationKeyMapping applicationKeyMapping :
                 applicationKeyMappingList) {
             ApplicationKeyMapping mapping = new ApplicationKeyMapping();
-            mapping.setApplicationId(applicationKeyMapping.getApplicationId());
+//            mapping.setApplicationId(applicationKeyMapping.getApplicationId());
             mapping.setApplicationUUID(applicationKeyMapping.getApplicationUUID());
-            mapping.setConsumerKey(applicationKeyMapping.getConsumerKey());
+//            mapping.setConsumerKey(applicationKeyMapping.getConsumerKey());
             mapping.setKeyType(applicationKeyMapping.getKeyType());
-            mapping.setKeyManager(applicationKeyMapping.getKeyManager());
+//            mapping.setKeyManager(applicationKeyMapping.getKeyManager());
 
             newApplicationKeyMappingMap.put(mapping.getCacheKey(), mapping);
         }
