@@ -54,6 +54,7 @@ public class SubscriptionPolicyDiscoveryClient implements Runnable {
     private StreamObserver<DiscoveryRequest> reqObserver;
     private final SubscriptionDataStoreImpl subscriptionDataStore;
     private final String host;
+    private final String hostName;
     private final int port;
 
     /**
@@ -78,8 +79,9 @@ public class SubscriptionPolicyDiscoveryClient implements Runnable {
      */
     private final Node node;
 
-    private SubscriptionPolicyDiscoveryClient(String host, int port) {
+    private SubscriptionPolicyDiscoveryClient(String host, String hostName, int port) {
         this.host = host;
+        this.hostName = hostName;
         this.port = port;
         this.subscriptionDataStore = SubscriptionDataStoreImpl.getInstance();
         initConnection();
@@ -99,7 +101,7 @@ public class SubscriptionPolicyDiscoveryClient implements Runnable {
                     }
                 } while (!channel.isShutdown());
             }
-            this.channel = GRPCUtils.createSecuredChannel(logger, host, port);
+            this.channel = GRPCUtils.createSecuredChannel(logger, host, port, hostName);
             this.stub = SubscriptionPolicyDiscoveryServiceGrpc.newStub(channel);
         } else if (channel.getState(true) == ConnectivityState.READY) {
             XdsSchedulerManager.getInstance().stopSubscriptionPolicyDiscoveryScheduling();
@@ -109,8 +111,9 @@ public class SubscriptionPolicyDiscoveryClient implements Runnable {
     public static SubscriptionPolicyDiscoveryClient getInstance() {
         if (instance == null) {
             String sdsHost = ConfigHolder.getInstance().getEnvVarConfig().getAdapterHost();
+            String sdsHostName = ConfigHolder.getInstance().getEnvVarConfig().getAdapterHostName();
             int sdsPort = Integer.parseInt(ConfigHolder.getInstance().getEnvVarConfig().getAdapterXdsPort());
-            instance = new SubscriptionPolicyDiscoveryClient(sdsHost, sdsPort);
+            instance = new SubscriptionPolicyDiscoveryClient(sdsHost, sdsHostName, sdsPort);
         }
         return instance;
     }

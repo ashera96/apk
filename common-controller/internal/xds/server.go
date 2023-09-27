@@ -135,6 +135,7 @@ func init() {
 	enforcerSubscriptionCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
 	enforcerApplicationCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
 	enforcerApplicationKeyMappingCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
+	enforcerApplicationMappingCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
 	gatewayLabelConfigMap = make(map[string]*EnvoyGatewayConfig)
 	listenerToRouteArrayMap = make(map[string][]*routev3.Route)
 	orgAPIMap = make(map[string]map[string]*EnvoyInternalAPI)
@@ -228,6 +229,11 @@ func GetEnforcerApplicationCache() wso2_cache.SnapshotCache {
 // GetEnforcerApplicationKeyMappingCache returns xds server cache.
 func GetEnforcerApplicationKeyMappingCache() wso2_cache.SnapshotCache {
 	return enforcerApplicationKeyMappingCache
+}
+
+// GetEnforcerApplicationMappingCache returns xds server cache.
+func GetEnforcerApplicationMappingCache() wso2_cache.SnapshotCache {
+	return enforcerApplicationMappingCache
 }
 
 // // UpdateEnforcerConfig Sets new update to the enforcer's configuration

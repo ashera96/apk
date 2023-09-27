@@ -92,7 +92,7 @@ func init() {
 
 	flag.BoolVar(&debug, "debug", true, "Use debug logging")
 	flag.BoolVar(&onlyLogging, "onlyLogging", false, "Only demo AccessLogging Service")
-	flag.UintVar(&port, "port", 18000, "Management server port")
+	flag.UintVar(&port, "port", 18002, "Management server port")
 	flag.UintVar(&alsPort, "als", 18090, "Accesslog server port")
 	flag.StringVar(&mode, "ads", ads, "Management server type (ads, xds, rest)")
 }
@@ -148,7 +148,8 @@ func runRatelimitServer(rlsServer xdsv3.Server) {
 }
 
 func runManagementServer(server xdsv3.Server, enforcerServer wso2_server.Server, enforcerSdsServer wso2_server.Server,
-	enforcerAppDsSrv wso2_server.Server, enforcerAppKeyMappingDsSrv wso2_server.Server, port uint) {
+	enforcerAppDsSrv wso2_server.Server, enforcerAppKeyMappingDsSrv wso2_server.Server, enforcerAppMappingDsSrv wso2_server.Server,
+	port uint) {
 	var grpcOptions []grpc.ServerOption
 	grpcOptions = append(grpcOptions, grpc.MaxConcurrentStreams(grpcMaxConcurrentStreams))
 	publicKeyLocation, privateKeyLocation, truststoreLocation := tlsutils.GetKeyLocations()
@@ -235,15 +236,17 @@ func InitCommonControllerServer(conf *config.Config) {
 	enforcerSubscriptionCache := xds.GetEnforcerSubscriptionCache()
 	enforcerApplicationCache := xds.GetEnforcerApplicationCache()
 	enforcerApplicationKeyMappingCache := xds.GetEnforcerApplicationKeyMappingCache()
+	enforcerApplicationMappingCache := xds.GetEnforcerApplicationMappingCache()
 	srv := xdsv3.NewServer(ctx, cache, &routercb.Callbacks{})
 	enforcerXdsSrv := wso2_server.NewServer(ctx, enforcerCache, &enforcerCallbacks.Callbacks{})
 	enforcerSdsSrv := wso2_server.NewServer(ctx, enforcerSubscriptionCache, &enforcerCallbacks.Callbacks{})
 	enforcerAppDsSrv := wso2_server.NewServer(ctx, enforcerApplicationCache, &enforcerCallbacks.Callbacks{})
 	enforcerAppKeyMappingDsSrv := wso2_server.NewServer(ctx, enforcerApplicationKeyMappingCache, &enforcerCallbacks.Callbacks{})
+	enforcerAppMappingDsSrv := wso2_server.NewServer(ctx, enforcerApplicationMappingCache, &enforcerCallbacks.Callbacks{})
 
 	// Start Enforcer xDS gRPC server
-	runManagementServer(srv, enforcerXdsSrv, enforcerSdsSrv, enforcerAppDsSrv,
-		enforcerAppKeyMappingDsSrv, port)
+	runManagementServer(srv, enforcerXdsSrv, enforcerSdsSrv, enforcerAppDsSrv, enforcerAppKeyMappingDsSrv,
+		enforcerAppMappingDsSrv, port)
 	// Set Enforcer startup configs
 	// xds.UpdateEnforcerConfig(conf)
 

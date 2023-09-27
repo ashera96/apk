@@ -53,6 +53,7 @@ public class ApiListDiscoveryClient implements Runnable {
     private StreamObserver<DiscoveryRequest> reqObserver;
     private final SubscriptionDataStoreImpl subscriptionDataStore;
     private final String host;
+    private final String hostName;
     private final int port;
 
     /**
@@ -78,8 +79,9 @@ public class ApiListDiscoveryClient implements Runnable {
      */
     private final Node node;
 
-    private ApiListDiscoveryClient(String host, int port) {
+    private ApiListDiscoveryClient(String host, String hostName, int port) {
         this.host = host;
+        this.hostName = hostName;
         this.port = port;
         this.subscriptionDataStore = SubscriptionDataStoreImpl.getInstance();
         initConnection();
@@ -99,7 +101,7 @@ public class ApiListDiscoveryClient implements Runnable {
                     }
                 } while (!channel.isShutdown());
             }
-            this.channel = GRPCUtils.createSecuredChannel(logger, host, port);
+            this.channel = GRPCUtils.createSecuredChannel(logger, host, port, hostName);
             this.stub = ApiListDiscoveryServiceGrpc.newStub(channel);
         } else if (channel.getState(true) == ConnectivityState.READY) {
             XdsSchedulerManager.getInstance().stopAPIListDiscoveryScheduling();
@@ -109,8 +111,9 @@ public class ApiListDiscoveryClient implements Runnable {
     public static ApiListDiscoveryClient getInstance() {
         if (instance == null) {
             String sdsHost = ConfigHolder.getInstance().getEnvVarConfig().getAdapterHost();
+            String sdsHostName = ConfigHolder.getInstance().getEnvVarConfig().getAdapterHostName();
             int sdsPort = Integer.parseInt(ConfigHolder.getInstance().getEnvVarConfig().getAdapterXdsPort());
-            instance = new ApiListDiscoveryClient(sdsHost, sdsPort);
+            instance = new ApiListDiscoveryClient(sdsHost, sdsHostName, sdsPort);
         }
         return instance;
     }
