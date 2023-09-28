@@ -158,12 +158,9 @@ var _ envoy_cachev3.NodeHash = IDHash{}
 func init() {
 	cache = envoy_cachev3.NewSnapshotCache(false, IDHash{}, nil)
 	enforcerCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
-	// enforcerSubscriptionCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
-	// enforcerApplicationCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
 	enforcerAPICache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
 	enforcerApplicationPolicyCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
 	enforcerSubscriptionPolicyCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
-	// enforcerApplicationKeyMappingCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
 	enforcerKeyManagerCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
 	enforcerRevokedTokensCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
 	enforcerThrottleDataCache = wso2_cache.NewSnapshotCache(false, IDHash{}, nil)
@@ -192,16 +189,6 @@ func GetEnforcerCache() wso2_cache.SnapshotCache {
 	return enforcerCache
 }
 
-// // GetEnforcerSubscriptionCache returns xds server cache.
-// func GetEnforcerSubscriptionCache() wso2_cache.SnapshotCache {
-// 	return enforcerSubscriptionCache
-// }
-
-// // GetEnforcerApplicationCache returns xds server cache.
-// func GetEnforcerApplicationCache() wso2_cache.SnapshotCache {
-// 	return enforcerApplicationCache
-// }
-
 // GetEnforcerJWTIssuerCache returns xds server cache.
 func GetEnforcerJWTIssuerCache() wso2_cache.SnapshotCache {
 	return enforcerJwtIssuerCache
@@ -221,11 +208,6 @@ func GetEnforcerApplicationPolicyCache() wso2_cache.SnapshotCache {
 func GetEnforcerSubscriptionPolicyCache() wso2_cache.SnapshotCache {
 	return enforcerSubscriptionPolicyCache
 }
-
-// // GetEnforcerApplicationKeyMappingCache returns xds server cache.
-// func GetEnforcerApplicationKeyMappingCache() wso2_cache.SnapshotCache {
-// 	return enforcerApplicationKeyMappingCache
-// }
 
 // GetEnforcerKeyManagerCache returns xds server cache.
 func GetEnforcerKeyManagerCache() wso2_cache.SnapshotCache {

@@ -190,6 +190,7 @@ func runManagementServer(server xdsv3.Server, enforcerServer wso2_server.Server,
 	subscriptionservice.RegisterSubscriptionDiscoveryServiceServer(grpcServer, enforcerSdsServer)
 	subscriptionservice.RegisterApplicationDiscoveryServiceServer(grpcServer, enforcerAppDsSrv)
 	subscriptionservice.RegisterApplicationKeyMappingDiscoveryServiceServer(grpcServer, enforcerAppKeyMappingDsSrv)
+	subscriptionservice.RegisterApplicationMappingDiscoveryServiceServer(grpcServer, enforcerAppMappingDsSrv)
 	// register health service
 	healthservice.RegisterHealthServer(grpcServer, &health.Server{})
 
