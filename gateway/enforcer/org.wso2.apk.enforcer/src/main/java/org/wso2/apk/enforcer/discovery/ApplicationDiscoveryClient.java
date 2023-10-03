@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Client to communicate with Application discovery service at the adapter.
+ * Client to communicate with Application discovery service at the common-controller.
  */
 public class ApplicationDiscoveryClient implements Runnable {
     private static final Logger logger = LogManager.getLogger(ApplicationDiscoveryClient.class);
@@ -111,9 +111,9 @@ public class ApplicationDiscoveryClient implements Runnable {
 
     public static ApplicationDiscoveryClient getInstance() {
         if (instance == null) {
-            String sdsHost = ConfigHolder.getInstance().getEnvVarConfig().getAdapterHost();
-            String sdsHostName = ConfigHolder.getInstance().getEnvVarConfig().getAdapterHostName();
-            int sdsPort = Integer.parseInt(ConfigHolder.getInstance().getEnvVarConfig().getAdapterXdsPort());
+            String sdsHost = ConfigHolder.getInstance().getEnvVarConfig().getCommonControllerHost();
+            String sdsHostName = ConfigHolder.getInstance().getEnvVarConfig().getCommonControllerHostName();
+            int sdsPort = Integer.parseInt(ConfigHolder.getInstance().getEnvVarConfig().getCommonControllerXdsPort());
             instance = new ApplicationDiscoveryClient(sdsHost, sdsHostName, sdsPort);
         }
         return instance;

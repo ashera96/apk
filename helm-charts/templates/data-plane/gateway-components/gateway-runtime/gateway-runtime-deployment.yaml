@@ -62,12 +62,20 @@ spec:
               protocol: "TCP"
             - containerPort: 9092
               protocol: "TCP"
+            - containerPort: 18002
+              protocol: "TCP"
+            - containerPort: 5006
+              protocol: "TCP"
 {{ include "apk-helm.deployment.resources" .Values.wso2.apk.dp.gatewayRuntime.deployment.enforcer.resources | indent 10 }}
 {{ include "apk-helm.deployment.env" .Values.wso2.apk.dp.gatewayRuntime.deployment.enforcer.env | indent 10 }}
             - name: ADAPTER_HOST_NAME
               value: {{ template "apk-helm.resource.prefix" . }}-adapter-service.{{ .Release.Namespace }}.svc
             - name: ADAPTER_HOST
               value: {{ template "apk-helm.resource.prefix" . }}-adapter-service.{{ .Release.Namespace }}.svc
+            - name: COMMON_CONTROLLER_HOST_NAME
+              value: {{ template "apk-helm.resource.prefix" . }}-common-controller-service.{{ .Release.Namespace }}.svc
+            - name: COMMON_CONTROLLER_HOST
+              value: {{ template "apk-helm.resource.prefix" . }}-common-controller-service.{{ .Release.Namespace }}.svc
             - name: ENFORCER_PRIVATE_KEY_PATH
               value: /home/wso2/security/keystore/enforcer.key  
             - name: ENFORCER_PUBLIC_CERT_PATH
@@ -78,6 +86,8 @@ spec:
               value: "/home/wso2/security/truststore"
             - name: ADAPTER_XDS_PORT
               value : "18000"
+            - name: COMMON_CONTROLLER_XDS_PORT
+              value : "18002"
             - name: ENFORCER_LABEL
               value : default
             - name: ENFORCER_REGION
@@ -89,7 +99,8 @@ spec:
             - name: enforcer_admin_pwd
               value: admin
             - name: JAVA_OPTS
-              value: -Dhttpclient.hostnameVerifier=AllowAll -Xms512m -Xmx512m -XX:MaxRAMFraction=2
+              value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006 -Dhttpclient.hostnameVerifier=AllowAll -Xms512m -Xmx512m -XX:MaxRAMFraction=2
+              # value: -Dhttpclient.hostnameVerifier=AllowAll -Xms512m -Xmx512m -XX:MaxRAMFraction=2
         {{- if and .Values.wso2.apk.dp.gatewayRuntime.analytics .Values.wso2.apk.dp.gatewayRuntime.analytics.secretName }}
             - name: analytics_authToken
               valueFrom:

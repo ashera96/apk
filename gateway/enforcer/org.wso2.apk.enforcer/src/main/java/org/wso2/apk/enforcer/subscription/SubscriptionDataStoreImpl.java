@@ -28,11 +28,13 @@ import org.wso2.apk.enforcer.config.dto.ExtendedTokenIssuerDto;
 import org.wso2.apk.enforcer.discovery.ApiListDiscoveryClient;
 import org.wso2.apk.enforcer.discovery.ApplicationDiscoveryClient;
 import org.wso2.apk.enforcer.discovery.ApplicationKeyMappingDiscoveryClient;
+import org.wso2.apk.enforcer.discovery.ApplicationMappingDiscoveryClient;
 import org.wso2.apk.enforcer.discovery.ApplicationPolicyDiscoveryClient;
 import org.wso2.apk.enforcer.discovery.JWTIssuerDiscoveryClient;
 import org.wso2.apk.enforcer.discovery.SubscriptionDiscoveryClient;
 import org.wso2.apk.enforcer.discovery.SubscriptionPolicyDiscoveryClient;
 import org.wso2.apk.enforcer.discovery.subscription.APIs;
+import org.wso2.apk.enforcer.discovery.subscription.ApplicationMapping;
 import org.wso2.apk.enforcer.discovery.subscription.Certificate;
 import org.wso2.apk.enforcer.discovery.subscription.JWTIssuer;
 import org.wso2.apk.enforcer.models.API;
@@ -75,6 +77,7 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
 
     // Maps for keeping Subscription related details.
     private Map<ApplicationKeyMappingCacheKey, ApplicationKeyMapping> applicationKeyMappingMap;
+    private Map<String, ApplicationMapping> applicationMappingMap;
     private Map<String, Application> applicationMap;
     private Map<String, API> apiMap;
     private Map<String, ApiPolicy> apiPolicyMap;
@@ -132,6 +135,7 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
         ApplicationPolicyDiscoveryClient.getInstance().watchApplicationPolicies();
         SubscriptionPolicyDiscoveryClient.getInstance().watchSubscriptionPolicies();
         ApplicationKeyMappingDiscoveryClient.getInstance().watchApplicationKeyMappings();
+        ApplicationMappingDiscoveryClient.getInstance().watchApplicationMappings();
         JWTIssuerDiscoveryClient.getInstance().watchJWTIssuers();
     }
 
@@ -268,6 +272,11 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
             log.debug("Total Application Key Mappings in new cache: {}", newApplicationKeyMappingMap.size());
         }
         this.applicationKeyMappingMap = newApplicationKeyMappingMap;
+    }
+
+    public void addApplicationMappings(
+            List<org.wso2.apk.enforcer.discovery.subscription.ApplicationMapping> applicationMappingList) {
+        // TODO: ###############
     }
 
     @Override

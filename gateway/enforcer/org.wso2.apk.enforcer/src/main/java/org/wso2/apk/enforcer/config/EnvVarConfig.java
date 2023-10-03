@@ -183,7 +183,7 @@ public class EnvVarConfig {
     }
 
     public String getCommonControllerHostName() {
-        return COMMON_CONTROLLER_HOST_NAME;
+        return commonControllerHostName;
     }
 
     public String getXdsMaxMsgSize() {

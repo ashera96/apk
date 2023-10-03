@@ -39,7 +39,6 @@ import (
 	wso2_server "github.com/wso2/apk/adapter/pkg/discovery/protocol/server/v3"
 	"github.com/wso2/apk/adapter/pkg/health"
 	healthservice "github.com/wso2/apk/adapter/pkg/health/api/wso2/health/service"
-	"github.com/wso2/apk/adapter/pkg/utils/tlsutils"
 	"github.com/wso2/apk/common-controller/internal/config"
 	"github.com/wso2/apk/common-controller/internal/operator"
 	utils "github.com/wso2/apk/common-controller/internal/utils"
@@ -47,7 +46,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
-	"github.com/fsnotify/fsnotify"
 	"github.com/wso2/apk/adapter/pkg/logging"
 	"github.com/wso2/apk/common-controller/internal/loggers"
 )
@@ -147,15 +145,15 @@ func runRatelimitServer(rlsServer xdsv3.Server) {
 	}()
 }
 
-func runManagementServer(server xdsv3.Server, enforcerServer wso2_server.Server, enforcerSdsServer wso2_server.Server,
+func runCommonEnforcerServer(server xdsv3.Server, enforcerServer wso2_server.Server, enforcerSdsServer wso2_server.Server,
 	enforcerAppDsSrv wso2_server.Server, enforcerAppKeyMappingDsSrv wso2_server.Server, enforcerAppMappingDsSrv wso2_server.Server,
 	port uint) {
 	var grpcOptions []grpc.ServerOption
 	grpcOptions = append(grpcOptions, grpc.MaxConcurrentStreams(grpcMaxConcurrentStreams))
-	publicKeyLocation, privateKeyLocation, truststoreLocation := tlsutils.GetKeyLocations()
-	cert, err := tlsutils.GetServerCertificate(publicKeyLocation, privateKeyLocation)
+	publicKeyLocation, privateKeyLocation, truststoreLocation := utils.GetKeyLocations()
+	cert, err := utils.GetServerCertificate(publicKeyLocation, privateKeyLocation)
 
-	caCertPool := tlsutils.GetTrustedCertPool(truststoreLocation)
+	caCertPool := utils.GetTrustedCertPool(truststoreLocation)
 
 	if err == nil {
 		grpcOptions = append(grpcOptions, grpc.Creds(
@@ -211,17 +209,6 @@ func InitCommonControllerServer(conf *config.Config) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// log config watcher
-	watcherLogConf, _ := fsnotify.NewWatcher()
-	logConfigPath, errC := config.GetLogConfigPath()
-	if errC == nil {
-		errC = watcherLogConf.Add(logConfigPath)
-	}
-
-	if errC != nil {
-		loggers.LoggerAPKOperator.ErrorC(logging.PrintError(logging.Error1102, logging.CRITICAL, "Error reading the log configs, error: %v", errC.Error()))
-	}
-
 	loggers.LoggerAPKOperator.Info("Starting common controller ....")
 
 	rateLimiterCache := xds.GetRateLimiterCache()
@@ -246,23 +233,14 @@ func InitCommonControllerServer(conf *config.Config) {
 	enforcerAppMappingDsSrv := wso2_server.NewServer(ctx, enforcerApplicationMappingCache, &enforcerCallbacks.Callbacks{})
 
 	// Start Enforcer xDS gRPC server
-	runManagementServer(srv, enforcerXdsSrv, enforcerSdsSrv, enforcerAppDsSrv, enforcerAppKeyMappingDsSrv,
+	runCommonEnforcerServer(srv, enforcerXdsSrv, enforcerSdsSrv, enforcerAppDsSrv, enforcerAppKeyMappingDsSrv,
 		enforcerAppMappingDsSrv, port)
-	// Set Enforcer startup configs
-	// xds.UpdateEnforcerConfig(conf)
 
 	go operator.InitOperator()
 
 OUTER:
 	for {
 		select {
-		case l := <-watcherLogConf.Events:
-			switch l.Op.String() {
-			case "WRITE":
-				loggers.LoggerAPKOperator.Info("Loading updated log config file...")
-				config.ClearLogConfigInstance()
-				loggers.UpdateLoggers()
-			}
 		case s := <-sig:
 			switch s {
 			case os.Interrupt:

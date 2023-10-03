@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, WSO2 LLC. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2023, WSO2 LLC. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -28,9 +28,9 @@ import io.grpc.ManagedChannel;
 import io.grpc.stub.StreamObserver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.wso2.apk.enforcer.discovery.service.subscription.SubscriptionDiscoveryServiceGrpc;
-import org.wso2.apk.enforcer.discovery.subscription.Subscription;
-import org.wso2.apk.enforcer.discovery.subscription.SubscriptionList;
+import org.wso2.apk.enforcer.discovery.service.subscription.ApplicationMappingDiscoveryServiceGrpc;
+import org.wso2.apk.enforcer.discovery.subscription.ApplicationMapping;
+import org.wso2.apk.enforcer.discovery.subscription.ApplicationMappingList;
 import org.wso2.apk.enforcer.config.ConfigHolder;
 import org.wso2.apk.enforcer.constants.AdapterConstants;
 import org.wso2.apk.enforcer.constants.Constants;
@@ -44,13 +44,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Client to communicate with Subscription discovery service at the common-controller.
+ * Client to communicate with Application Mapping discovery service at the common-controller.
  */
-public class SubscriptionDiscoveryClient implements Runnable {
-    private static final Logger logger = LogManager.getLogger(SubscriptionDiscoveryClient.class);
-    private static SubscriptionDiscoveryClient instance;
+public class ApplicationMappingDiscoveryClient implements Runnable {
+    private static final Logger logger = LogManager.getLogger(ApplicationMappingDiscoveryClient.class);
+    private static ApplicationMappingDiscoveryClient instance;
     private ManagedChannel channel;
-    private SubscriptionDiscoveryServiceGrpc.SubscriptionDiscoveryServiceStub stub;
+    private ApplicationMappingDiscoveryServiceGrpc.ApplicationMappingDiscoveryServiceStub stub;
     private StreamObserver<DiscoveryRequest> reqObserver;
     private final SubscriptionDataStoreImpl subscriptionDataStore;
     private final String host;
@@ -64,8 +64,8 @@ public class SubscriptionDiscoveryClient implements Runnable {
      * which may not have been acked/nacked so far.
      * </p>
      */
-
     private DiscoveryResponse latestReceived;
+
     /**
      * This is a reference to the latest acked response from the ADS.
      * <p>
@@ -74,12 +74,13 @@ public class SubscriptionDiscoveryClient implements Runnable {
      * </p>
      */
     private DiscoveryResponse latestACKed;
+
     /**
      * Node struct for the discovery client
      */
     private final Node node;
 
-    private SubscriptionDiscoveryClient(String host, String hostName, int port) {
+    private ApplicationMappingDiscoveryClient(String host, String hostName, int port) {
         this.host = host;
         this.hostName = hostName;
         this.port = port;
@@ -97,50 +98,49 @@ public class SubscriptionDiscoveryClient implements Runnable {
                     try {
                         channel.awaitTermination(100, TimeUnit.MILLISECONDS);
                     } catch (InterruptedException e) {
-                        logger.error("Subscription discovery channel shutdown wait was interrupted", e);
+                        logger.error("Application mapping discovery channel shutdown wait was interrupted", e);
                     }
                 } while (!channel.isShutdown());
             }
             this.channel = GRPCUtils.createSecuredChannel(logger, host, port, hostName);
-            this.stub = SubscriptionDiscoveryServiceGrpc.newStub(channel);
+            this.stub = ApplicationMappingDiscoveryServiceGrpc.newStub(channel);
         } else if (channel.getState(true) == ConnectivityState.READY) {
-            XdsSchedulerManager.getInstance().stopSubscriptionDiscoveryScheduling();
+            XdsSchedulerManager.getInstance().stopApplicationMappingDiscoveryScheduling();
         }
     }
 
-    public static SubscriptionDiscoveryClient getInstance() {
+    public static ApplicationMappingDiscoveryClient getInstance() {
         if (instance == null) {
             String sdsHost = ConfigHolder.getInstance().getEnvVarConfig().getCommonControllerHost();
             String sdsHostName = ConfigHolder.getInstance().getEnvVarConfig().getCommonControllerHostName();
             int sdsPort = Integer.parseInt(ConfigHolder.getInstance().getEnvVarConfig().getCommonControllerXdsPort());
-            instance = new SubscriptionDiscoveryClient(sdsHost, sdsHostName, sdsPort);
+            instance = new ApplicationMappingDiscoveryClient(sdsHost, sdsHostName, sdsPort);
         }
         return instance;
     }
 
     public void run() {
         initConnection();
-        watchSubscriptions();
+        watchApplicationMappings();
     }
 
-    public void watchSubscriptions() {
+    public void watchApplicationMappings() {
         // TODO: (Praminda) implement a deadline with retries
-        reqObserver = stub.streamSubscriptions(new StreamObserver<DiscoveryResponse>() {
+        reqObserver = stub.streamApplicationMappings(new StreamObserver<DiscoveryResponse>() {
             @Override
             public void onNext(DiscoveryResponse response) {
-                logger.info("Subscription event received with version : " + response.getVersionInfo());
-                logger.debug("Received Subscription discovery response " + response);
-                XdsSchedulerManager.getInstance().stopSubscriptionDiscoveryScheduling();
+                logger.info("Application Mapping event received with version : " + response.getVersionInfo());
+                logger.debug("Received Application Mapping discovery response " + response);
+                XdsSchedulerManager.getInstance().stopApplicationMappingDiscoveryScheduling();
                 latestReceived = response;
                 try {
-                    List<Subscription> subscriptionList = new ArrayList<>();
+                    List<ApplicationMapping> applicationMappingList = new ArrayList<>();
                     for (Any res : response.getResourcesList()) {
-                        subscriptionList.addAll(res.unpack(SubscriptionList.class).getListList());
+                        applicationMappingList.addAll(res.unpack(ApplicationMappingList.class).getListList());
                     }
-                    subscriptionDataStore.addSubscriptions(subscriptionList);
-                    logger.info("Number of subscriptions received : " + subscriptionList.size());
+//                    subscriptionDataStore.addApplicationMappings(applicationMappingList);
+                    logger.info("Number of application key mappings received : " + applicationMappingList.size());
                     ack();
-
                 } catch (Exception e) {
                     // catching generic error here to wrap any grpc communication errors in the runtime
                     onError(e);
@@ -149,14 +149,14 @@ public class SubscriptionDiscoveryClient implements Runnable {
 
             @Override
             public void onError(Throwable throwable) {
-                logger.error("Error occurred during Subscription discovery", throwable);
-                XdsSchedulerManager.getInstance().startSubscriptionDiscoveryScheduling();
+                logger.error("Error occurred during Application Mappings discovery", throwable);
+                XdsSchedulerManager.getInstance().startApplicationMappingDiscoveryScheduling();
                 nack(throwable);
             }
 
             @Override
             public void onCompleted() {
-                logger.info("Completed receiving Subscription data");
+                logger.info("Completed receiving Application Mapping data");
             }
         });
 
@@ -164,12 +164,12 @@ public class SubscriptionDiscoveryClient implements Runnable {
             DiscoveryRequest req = DiscoveryRequest.newBuilder()
                     .setNode(node)
                     .setVersionInfo(latestACKed.getVersionInfo())
-                    .setTypeUrl(Constants.SUBSCRIPTION_LIST_TYPE_URL).build();
+                    .setTypeUrl(Constants.APPLICATION_MAPPING_LIST_TYPE_URL).build();
             reqObserver.onNext(req);
-            logger.debug("Sent Discovery request for type url: " + Constants.SUBSCRIPTION_LIST_TYPE_URL);
+            logger.debug("Sent Discovery request for type url: " + Constants.APPLICATION_MAPPING_LIST_TYPE_URL);
 
         } catch (Exception e) {
-            logger.error("Unexpected error occurred in API discovery service", e);
+            logger.error("Unexpected error occurred in Application Mapping discovery service", e);
             reqObserver.onError(e);
         }
     }
@@ -183,7 +183,7 @@ public class SubscriptionDiscoveryClient implements Runnable {
                 .setNode(node)
                 .setVersionInfo(latestReceived.getVersionInfo())
                 .setResponseNonce(latestReceived.getNonce())
-                .setTypeUrl(Constants.SUBSCRIPTION_LIST_TYPE_URL).build();
+                .setTypeUrl(Constants.APPLICATION_MAPPING_LIST_TYPE_URL).build();
         reqObserver.onNext(req);
         latestACKed = latestReceived;
     }
@@ -196,7 +196,7 @@ public class SubscriptionDiscoveryClient implements Runnable {
                 .setNode(node)
                 .setVersionInfo(latestACKed.getVersionInfo())
                 .setResponseNonce(latestReceived.getNonce())
-                .setTypeUrl(Constants.SUBSCRIPTION_LIST_TYPE_URL)
+                .setTypeUrl(Constants.APPLICATION_MAPPING_LIST_TYPE_URL)
                 .setErrorDetail(Status.newBuilder().setMessage(e.getMessage()))
                 .build();
         reqObserver.onNext(req);

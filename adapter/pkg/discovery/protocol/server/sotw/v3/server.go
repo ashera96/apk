@@ -57,7 +57,7 @@ type watches struct {
 	jwtIssuerList             chan cache.Response
 	subscriptionPolicyList    chan cache.Response
 	applicationKeyMappingList chan cache.Response
-	applicationMappingList chan cache.Response
+	applicationMappingList    chan cache.Response
 	keyManagers               chan cache.Response
 	revokedTokens             chan cache.Response
 	throttleData              chan cache.Response
@@ -72,7 +72,7 @@ type watches struct {
 	applicationPolicyListCancel     func()
 	subscriptionPolicyListCancel    func()
 	applicationKeyMappingListCancel func()
-	applicationMappingListCancel func()
+	applicationMappingListCancel    func()
 	keyManagerCancel                func()
 	revokedTokenCancel              func()
 	throttleDataCancel              func()
@@ -87,7 +87,7 @@ type watches struct {
 	applicationPolicyListNonce     string
 	subscriptionPolicyListNonce    string
 	applicationKeyMappingListNonce string
-	applicationMappingListNonce string
+	applicationMappingListNonce    string
 	keyManagerNonce                string
 	revokedTokenNonce              string
 	throttleDataNonce              string
