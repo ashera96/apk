@@ -146,6 +146,8 @@ spec:
             {{- end }}
             - name: adapter-truststore-secret-volume
               mountPath: /home/wso2/security/truststore/adapter.crt
+            - name: common-controller-truststore-secret-volume
+              mountPath: /home/wso2/security/truststore/adapter.pem
             {{- if and .Values.wso2.apk.dp.adapter.configs .Values.wso2.apk.dp.adapter.configs.tls }}
               subPath: {{ .Values.wso2.apk.dp.adapter.configs.tls.certFilename | default "tls.crt" }}
             {{- else }}
@@ -338,6 +340,14 @@ spec:
             secretName: {{ template "apk-helm.resource.prefix" . }}-ratelimiter-server-cert
           {{- end }}
       {{ end }}
+        - name: common-controller-truststore-secret-volume
+          secret:
+          {{- if and .Values.wso2.apk.dp.commonController.configs .Values.wso2.apk.dp.commonController.configs.tls }}
+            secretName: {{ .Values.wso2.apk.dp.commonController.configs.tls.secretName | default (printf "%s-common-controller-server-cert" (include "apk-helm.resource.prefix" .)) }}
+          {{- else }}
+            secretName: {{ template "apk-helm.resource.prefix" . }}-common-controller-server-cert
+          {{- end }}
+            defaultMode: 420
         - name: enforcer-keystore-secret-volume
           secret: 
             {{- if and .Values.wso2.apk.dp.gatewayRuntime.deployment.enforcer.configs .Values.wso2.apk.dp.gatewayRuntime.deployment.enforcer.configs.tls }}
