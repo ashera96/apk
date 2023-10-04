@@ -142,6 +142,7 @@ spec:
           secret:
             secretName: {{ template "apk-helm.resource.prefix" . }}-webhook-server-cert
             defaultMode: 420
+      {{ if and .Values.wso2.apk.dp.enabled .Values.wso2.apk.dp.ratelimiter.enabled }}
         - name: enforcer-truststore-secret-volume
           secret: 
           {{- if and .Values.wso2.apk.dp.gatewayRuntime.deployment.enforcer.configs .Values.wso2.apk.dp.gatewayRuntime.deployment.enforcer.configs.tls }}
@@ -149,7 +150,6 @@ spec:
           {{- else }}
             secretName: {{ template "apk-helm.resource.prefix" . }}-enforcer-server-cert
           {{- end }}
-      {{ if and .Values.wso2.apk.dp.enabled .Values.wso2.apk.dp.ratelimiter.enabled }}
         - name: ratelimiter-truststore-secret-volume
           secret:
             {{- if and .Values.wso2.apk.dp.ratelimiter.configs .Values.wso2.apk.dp.ratelimiter.configs.tls }}
