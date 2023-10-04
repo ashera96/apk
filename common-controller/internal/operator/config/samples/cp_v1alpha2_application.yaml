@@ -9,4 +9,14 @@ metadata:
     app.kubernetes.io/created-by: operator
   name: application-sample
 spec:
-  # TODO(user): Add fields here
+  name: app1
+  owner: admin
+  attributes: 
+    attb1: value1
+    attb2: value2
+  securitySchemes:
+    oauth2:
+      environments:
+        - envId: dev
+          appId: yef14gh8syDvTt56rdtIHYbjF_Ya # OAuth2 consumer key
+          keyType: PRODUCTION

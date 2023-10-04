@@ -9,4 +9,5 @@ metadata:
     app.kubernetes.io/created-by: operator
   name: applicationmapping-sample
 spec:
-  # TODO(user): Add fields here
+  applicationRef: application-sample
+  subscriptionRef: subscription-sample

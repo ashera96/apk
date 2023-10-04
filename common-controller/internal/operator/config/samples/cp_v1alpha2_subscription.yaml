@@ -9,4 +9,10 @@ metadata:
     app.kubernetes.io/created-by: operator
   name: subscription-sample
 spec:
-  # TODO(user): Add fields here
+  subscriptionStatus: ACTIVE
+  organization: carbon.super
+  api:
+    name: PizzaShackAPI
+    versions:
+      - ^v1$
+      - ^1.*
