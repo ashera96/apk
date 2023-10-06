@@ -31,11 +31,11 @@ message Subscription {
     string subStatus = 2;
     string uuid = 3;
     string organization = 4;
-    API api = 5;
+    SubscribedAPI subscribedApi = 5;
     string timeStamp = 6;
 }
 
-message API {
+message SubscribedAPI {
     string name = 1;
     repeated string versions = 2;
 }

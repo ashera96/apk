@@ -34,14 +34,13 @@ import org.wso2.apk.enforcer.discovery.JWTIssuerDiscoveryClient;
 import org.wso2.apk.enforcer.discovery.SubscriptionDiscoveryClient;
 import org.wso2.apk.enforcer.discovery.SubscriptionPolicyDiscoveryClient;
 import org.wso2.apk.enforcer.discovery.subscription.APIs;
-import org.wso2.apk.enforcer.discovery.subscription.ApplicationMapping;
 import org.wso2.apk.enforcer.discovery.subscription.Certificate;
 import org.wso2.apk.enforcer.discovery.subscription.JWTIssuer;
 import org.wso2.apk.enforcer.models.API;
 import org.wso2.apk.enforcer.models.ApiPolicy;
 import org.wso2.apk.enforcer.models.Application;
 import org.wso2.apk.enforcer.models.ApplicationKeyMapping;
-import org.wso2.apk.enforcer.models.ApplicationKeyMappingCacheKey;
+import org.wso2.apk.enforcer.models.ApplicationMapping;
 import org.wso2.apk.enforcer.models.ApplicationPolicy;
 import org.wso2.apk.enforcer.models.Subscription;
 import org.wso2.apk.enforcer.models.SubscriptionPolicy;
@@ -76,7 +75,7 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
     public static final String DELEM_PERIOD = ":";
 
     // Maps for keeping Subscription related details.
-    private Map<ApplicationKeyMappingCacheKey, ApplicationKeyMapping> applicationKeyMappingMap;
+    private Map<String, ApplicationKeyMapping> applicationKeyMappingMap;
     private Map<String, ApplicationMapping> applicationMappingMap;
     private Map<String, Application> applicationMap;
     private Map<String, API> apiMap;
@@ -105,6 +104,7 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
         this.appPolicyMap = new ConcurrentHashMap<>();
         this.apiPolicyMap = new ConcurrentHashMap<>();
         this.subscriptionMap = new ConcurrentHashMap<>();
+        this.applicationMappingMap = new ConcurrentHashMap<>();
         this.jwtValidatorMap = new ConcurrentHashMap<>();
         initializeLoadingTasks();
     }
@@ -144,12 +144,15 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
         Map<String, Subscription> newSubscriptionMap = new ConcurrentHashMap<>();
 
         for (org.wso2.apk.enforcer.discovery.subscription.Subscription subscription : subscriptionList) {
+            SubscribedAPI subscribedAPI = new SubscribedAPI();
+            subscribedAPI.setName(subscription.getSubscribedApi().getName());
+            subscribedAPI.setVersions(subscription.getSubscribedApi().getVersionsList());
+
             Subscription newSubscription = new Subscription();
             newSubscription.setSubscriptionId(subscription.getUuid());
-//            newSubscription.setPolicyId(subscription.getPolicyId());
-//            newSubscription.setApiUUID(subscription.getApiRef());
-//            newSubscription.setAppUUID(subscription.getApplicationRef());
-            newSubscription.setSubscriptionState(subscription.getSubStatus());
+            newSubscription.setSubscriptionStatus(subscription.getSubStatus());
+            newSubscription.setOrganization(subscription.getOrganization());
+            newSubscription.setSubscribedApi(subscribedAPI);
 //            newSubscription.setTimeStamp(Long.parseLong(subscription.getTimeStamp()));
 
             newSubscriptionMap.put(newSubscription.getCacheKey(), newSubscription);
@@ -167,10 +170,8 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
 
         for (org.wso2.apk.enforcer.discovery.subscription.Application application : applicationList) {
             Application newApplication = new Application();
-            newApplication.setName(application.getName());
-//            newApplication.setPolicy(application.getPolicy());
             newApplication.setUUID(application.getUuid());
-//            newApplication.setTenantDomain(application.getOrganization());
+            newApplication.setName(application.getName());
             application.getAttributesMap().forEach(newApplication::addAttribute);
 
             newApplicationMap.put(newApplication.getCacheKey(), newApplication);
@@ -254,18 +255,16 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
     public void addApplicationKeyMappings(
             List<org.wso2.apk.enforcer.discovery.subscription.ApplicationKeyMapping> applicationKeyMappingList) {
 
-        Map<ApplicationKeyMappingCacheKey, ApplicationKeyMapping> newApplicationKeyMappingMap =
-                new ConcurrentHashMap<>();
+        Map<String, ApplicationKeyMapping> newApplicationKeyMappingMap = new ConcurrentHashMap<>();
 
         for (org.wso2.apk.enforcer.discovery.subscription.ApplicationKeyMapping applicationKeyMapping :
                 applicationKeyMappingList) {
             ApplicationKeyMapping mapping = new ApplicationKeyMapping();
-//            mapping.setApplicationId(applicationKeyMapping.getApplicationId());
             mapping.setApplicationUUID(applicationKeyMapping.getApplicationUUID());
-//            mapping.setConsumerKey(applicationKeyMapping.getConsumerKey());
+            mapping.setSecurityScheme(applicationKeyMapping.getSecurityScheme());
+            mapping.setApplicationIdentifier(applicationKeyMapping.getApplicationIdentifier());
             mapping.setKeyType(applicationKeyMapping.getKeyType());
-//            mapping.setKeyManager(applicationKeyMapping.getKeyManager());
-
+            mapping.setEnvId(applicationKeyMapping.getEnvID());
             newApplicationKeyMappingMap.put(mapping.getCacheKey(), mapping);
         }
         if (log.isDebugEnabled()) {
@@ -276,7 +275,21 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
 
     public void addApplicationMappings(
             List<org.wso2.apk.enforcer.discovery.subscription.ApplicationMapping> applicationMappingList) {
-        // TODO: ###############
+
+        Map<String, ApplicationMapping> newApplicationMappingMap = new ConcurrentHashMap<>();
+
+        for (org.wso2.apk.enforcer.discovery.subscription.ApplicationMapping applicationMapping :
+                applicationMappingList) {
+            ApplicationMapping appMapping = new ApplicationMapping();
+            appMapping.setUuid(applicationMapping.getUuid());
+            appMapping.setApplicationRef(applicationMapping.getApplicationRef());
+            appMapping.setSubscriptionRef(applicationMapping.getSubscriptionRef());
+            newApplicationMappingMap.put(appMapping.getCacheKey(), appMapping);
+        }
+        if (log.isDebugEnabled()) {
+            log.debug("Total Application Mappings in new cache: {}", newApplicationMappingMap.size());
+        }
+        this.applicationMappingMap = newApplicationMappingMap;
     }
 
     @Override
@@ -321,23 +334,19 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
     }
 
     @Override
-    public List<Application> getMatchingApplications(String name, String organizationID, String uuid) {
+    public List<Application> getMatchingApplications(String name, String uuid) {
 
         List<Application> applicationList = new ArrayList<>();
         for (Application application : applicationMap.values()) {
             boolean isNameMatching = true;
-            boolean isOrgMatching = true;
             boolean isUUIDMatching = true;
             if (StringUtils.isNotEmpty(name)) {
                 isNameMatching = application.getName().contains(name);
             }
-            if (StringUtils.isNotEmpty(organizationID)) {
-                isOrgMatching = application.getTenantDomain().equals(organizationID);
-            }
             if (StringUtils.isNotEmpty(uuid)) {
                 isUUIDMatching = application.getUUID().equals(uuid);
             }
-            if (isNameMatching && isOrgMatching && isUUIDMatching) {
+            if (isNameMatching && isUUIDMatching) {
                 applicationList.add(application);
             }
         }
@@ -345,21 +354,22 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
     }
 
     @Override
-    public List<ApplicationKeyMapping> getMatchingKeyMapping(String applicationUUID, String consumerKey) {
+    public List<ApplicationKeyMapping> getMatchingKeyMapping(String applicationUUID, String applicationIdentifier) {
 
         List<ApplicationKeyMapping> applicationKeyMappingList = new ArrayList<>();
 
         for (ApplicationKeyMapping applicationKeyMapping : applicationKeyMappingMap.values()) {
-            boolean isConsumerKeyMatching = true;
+            boolean isApplicationIdentifierMatching = true;
             boolean isAppUUIDMatching = true;
 
             if (StringUtils.isNotEmpty(applicationUUID)) {
                 isAppUUIDMatching = applicationKeyMapping.getApplicationUUID().equals(applicationUUID);
             }
-            if (StringUtils.isNotEmpty(consumerKey)) {
-                isConsumerKeyMatching = applicationKeyMapping.getConsumerKey().equals(consumerKey);
+            if (StringUtils.isNotEmpty(applicationIdentifier)) {
+                isApplicationIdentifierMatching = applicationKeyMapping.getApplicationIdentifier()
+                        .equals(applicationIdentifier);
             }
-            if (isConsumerKeyMatching && isAppUUIDMatching) {
+            if (isApplicationIdentifierMatching && isAppUUIDMatching) {
                 applicationKeyMappingList.add(applicationKeyMapping);
             }
         }
@@ -367,29 +377,36 @@ public class SubscriptionDataStoreImpl implements SubscriptionDataStore {
     }
 
     @Override
-    public List<Subscription> getMatchingSubscriptions(String applicationUUID, String apiUUID, String state) {
+    public List<Subscription> getMatchingSubscriptions(String uuid, String apiName, String apiVersion, String state) {
 
         List<Subscription> subscriptionList = new ArrayList<>();
 
         for (Subscription subscription : subscriptionMap.values()) {
-            boolean isApiUUIDMatch = true;
-            boolean isAppUUIDMatch = true;
-            boolean isStateMatch = true;
-            if (StringUtils.isNotEmpty(applicationUUID)) {
-                isAppUUIDMatch = subscription.getAppUUID().equals(applicationUUID);
+            boolean isUUIDMatching = true;
+            boolean isApiNameMatching = true;
+            boolean isApiVersionMatching = true;
+            boolean isStateMatching = true;
+            if (StringUtils.isNotEmpty(uuid)) {
+                isUUIDMatching = subscription.getSubscriptionId().equals(uuid);
             }
-            if (StringUtils.isNotEmpty(apiUUID)) {
-                isApiUUIDMatch = subscription.getApiUUID().equals(apiUUID);
+            if (StringUtils.isNotEmpty(apiName)) {
+                isApiNameMatching = subscription.getSubscribedApi().getName().equals(apiName);
+            }
+            if (StringUtils.isNotEmpty(apiVersion)) {
+                // Todo: Regex check
             }
             if (StringUtils.isNotEmpty(state)) {
-                isStateMatch = subscription.getSubscriptionState().equals(state);
+                isStateMatching = subscription.getSubscriptionStatus().equals(state);
             }
-            if (isApiUUIDMatch && isAppUUIDMatch && isStateMatch) {
+            if (isUUIDMatching && isApiNameMatching && isApiVersionMatching && isStateMatching) {
                 subscriptionList.add(subscription);
             }
         }
         return subscriptionList;
     }
+
+//    @Override
+//    public List<ApplicationMapping> getMatchingApplicationMapping
 
     @Override
     public void addJWTIssuers(List<JWTIssuer> jwtIssuers) {

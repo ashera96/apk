@@ -151,8 +151,8 @@ spec:
             {{- else }}
               subPath: tls.crt
             {{- end }}
-            - name: common-controller-truststore-secret-volume
-              mountPath: /home/wso2/security/truststore/adapter.pem
+            # - name: common-controller-truststore-secret-volume
+            #   mountPath: /home/wso2/security/truststore/adapter.pem
             - name: router-keystore-secret-volume
               mountPath: /home/wso2/security/truststore/router.crt
             {{- if and .Values.wso2.apk.dp.gatewayRuntime.deployment.router.configs .Values.wso2.apk.dp.gatewayRuntime.deployment.router.configs.tls }}
@@ -340,14 +340,14 @@ spec:
             secretName: {{ template "apk-helm.resource.prefix" . }}-ratelimiter-server-cert
           {{- end }}
       {{ end }}
-        - name: common-controller-truststore-secret-volume
-          secret:
-          {{- if and .Values.wso2.apk.dp.commonController.configs .Values.wso2.apk.dp.commonController.configs.tls }}
-            secretName: {{ .Values.wso2.apk.dp.commonController.configs.tls.secretName | default (printf "%s-common-controller-server-cert" (include "apk-helm.resource.prefix" .)) }}
-          {{- else }}
-            secretName: {{ template "apk-helm.resource.prefix" . }}-common-controller-server-cert
-          {{- end }}
-            defaultMode: 420
+        # - name: common-controller-truststore-secret-volume
+        #   secret:
+        #   {{- if and .Values.wso2.apk.dp.commonController.configs .Values.wso2.apk.dp.commonController.configs.tls }}
+        #     secretName: {{ .Values.wso2.apk.dp.commonController.configs.tls.secretName | default (printf "%s-common-controller-server-cert" (include "apk-helm.resource.prefix" .)) }}
+        #   {{- else }}
+        #     secretName: {{ template "apk-helm.resource.prefix" . }}-common-controller-server-cert
+        #   {{- end }}
+        #     defaultMode: 420
         - name: enforcer-keystore-secret-volume
           secret: 
             {{- if and .Values.wso2.apk.dp.gatewayRuntime.deployment.enforcer.configs .Values.wso2.apk.dp.gatewayRuntime.deployment.enforcer.configs.tls }}

@@ -32,20 +32,14 @@ import org.wso2.apk.enforcer.constants.APISecurityConstants;
 import org.wso2.apk.enforcer.constants.GeneralErrorCodeConstants;
 import org.wso2.apk.enforcer.dto.APIKeyValidationInfoDTO;
 import org.wso2.apk.enforcer.models.API;
-import org.wso2.apk.enforcer.models.ApiPolicy;
 import org.wso2.apk.enforcer.models.Application;
 import org.wso2.apk.enforcer.models.ApplicationKeyMapping;
-import org.wso2.apk.enforcer.models.ApplicationPolicy;
 import org.wso2.apk.enforcer.models.Subscription;
-import org.wso2.apk.enforcer.models.SubscriptionPolicy;
-import org.wso2.apk.enforcer.models.URLMapping;
 import org.wso2.apk.enforcer.subscription.SubscriptionDataHolder;
 import org.wso2.apk.enforcer.subscription.SubscriptionDataStore;
 import org.wso2.apk.enforcer.util.FilterUtils;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -253,7 +247,7 @@ public class KeyValidator {
 
     private static void validate(APIKeyValidationInfoDTO infoDTO, SubscriptionDataStore datastore,
                                  API api, String keyType, Application app, Subscription sub) {
-        String subscriptionStatus = sub.getSubscriptionState();
+        String subscriptionStatus = sub.getSubscriptionStatus();
         if (APIConstants.SubscriptionStatus.BLOCKED.equals(subscriptionStatus)) {
             infoDTO.setValidationStatus(APIConstants.KeyValidationStatus.API_BLOCKED);
             infoDTO.setAuthorized(false);

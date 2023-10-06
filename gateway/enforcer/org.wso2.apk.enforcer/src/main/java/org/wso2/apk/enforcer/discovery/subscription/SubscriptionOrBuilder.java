@@ -56,19 +56,19 @@ public interface SubscriptionOrBuilder extends
       getOrganizationBytes();
 
   /**
-   * <code>.wso2.discovery.subscription.API api = 5;</code>
-   * @return Whether the api field is set.
+   * <code>.wso2.discovery.subscription.SubscribedAPI subscribedApi = 5;</code>
+   * @return Whether the subscribedApi field is set.
    */
-  boolean hasApi();
+  boolean hasSubscribedApi();
   /**
-   * <code>.wso2.discovery.subscription.API api = 5;</code>
-   * @return The api.
+   * <code>.wso2.discovery.subscription.SubscribedAPI subscribedApi = 5;</code>
+   * @return The subscribedApi.
    */
-  org.wso2.apk.enforcer.discovery.subscription.API getApi();
+  org.wso2.apk.enforcer.discovery.subscription.SubscribedAPI getSubscribedApi();
   /**
-   * <code>.wso2.discovery.subscription.API api = 5;</code>
+   * <code>.wso2.discovery.subscription.SubscribedAPI subscribedApi = 5;</code>
    */
-  org.wso2.apk.enforcer.discovery.subscription.APIOrBuilder getApiOrBuilder();
+  org.wso2.apk.enforcer.discovery.subscription.SubscribedAPIOrBuilder getSubscribedApiOrBuilder();
 
   /**
    * <code>string timeStamp = 6;</code>

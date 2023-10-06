@@ -138,8 +138,8 @@ public class ApplicationMappingDiscoveryClient implements Runnable {
                     for (Any res : response.getResourcesList()) {
                         applicationMappingList.addAll(res.unpack(ApplicationMappingList.class).getListList());
                     }
-//                    subscriptionDataStore.addApplicationMappings(applicationMappingList);
-                    logger.info("Number of application key mappings received : " + applicationMappingList.size());
+                    subscriptionDataStore.addApplicationMappings(applicationMappingList);
+                    logger.info("Number of application mappings received : " + applicationMappingList.size());
                     ack();
                 } catch (Exception e) {
                     // catching generic error here to wrap any grpc communication errors in the runtime

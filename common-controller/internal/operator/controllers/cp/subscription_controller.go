@@ -104,17 +104,17 @@ func sendSubUpdates(subscriptionsList *cpv1alpha2.SubscriptionList) {
 func marshalSubscriptionList(subscriptionList []cpv1alpha2.Subscription) *subscription.SubscriptionList {
 	subscriptions := []*subscription.Subscription{}
 	for _, subInternal := range subscriptionList {
-		api := &subscription.API{}
+		subscribedApi := &subscription.SubscribedAPI{}
 		sub := &subscription.Subscription{
 			Uuid:         string(subInternal.UID),
 			SubStatus:    subInternal.Spec.SubscriptionStatus,
 			Organization: subInternal.Spec.Organization,
 		}
 		if subInternal.Spec.API.Name != "" && len(subInternal.Spec.API.Versions) > 0 {
-			api.Name = subInternal.Spec.API.Name
-			api.Versions = subInternal.Spec.API.Versions
+			subscribedApi.Name = subInternal.Spec.API.Name
+			subscribedApi.Versions = subInternal.Spec.API.Versions
 		}
-		sub.Api = api
+		sub.SubscribedApi = subscribedApi
 		subscriptions = append(subscriptions, sub)
 	}
 	return &subscription.SubscriptionList{

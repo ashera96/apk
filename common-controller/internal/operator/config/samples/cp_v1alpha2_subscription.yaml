@@ -12,7 +12,7 @@ spec:
   subscriptionStatus: ACTIVE
   organization: carbon.super
   api:
-    name: PizzaShackAPI
+    name: AppSubTestAPI
     versions:
       - ^v1$
       - ^1.*

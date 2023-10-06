@@ -20,10 +20,10 @@ public final class SubscriptionProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_wso2_discovery_subscription_Subscription_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_wso2_discovery_subscription_API_descriptor;
+    internal_static_wso2_discovery_subscription_SubscribedAPI_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_wso2_discovery_subscription_API_fieldAccessorTable;
+      internal_static_wso2_discovery_subscription_SubscribedAPI_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -34,16 +34,17 @@ public final class SubscriptionProto {
   static {
     java.lang.String[] descriptorData = {
       "\n.wso2/discovery/subscription/subscripti" +
-      "on.proto\022\033wso2.discovery.subscription\"\230\001" +
+      "on.proto\022\033wso2.discovery.subscription\"\254\001" +
       "\n\014Subscription\022\017\n\007eventId\030\001 \001(\t\022\021\n\tsubSt" +
       "atus\030\002 \001(\t\022\014\n\004uuid\030\003 \001(\t\022\024\n\014organization" +
-      "\030\004 \001(\t\022-\n\003api\030\005 \001(\0132 .wso2.discovery.sub" +
-      "scription.API\022\021\n\ttimeStamp\030\006 \001(\t\"%\n\003API\022" +
-      "\014\n\004name\030\001 \001(\t\022\020\n\010versions\030\002 \003(\tB\224\001\n,org." +
-      "wso2.apk.enforcer.discovery.subscription" +
-      "B\021SubscriptionProtoP\001ZOgithub.com/envoyp" +
-      "roxy/go-control-plane/wso2/discovery/sub" +
-      "scription;subscriptionb\006proto3"
+      "\030\004 \001(\t\022A\n\rsubscribedApi\030\005 \001(\0132*.wso2.dis" +
+      "covery.subscription.SubscribedAPI\022\021\n\ttim" +
+      "eStamp\030\006 \001(\t\"/\n\rSubscribedAPI\022\014\n\004name\030\001 " +
+      "\001(\t\022\020\n\010versions\030\002 \003(\tB\224\001\n,org.wso2.apk.e" +
+      "nforcer.discovery.subscriptionB\021Subscrip" +
+      "tionProtoP\001ZOgithub.com/envoyproxy/go-co" +
+      "ntrol-plane/wso2/discovery/subscription;" +
+      "subscriptionb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -54,12 +55,12 @@ public final class SubscriptionProto {
     internal_static_wso2_discovery_subscription_Subscription_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_wso2_discovery_subscription_Subscription_descriptor,
-        new java.lang.String[] { "EventId", "SubStatus", "Uuid", "Organization", "Api", "TimeStamp", });
-    internal_static_wso2_discovery_subscription_API_descriptor =
+        new java.lang.String[] { "EventId", "SubStatus", "Uuid", "Organization", "SubscribedApi", "TimeStamp", });
+    internal_static_wso2_discovery_subscription_SubscribedAPI_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_wso2_discovery_subscription_API_fieldAccessorTable = new
+    internal_static_wso2_discovery_subscription_SubscribedAPI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_wso2_discovery_subscription_API_descriptor,
+        internal_static_wso2_discovery_subscription_SubscribedAPI_descriptor,
         new java.lang.String[] { "Name", "Versions", });
   }
 
