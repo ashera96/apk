@@ -99,20 +99,20 @@ func FeedData() {
 
 // AddSingleApplication will update the Application specified by the UUID to the xds cache
 func AddSingleApplication(label string, application internal_types.ApplicationEvent) {
-	appKeys := make([]*internal_application.Application_Key, len(application.Keys))
-	for i, key := range application.Keys {
-		appKeys[i] = &internal_application.Application_Key{
-			Key:        key.Key,
-			KeyManager: key.KeyManager,
-		}
-	}
+	// appKeys := make([]*internal_application.Application_Key, len(application.Keys))
+	// for i, key := range application.Keys {
+	// 	appKeys[i] = &internal_application.Application_Key{
+	// 		Key:        key.Key,
+	// 		KeyManager: key.KeyManager,
+	// 	}
+	// }
 	convertedApplication := &internal_application.Application{
 		Uuid:         application.UUID,
 		Name:         application.Name,
-		Policy:       application.Policy,
+		// Policy:       application.Policy,
 		Owner:        application.Owner,
-		Organization: application.Organization,
-		Keys:         appKeys,
+		// Organization: application.Organization,
+		// Keys:         appKeys,
 		Attributes:   application.Attributes,
 	}
 	logger.LoggerXds.Debugf("Converted Application: %v", convertedApplication)
@@ -327,12 +327,12 @@ func InitAPKMgtServer() {
 func AddSingleSubscription(label string, subscription internal_types.SubscriptionEvent) {
 	convertedSubscription := &internal_application.Subscription{
 		Uuid:           subscription.UUID,
-		ApplicationRef: subscription.ApplicationRef,
-		ApiRef:         subscription.APIRef,
+		// ApplicationRef: subscription.ApplicationRef,
+		// ApiRef:         subscription.APIRef,
 		SubStatus:      subscription.SubStatus,
-		PolicyId:       subscription.PolicyID,
+		// PolicyId:       subscription.PolicyID,
 		Organization:   subscription.Organization,
-		Subscriber:     subscription.Subscriber,
+		// Subscriber:     subscription.Subscriber,
 		TimeStamp:      subscription.TimeStamp,
 	}
 	logger.LoggerXds.Debugf("Converted Subscription: %v", convertedSubscription)
