@@ -268,19 +268,20 @@ public class KeyValidator {
             infoDTO.setAuthorized(false);
             return;
         }
-        infoDTO.setTier(sub.getPolicyId());
-        infoDTO.setSubscriber(app.getSubName());
+        // TODO(Ashera): Revisit with Application and Subscription feature
+        //infoDTO.setTier(sub.getPolicyId());
+        //infoDTO.setSubscriber(app.getSubName());
         //infoDTO.setApplicationId(app.getId());
         infoDTO.setApplicationUUID(app.getUUID());
         infoDTO.setApiName(api.getApiName());
         infoDTO.setApiVersion(api.getApiVersion());
         infoDTO.setApiPublisher(api.getApiProvider());
         infoDTO.setApplicationName(app.getName());
-        infoDTO.setApplicationTier(app.getPolicy());
+        //infoDTO.setApplicationTier(app.getPolicy());
         infoDTO.setAppAttributes(app.getAttributes());
         infoDTO.setApiUUID(api.getApiUUID());
         infoDTO.setType(keyType);
-        infoDTO.setSubscriberTenantDomain(app.getTenantDomain());
+        //infoDTO.setSubscriberTenantDomain(app.getTenantDomain());
 
         // Todo: (Sampath) This must be implemented as a part rate plans implementation.
 //        ApplicationPolicy appPolicy = datastore.getApplicationPolicyByName(app.getPolicy());

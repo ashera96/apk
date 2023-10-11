@@ -92,11 +92,10 @@ public interface SubscriptionDataStore {
     /**
      * Filter the applications map based on the criteria.
      * @param name Application Name
-     * @param organizationID Application tenant domain/ organization id
-     * @param uuid Application uuid.
+     * @param uuid Application UUID
      * @return List of applications which match the given parameters
      */
-    List<Application> getMatchingApplications(String name, String organizationID, String uuid);
+    List<Application> getMatchingApplications(String name, String uuid);
 
 
     /**
@@ -110,12 +109,13 @@ public interface SubscriptionDataStore {
 
     /**
      * Filter the subscriptions map based on the provided parameters
-     * @param applicationUUID UUID of the application
-     * @param apiUUID UUID of the api
+     * @param uuid UUID of the subscription
+     * @param apiName Name of the api
+     * @param apiVersion Version of the api
      * @param state Subscription state
      * @return A List of subscriptions which matches the given parameters
      */
-    List<Subscription> getMatchingSubscriptions(String applicationUUID, String apiUUID, String state);
+    List<Subscription> getMatchingSubscriptions(String uuid, String apiName, String apiVersion, String state);
 
     void addJWTIssuers(List<JWTIssuer> jwtIssuers);
 
