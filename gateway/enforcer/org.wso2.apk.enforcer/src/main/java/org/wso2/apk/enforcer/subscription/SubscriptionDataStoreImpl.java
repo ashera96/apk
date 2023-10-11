@@ -42,6 +42,7 @@ import org.wso2.apk.enforcer.models.Application;
 import org.wso2.apk.enforcer.models.ApplicationKeyMapping;
 import org.wso2.apk.enforcer.models.ApplicationMapping;
 import org.wso2.apk.enforcer.models.ApplicationPolicy;
+import org.wso2.apk.enforcer.models.SubscribedAPI;
 import org.wso2.apk.enforcer.models.Subscription;
 import org.wso2.apk.enforcer.models.SubscriptionPolicy;
 import org.wso2.apk.enforcer.security.jwt.validator.JWTValidator;
