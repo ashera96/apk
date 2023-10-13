@@ -39,7 +39,6 @@ import org.wso2.apk.enforcer.commons.exception.EnforcerException;
 import org.wso2.apk.enforcer.config.ConfigHolder;
 import org.wso2.apk.enforcer.constants.APIConstants;
 import org.wso2.apk.enforcer.constants.Constants;
-import org.wso2.apk.enforcer.constants.JwtConstants;
 import org.wso2.apk.enforcer.dto.APIKeyValidationInfoDTO;
 import org.wso2.apk.enforcer.security.jwt.SignedJWTInfo;
 import org.wso2.apk.enforcer.security.jwt.validator.JWTValidator;
@@ -257,11 +256,10 @@ public class JWTUtils {
     public static void updateApplicationNameForSubscriptionDisabledKM(APIKeyValidationInfoDTO apiKeyValidationInfoDTO
             , String kmReference) {
 
-        String applicationRef = APIConstants.ANONYMOUS_PREFIX + kmReference;
+        String applicationRef = APIConstants.ANONYMOUS_PREFIX + kmReference; // TODO(Ashera): kmReference is "" -> securityScheme instead?
         apiKeyValidationInfoDTO.setApplicationName(applicationRef);
         apiKeyValidationInfoDTO.setApplicationId(-1);
         apiKeyValidationInfoDTO.setApplicationUUID(UUID.nameUUIDFromBytes(applicationRef.getBytes(StandardCharsets.UTF_8)).toString());
-        apiKeyValidationInfoDTO.setApplicationTier(APIConstants.UNLIMITED_TIER);
     }
 
     public static JWTValidationInfo validateJWTToken(SignedJWTInfo signedJWTInfo, String organization) throws EnforcerException {

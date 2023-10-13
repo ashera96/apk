@@ -90,32 +90,39 @@ public interface SubscriptionDataStore {
     API getMatchingAPI(String context, String version);
 
     /**
-     * Filter the applications map based on the criteria.
-     * @param name Application Name
+     * Filter the applicationMapping map based on the provided application UUID.
+     *
      * @param uuid Application UUID
-     * @return List of applications which match the given parameters
+     * @return ApplicationMapping which match the given UUID
      */
-    List<Application> getMatchingApplications(String name, String uuid);
-
+    ApplicationMapping getMatchingApplicationMapping(String uuid);
 
     /**
      * Filter the application key mapping map based on provided parameters
-     * @param applicationUUID  Application uuid
-     * @param consumerKey The application consumer key
-     * @return List of key mappings which match the given parameters
+     *
+     * @param applicationIdentifier Application identifier
+     * @param securityScheme        Security scheme
+     * @param keyType               Key type, i.e. PRODUCTION or SANDBOX
+     * @return ApplicationKeyMapping which match the given parameters
      */
-    List<ApplicationKeyMapping> getMatchingKeyMapping(String applicationUUID, String consumerKey);
-
+    ApplicationKeyMapping getMatchingApplicationKeyMapping(String applicationIdentifier, String securityScheme,
+            String keyType);
 
     /**
-     * Filter the subscriptions map based on the provided parameters
-     * @param uuid UUID of the subscription
-     * @param apiName Name of the api
-     * @param apiVersion Version of the api
-     * @param state Subscription state
-     * @return A List of subscriptions which matches the given parameters
+     * Filter the applications map based on the provided parameters.
+     *
+     * @param uuid UUID of the application
+     * @return Application which match the given UUID
      */
-    List<Subscription> getMatchingSubscriptions(String uuid, String apiName, String apiVersion, String state);
+    Application getMatchingApplication(String uuid);
+
+    /**
+     * Filter the subscriptions map based on the provided parameters.
+     *
+     * @param uuid UUID of the subscription
+     * @return Subscription which matches the given UUID
+     */
+    Subscription getMatchingSubscription(String uuid);
 
     void addJWTIssuers(List<JWTIssuer> jwtIssuers);
 

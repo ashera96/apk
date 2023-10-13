@@ -49,6 +49,7 @@ import org.wso2.apk.enforcer.security.KeyValidator;
 import org.wso2.apk.enforcer.security.TokenValidationContext;
 import org.wso2.apk.enforcer.security.jwt.validator.JWTConstants;
 import org.wso2.apk.enforcer.security.jwt.validator.RevokedJWTDataHolder;
+import org.wso2.apk.enforcer.subscription.SubscriptionDataStoreImpl;
 import org.wso2.apk.enforcer.tracing.TracingConstants;
 import org.wso2.apk.enforcer.tracing.TracingSpan;
 import org.wso2.apk.enforcer.tracing.TracingTracer;
@@ -73,6 +74,7 @@ public class JWTAuthenticator implements Authenticator {
     private static final Logger log = LogManager.getLogger(JWTAuthenticator.class);
     private final boolean isGatewayTokenCacheEnabled;
     private AbstractAPIMgtGatewayJWTGenerator jwtGenerator;
+    private SubscriptionDataStoreImpl subscriptionDataStore;
 
     public JWTAuthenticator(final JWTConfigurationDto jwtConfigurationDto, final boolean isGatewayTokenCacheEnabled) {
 
@@ -81,6 +83,7 @@ public class JWTAuthenticator implements Authenticator {
             this.jwtGenerator = BackendJwtUtils.getApiMgtGatewayJWTGenerator(jwtConfigurationDto);
             this.jwtGenerator.setJWTConfigurationDto(jwtConfigurationDto);
         }
+        this.subscriptionDataStore = SubscriptionDataStoreImpl.getInstance();
     }
 
     @Override
@@ -134,7 +137,6 @@ public class JWTAuthenticator implements Authenticator {
             String envType = requestContext.getMatchedAPI().getEnvType();
             String version = requestContext.getMatchedAPI().getVersion();
             String organization = requestContext.getMatchedAPI().getOrganizationId();
-            context = context + "/" + version;
             SignedJWTInfo signedJWTInfo;
             Scope decodeTokenHeaderSpanScope = null;
             try {
@@ -186,7 +188,7 @@ public class JWTAuthenticator implements Authenticator {
                     Scope validateSubscriptionSpanScope = null;
                     try {
                         // TODO(TharinduD) revisit when subscription validation is enabled
-                        if (false) {
+                        if (true) { // TODO(Ashera): Check if subscriptionValidation enabled
                             if (Utils.tracingEnabled()) {
                                 validateSubscriptionSpan =
                                         Utils.startSpan(TracingConstants.SUBSCRIPTION_VALIDATION_SPAN, tracer);
@@ -194,19 +196,19 @@ public class JWTAuthenticator implements Authenticator {
                                 Utils.setTag(validateSubscriptionSpan, APIConstants.LOG_TRACE_ID,
                                         ThreadContext.get(APIConstants.LOG_TRACE_ID));
                             }
-                            // if the token is self contained, validation subscription from `subscribedApis` claim
-                            JSONObject api = validateSubscriptionFromClaim(name, version, claims, splitToken, envType
-                                    , apiKeyValidationInfoDTO, true);
+                            // Subscription validation using JWT token
+                            JSONObject api = validateSubscriptionFromClaim(name, version, context, claims, splitToken, envType,
+                                    apiKeyValidationInfoDTO, APIConstants.API_SECURITY_OAUTH2);
                             if (api == null) {
-                                if (log.isDebugEnabled()) {
-                                    log.debug("Begin subscription validation via Key Manager: " + validationInfo.getKeyManager());
-                                }
-                                apiKeyValidationInfoDTO = validateSubscriptionUsingKeyManager(requestContext,
-                                        validationInfo);
-
-                                if (log.isDebugEnabled()) {
-                                    log.debug("Subscription validation via Key Manager. Status: " + apiKeyValidationInfoDTO.isAuthorized());
-                                }
+//                                if (log.isDebugEnabled()) {
+//                                    log.debug("Begin subscription validation via Key Manager: " + validationInfo.getKeyManager());
+//                                }
+//                                apiKeyValidationInfoDTO = validateSubscriptionUsingKeyManager(requestContext,
+//                                        validationInfo);
+//
+//                                if (log.isDebugEnabled()) {
+//                                    log.debug("Subscription validation via Key Manager. Status: " + apiKeyValidationInfoDTO.isAuthorized());
+//                                }
                                 if (!apiKeyValidationInfoDTO.isAuthorized()) {
                                     if (GeneralErrorCodeConstants.API_BLOCKED_CODE == apiKeyValidationInfoDTO.getValidationStatus()) {
                                         FilterUtils.setErrorToContext(requestContext,
@@ -383,17 +385,17 @@ public class JWTAuthenticator implements Authenticator {
     private APIKeyValidationInfoDTO validateSubscriptionUsingKeyManager(RequestContext requestContext,
                                                                         JWTValidationInfo jwtValidationInfo) throws APISecurityException {
 
-        String apiContext = requestContext.getMatchedAPI().getBasePath();
-        String apiVersion = requestContext.getMatchedAPI().getVersion();
-        String uuid = requestContext.getMatchedAPI().getUuid();
-        String envType = requestContext.getMatchedAPI().getEnvType();
+//        String apiContext = requestContext.getMatchedAPI().getBasePath();
+//        String apiVersion = requestContext.getMatchedAPI().getVersion();
+//        String uuid = requestContext.getMatchedAPI().getUuid();
+//        String envType = requestContext.getMatchedAPI().getEnvType();
 
-        String consumerKey = jwtValidationInfo.getConsumerKey();
-        String keyManager = jwtValidationInfo.getKeyManager();
+//        String consumerKey = jwtValidationInfo.getConsumerKey();
+//        String keyManager = jwtValidationInfo.getKeyManager();
 
-        if (consumerKey != null && keyManager != null) {
-            return KeyValidator.validateSubscription(uuid, apiContext, apiVersion, consumerKey, envType, keyManager);
-        }
+//        if (consumerKey != null && keyManager != null) {
+//            return KeyValidator.validateSubscription(uuid, apiContext, apiVersion, consumerKey, envType, keyManager);
+//        }
         log.debug("Cannot call Key Manager to validate subscription. " + "Payload of the token does not contain the " +
                 "Authorized party - the party to which the ID Token was " + "issued");
         throw new APISecurityException(APIConstants.StatusCodes.UNAUTHORIZED.getCode(),
@@ -406,37 +408,51 @@ public class JWTAuthenticator implements Authenticator {
      *
      * @param name           API name
      * @param version        API version
-     * @param validationInfo token validation related details. this will be populated based on the available data
-     *                       during the subscription validation.
+     * @param context        API context
      * @param payload        The payload of the JWT token
+     * @param splitToken     The split token
+     * @param envType        The environment type, i.e. PRODUCTION or SANDBOX
+     * @param validationInfo Token validation related details. This will be populated based on the available data
+     *                       during the subscription validation.
+     * @param securityScheme Security scheme related to the token (only OAuth2 is supported for now).
      * @return an JSON object containing subscribed API information retrieved from token payload.
      * If the subscription information is not found, return a null object.
      * @throws APISecurityException if the user is not subscribed to the API
      */
-    private JSONObject validateSubscriptionFromClaim(String name, String version, JWTClaimsSet payload,
-                                                     String[] splitToken, String envType,
-                                                     APIKeyValidationInfoDTO validationInfo, boolean isOauth) throws APISecurityException {
+    private JSONObject validateSubscriptionFromClaim(String name, String version, String context, JWTClaimsSet payload,
+            String[] splitToken, String envType, APIKeyValidationInfoDTO validationInfo, String securityScheme)
+            throws APISecurityException {
 
         JSONObject api = null;
         try {
             validationInfo.setEndUserName(payload.getSubject());
             validationInfo.setType(envType);
+            validationInfo.setApiName(name);
+            validationInfo.setApiVersion(version);
+            validationInfo.setSecurityScheme(securityScheme);
 
-            if (payload.getClaim(APIConstants.JwtTokenConstants.CONSUMER_KEY) != null) {
-                validationInfo.setConsumerKey(payload.getStringClaim(APIConstants.JwtTokenConstants.CONSUMER_KEY));
+            // Get consumer key from the JWT token claim set
+            String consumerKey = payload.getStringClaim(APIConstants.JwtTokenConstants.CLIENT_ID);
+            if (consumerKey != null) {
+                validationInfo.setConsumerKey(consumerKey);
+                KeyValidator.validateSubscription(validationInfo, );
+            } else {
+                log.error("Error while extracting consumer key from JWT token");
+//                throw new
             }
 
-            JSONObject app = payload.getJSONObjectClaim(APIConstants.JwtTokenConstants.APPLICATION);
-            if (app != null) {
-                validationInfo.setApplicationUUID(app.getAsString(APIConstants.JwtTokenConstants.APPLICATION_UUID));
-                validationInfo.setApplicationId(app.getAsNumber(APIConstants.JwtTokenConstants.APPLICATION_ID).intValue());
-                validationInfo.setApplicationName(app.getAsString(APIConstants.JwtTokenConstants.APPLICATION_NAME));
-                validationInfo.setApplicationTier(app.getAsString(APIConstants.JwtTokenConstants.APPLICATION_TIER));
-                validationInfo.setSubscriber(app.getAsString(APIConstants.JwtTokenConstants.APPLICATION_OWNER));
-                if (app.containsKey(APIConstants.JwtTokenConstants.QUOTA_TYPE) && APIConstants.JwtTokenConstants.QUOTA_TYPE_BANDWIDTH.equals(app.getAsString(APIConstants.JwtTokenConstants.QUOTA_TYPE))) {
-                    validationInfo.setContentAware(true);
-                }
-            }
+
+//            JSONObject app = payload.getJSONObjectClaim(APIConstants.JwtTokenConstants.APPLICATION); // app is null
+//            if (app != null) {
+//                validationInfo.setApplicationUUID(app.getAsString(APIConstants.JwtTokenConstants.APPLICATION_UUID));
+//                validationInfo.setApplicationId(app.getAsNumber(APIConstants.JwtTokenConstants.APPLICATION_ID).intValue());
+//                validationInfo.setApplicationName(app.getAsString(APIConstants.JwtTokenConstants.APPLICATION_NAME));
+//                validationInfo.setSubscriber(app.getAsString(APIConstants.JwtTokenConstants.APPLICATION_OWNER));
+//                validationInfo.setSubscriberTenantDomain(sub.getAsString(APIConstants.JwtTokenConstants.SUBSCRIPTION_ORGANIZATION));
+//                if (app.containsKey(APIConstants.JwtTokenConstants.QUOTA_TYPE) && APIConstants.JwtTokenConstants.QUOTA_TYPE_BANDWIDTH.equals(app.getAsString(APIConstants.JwtTokenConstants.QUOTA_TYPE))) {
+//                    validationInfo.setContentAware(true);
+//                }
+//            }
         } catch (ParseException e) {
             log.error("Error while parsing jwt claims");
             throw new APISecurityException(APIConstants.StatusCodes.UNAUTHORIZED.getCode(),

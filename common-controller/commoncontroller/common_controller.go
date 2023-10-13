@@ -150,6 +150,7 @@ func runCommonEnforcerServer(server xdsv3.Server, enforcerServer wso2_server.Ser
 	port uint) {
 	var grpcOptions []grpc.ServerOption
 	grpcOptions = append(grpcOptions, grpc.MaxConcurrentStreams(grpcMaxConcurrentStreams))
+	// TODO(Ashera): Add TLS support for Common Controller - Enforcer connection
 	publicKeyLocation, privateKeyLocation, truststoreLocation := utils.GetKeyLocations()
 	cert, err := utils.GetServerCertificate(publicKeyLocation, privateKeyLocation)
 
@@ -192,7 +193,7 @@ func runCommonEnforcerServer(server xdsv3.Server, enforcerServer wso2_server.Ser
 	// register health service
 	healthservice.RegisterHealthServer(grpcServer, &health.Server{})
 
-	loggers.LoggerAPKOperator.Info("port: ", port, " management server listening")
+	loggers.LoggerAPKOperator.Info("port: ", port, " common enforcer server listening")
 	go func() {
 		loggers.LoggerAPKOperator.Info("Starting XDS GRPC server.")
 		if err = grpcServer.Serve(lis); err != nil {

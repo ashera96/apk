@@ -47,7 +47,7 @@ public class APIConstants {
     public static final String API_KEY_TYPE_SANDBOX = "SANDBOX";
 
     public static final String AUTHORIZATION_HEADER_BASIC = "Basic";
-    public static final String API_SECURITY_OAUTH2 = "oauth2";
+    public static final String API_SECURITY_OAUTH2 = "OAuth2";
     public static final String API_SECURITY_BASIC_AUTH = "basic_auth";
     public static final String SWAGGER_API_KEY_AUTH_TYPE_NAME = "apiKey";
     public static final String SWAGGER_API_KEY_IN_HEADER = "Header";
@@ -149,9 +149,10 @@ public class APIConstants {
         public static final String APPLICATION_NAME = "name";
         public static final String APPLICATION_TIER = "tier";
         public static final String APPLICATION_OWNER = "owner";
-        public static final String KEY_TYPE = "keytype";
-        public static final String CONSUMER_KEY = "consumerKey";
+        public static final String KEY_TYPE = "keyType";
+        public static final String CLIENT_ID = "clientId";
         public static final String SUBSCRIPTION_TIER = "subscriptionTier";
+        public static final String SUBSCRIPTION_ORGANIZATION = "organization";
         public static final String SUBSCRIBER_TENANT_DOMAIN = "subscriberTenantDomain";
         public static final String TIER_INFO = "tierInfo";
         public static final String STOP_ON_QUOTA_REACH = "stopOnQuotaReach";

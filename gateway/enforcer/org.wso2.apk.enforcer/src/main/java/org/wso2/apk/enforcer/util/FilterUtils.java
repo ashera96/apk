@@ -277,7 +277,6 @@ public class FilterUtils {
             authContext.setApplicationId(apiKeyValidationInfoDTO.getApplicationId());
             authContext.setApplicationUUID(apiKeyValidationInfoDTO.getApplicationUUID());
             authContext.setApplicationName(apiKeyValidationInfoDTO.getApplicationName());
-            authContext.setApplicationTier(apiKeyValidationInfoDTO.getApplicationTier());
             authContext.setSubscriber(apiKeyValidationInfoDTO.getSubscriber());
             authContext.setTier(apiKeyValidationInfoDTO.getTier());
             authContext.setSubscriberTenantDomain(apiKeyValidationInfoDTO.getSubscriberTenantDomain());
@@ -413,7 +412,6 @@ public class FilterUtils {
         if (apiKeyValidationInfoDTO != null) {
             jwtInfoDto.setApplicationId(apiKeyValidationInfoDTO.getApplicationUUID());
             jwtInfoDto.setApplicationName(apiKeyValidationInfoDTO.getApplicationName());
-            jwtInfoDto.setApplicationTier(apiKeyValidationInfoDTO.getApplicationTier());
             jwtInfoDto.setKeyType(apiKeyValidationInfoDTO.getType());
             jwtInfoDto.setSubscriber(apiKeyValidationInfoDTO.getSubscriber());
             jwtInfoDto.setSubscriptionTier(apiKeyValidationInfoDTO.getTier());

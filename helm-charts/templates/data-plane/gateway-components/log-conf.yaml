@@ -289,6 +289,6 @@ data:
     logger.io-swagger-v3.additivity = false
     logger.io-swagger-v3.appenderRef.console.ref = ENFORCER_CONSOLE
 
-    rootLogger.level = ERROR
+    rootLogger.level = DEBUG
     rootLogger.appenderRef.ENFORCER_CONSOLE.ref = ENFORCER_CONSOLE
 {{- end -}}
